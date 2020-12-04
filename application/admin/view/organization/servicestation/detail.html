@@ -1,0 +1,100 @@
+<!--<style>-->
+    <!--.form-control {-->
+        <!--border:none;-->
+        <!--background-color: #ffffff!important;-->
+    <!--}-->
+<!--</style>-->
+<form id="detail-form" class="form-horizontal" role="form" data-toggle="validator" method="POST" action="">
+        <div class="form-group">
+            <label class="control-label col-xs-12 col-sm-2">{:__('Service_id')}:</label>
+            <div class="col-xs-12 col-sm-8">
+                <input id="c-service_id" class="form-control" type="text" disabled value="{$row.service_id}">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-xs-12 col-sm-2">{:__('Name')}:</label>
+            <div class="col-xs-12 col-sm-8">
+                <input id="c-shop_id" class="form-control" type="text" disabled value="{$row.name}">
+            </div>
+        </div>
+    <div class="form-group">
+            <label class="control-label col-xs-12 col-sm-2">{:__('Type')}:</label>
+            <div class="col-xs-12 col-sm-8">
+                <select  id="c-type" class="form-control selectpicker" disabled>
+                    <option value="">请选择服务站</option>
+                    <option value="0" {if condition = '$row.type == 0'} selected {/if}>县服务站</option>
+                    <option value="1" {if condition = '$row.type == 1'} selected {/if}>乡服务站</option>
+                    <option value="2" {if condition = '$row.type == 2'} selected {/if}>村服务站</option>
+                    <option value="3" {if condition = '$row.type == 3'} selected {/if}>银行</option>
+                    <option value="4" {if condition = '$row.type == 4'} selected {/if}>担保</option>
+                </select>
+            </div>
+        </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Area')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-area"  disabled class="form-control" type="text" value="{$row.area|htmlentities}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Country')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-country" class="form-control" disabled type="text" value="{$row.country|htmlentities}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Village')}::</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-village" class="form-control" type="text" disabled value="{$row.village|htmlentities}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('pid')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-pid" class="form-control" disabled type="text" value="{$row.pid|htmlentities}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Bank_id')}::</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-bank_id" data-source="organization/servicestation/getbank?model=bank" disabled data-field="bank_name" data-primary-key="id" class="form-control selectpage" data-multiple="true" name="row[bank_id]" type="text" value="{$row.bank_id|htmlentities}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Break')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <textarea id="c-break" class="form-control" rows="5" disabled cols="50">{$row.break|htmlentities}</textarea>
+        </div>
+    </div>
+     <div class="form-group">
+            <label class="control-label col-xs-12 col-sm-2">{:__('Status')}::</label>
+            <div class="col-xs-12 col-sm-8">
+                <input id="c-status" class="form-control" name="" type="text" disabled
+                       {switch row.status}
+                       {case 0}value="异常"{/case}
+                {case 1}value="正常"{/case}
+                {default /}
+                {/switch}
+                >
+            </div>
+        </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">提交入库时间:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-createtime" disabled class="form-control datetimepicker" data-date-format="YYYY-MM-DD HH:mm:ss" data-use-current="true" type="text" value="{:$row.createtime?datetime($row.createtime):''}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">修改时间:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-updatetime" disabled class="form-control datetimepicker" data-date-format="YYYY-MM-DD HH:mm:ss" data-use-current="true" type="text" value="{:$row.updatetime?datetime($row.updatetime):''}">
+        </div>
+    </div>
+        <div class="hide layer-footer">
+            <label class="control-label col-xs-12 col-sm-2"></label>
+            <div class="col-xs-12 col-sm-8">
+                <button type="reset" class="btn btn-primary btn-embossed btn-close" onclick="Layer.closeAll();">{:__('Close')}</button>
+            </div>
+        </div>
+</form>
