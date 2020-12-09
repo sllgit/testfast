@@ -73,6 +73,7 @@ class Admin extends Backend
 
     function generateTree($array){
         $area = Config::get('site.areas');//默认县城id
+//        halt($area);
         //第一步 构造数据
         $items = array();
         foreach($array as $value){
@@ -110,47 +111,15 @@ class Admin extends Backend
 //        dump($service_id);
         if ($this->request->isAjax()) {
             //如果发送的来源是Selectpage，则转发到Selectpage
-            if ($this->request->request('keyField')) {
-                return $this->selectpage();
-            }
-            $childrenGroupIds = $this->childrenGroupIds;
-            $groupName = AuthGroup::where('id', 'in', $childrenGroupIds)
-                ->column('id,name');
-            $authGroupList = AuthGroupAccess::where('group_id', 'in', $childrenGroupIds)
-                ->field('uid,group_id')
-                ->select();
-
-            $adminGroupName = [];
-            foreach ($authGroupList as $k => $v) {
-                if (isset($groupName[$v['group_id']])) {
-                    $adminGroupName[$v['uid']][$v['group_id']] = $groupName[$v['group_id']];
-                }
-            }
-            $groups = $this->auth->getGroups();
-            foreach ($groups as $m => $n) {
-                $adminGroupName[$this->auth->id][$n['id']] = $n['name'];
-            }
-            list($where, $sort, $order, $offset, $limit) = $this->buildparams();
-
-            $wheres = ["service_id"=>$service_id];
-            $list = $this->model
-                ->where($where)
-                ->where($wheres)
-                ->where('id', 'in', $this->childrenAdminIds)
-                ->field(['password', 'salt', 'token'], true)
-                ->order($sort, $order)
-                ->paginate($limit);
-
-            foreach ($list as $k => &$v) {
-                $groups = isset($adminGroupName[$v['id']]) ? $adminGroupName[$v['id']] : [];
-                $v['groups'] = implode(',', array_keys($groups));
-                $v['groups_text'] = implode(',', array_values($groups));
-                $list[$k]['service_name'] = db('service_station')->where(['id'=>$v['service_id']])->value('name');
-            }
-            unset($v);
-            $result = array("total" => $list->total(), "rows" => $list->items());
-
-            return json($result);
+            $data = [
+                "code"=>0,
+                "data"=>[
+                    ["id"=>1,"username"=>"sll1","sex"=>"男"],
+                    ["id"=>2,"username"=>"sll2","sex"=>"女"]
+                ]
+            ];
+//            halt();
+            return $data;
         }
         return $this->view->fetch();
     }

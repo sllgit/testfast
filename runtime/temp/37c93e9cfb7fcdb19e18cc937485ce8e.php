@@ -1,0 +1,193 @@
+<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:91:"D:\phpStudy\PHPTutorial\WWW\testfast\public/../application/admin\view\auth\admin\index.html";i:1607523617;s:79:"D:\phpStudy\PHPTutorial\WWW\testfast\application\admin\view\layout\default.html";i:1607519277;s:76:"D:\phpStudy\PHPTutorial\WWW\testfast\application\admin\view\common\meta.html";i:1607519277;s:78:"D:\phpStudy\PHPTutorial\WWW\testfast\application\admin\view\common\script.html";i:1607519277;}*/ ?>
+<!DOCTYPE html>
+<html lang="<?php echo $config['language']; ?>">
+    <head>
+        <meta charset="utf-8">
+<title><?php echo (isset($title) && ($title !== '')?$title:''); ?></title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<meta name="renderer" content="webkit">
+<meta name="referrer" content="never">
+
+<link rel="shortcut icon" href="/assets/img/favicon.ico" />
+<!-- Loading Bootstrap -->
+<link href="/assets/css/backend<?php echo \think\Config::get('app_debug')?'':'.min'; ?>.css?v=<?php echo \think\Config::get('site.version'); ?>" rel="stylesheet">
+
+<?php if(\think\Config::get('fastadmin.adminskin')): ?>
+<link href="/assets/css/skins/<?php echo \think\Config::get('fastadmin.adminskin'); ?>.css?v=<?php echo \think\Config::get('site.version'); ?>" rel="stylesheet">
+<?php endif; ?>
+
+<!-- HTML5 shim, for IE6-8 support of HTML5 elements. All other JS at the end of file. -->
+<!--[if lt IE 9]>
+  <script src="/assets/js/html5shiv.js"></script>
+  <script src="/assets/js/respond.min.js"></script>
+<![endif]-->
+<script type="text/javascript">
+    var require = {
+        config:  <?php echo json_encode($config); ?>
+    };
+</script>
+
+    </head>
+
+    <body class="inside-header inside-aside <?php echo defined('IS_DIALOG') && IS_DIALOG ? 'is-dialog' : ''; ?>">
+        <div id="main" role="main">
+            <div class="tab-content tab-addtabs">
+                <div id="content">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            <section class="content-header hide">
+                                <h1>
+                                    <?php echo __('Dashboard'); ?>
+                                    <small><?php echo __('Control panel'); ?></small>
+                                </h1>
+                            </section>
+                            <?php if(!IS_DIALOG && !\think\Config::get('fastadmin.multiplenav') && \think\Config::get('fastadmin.breadcrumb')): ?>
+                            <!-- RIBBON -->
+                            <div id="ribbon">
+                                <ol class="breadcrumb pull-left">
+                                    <?php if($auth->check('dashboard')): ?>
+                                    <li><a href="dashboard" class="addtabsit"><i class="fa fa-dashboard"></i> <?php echo __('Dashboard'); ?></a></li>
+                                    <?php endif; ?>
+                                </ol>
+                                <ol class="breadcrumb pull-right">
+                                    <?php foreach($breadcrumb as $vo): ?>
+                                    <li><a href="javascript:;" data-url="<?php echo $vo['url']; ?>"><?php echo $vo['title']; ?></a></li>
+                                    <?php endforeach; ?>
+                                </ol>
+                            </div>
+                            <!-- END RIBBON -->
+                            <?php endif; ?>
+                            <div class="content">
+                                <meta name="renderer" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<link rel="stylesheet" href="/assets/css/jstree/style.min.css">
+<link rel="stylesheet" href="/assets/css/auth-admin/auth_admin.css">
+<!--D:\phpStudy\PHPTutorial\WWW\testfast\public\assets\css\modules\layer\default\layer.css-->
+<link rel="stylesheet" href="/assets/css/layui.css">
+<link rel="stylesheet" href="/assets/css/modules/layer/default/layer.css">
+<div class="panel panel-default panel-intro">
+    <?php echo build_heading(); ?>
+    <div class="panel-body">
+        <div id="leftbody">
+            <div class="leftbody1">
+                <div class="jia xian"></div><span class="spans" sid="<?php echo $servicedatas['area']['id']; ?>"><?php echo $servicedatas['area']['name']; ?></span>
+                <?php if(is_array($servicedatas['data']) || $servicedatas['data'] instanceof \think\Collection || $servicedatas['data'] instanceof \think\Paginator): $i = 0; $__LIST__ = $servicedatas['data'];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$v): $mod = ($i % 2 );++$i;?>
+                <div class="one hide">
+                    <?php if($v['son'] != []): ?>
+                    <div class="jia xiang"></div><span class="spans" sid="<?php echo $v['id']; ?>"><?php echo $v['name']; ?></span>
+                    <?php if(is_array($v['son']) || $v['son'] instanceof \think\Collection || $v['son'] instanceof \think\Paginator): $i = 0; $__LIST__ = $v['son'];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vv): $mod = ($i % 2 );++$i;?>
+                    <div class="two hide">
+                        <span class="spans" sid="<?php echo $vv['id']; ?>"><?php echo $vv['name']; ?></span>
+                    </div>
+                    <?php endforeach; endif; else: echo "" ;endif; else: ?>
+                    <span class="spans" sid="<?php echo $v['id']; ?>"><?php echo $v['name']; ?></span>
+                    <?php endif; ?>
+                </div>
+                <?php endforeach; endif; else: echo "" ;endif; ?>
+                <div class="other">
+                    <?php if(is_array($servicedatas['other']) || $servicedatas['other'] instanceof \think\Collection || $servicedatas['other'] instanceof \think\Paginator): $i = 0; $__LIST__ = $servicedatas['other'];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$v): $mod = ($i % 2 );++$i;?>
+                    <span class="spans" sid="<?php echo $v['id']; ?>"><?php echo $v['name']; ?></span>
+                    <?php endforeach; endif; else: echo "" ;endif; ?>
+                </div>
+            </div>
+        </div>
+        <div id="myTabContent" class="tab-content">
+            <div class="tab-pane fade active in" id="one">
+                <!--<table>-->
+                    <!--<tr class="titles">-->
+                        <!--<td>序号</td>-->
+                        <!--<td>账号</td>-->
+                        <!--<td>姓名</td>-->
+                        <!--<td>邮箱</td>-->
+                        <!--<td>所属服务站</td>-->
+                        <!--<td>角色</td>-->
+                        <!--<td>状态</td>-->
+                        <!--<td>最后登录时间</td>-->
+                        <!--<td>操作</td>-->
+                    <!--</tr>-->
+                     <!--<tr class="contents">-->
+                        <!--<td>1</td>-->
+                        <!--<td>12346855214</td>-->
+                        <!--<td>快快快</td>-->
+                        <!--<td>22222222@qq.com</td>-->
+                        <!--<td>小孙庄服务站</td>-->
+                        <!--<td>大队支书</td>-->
+                        <!--<td>正常</td>-->
+                        <!--<td>2020-10-01 12:00:00</td>-->
+                        <!--<td>-->
+                            <!--<a href="#">修改</a>-->
+                            <!--<a href="#">重置密码</a>-->
+                            <!--<a href="#">删除</a>-->
+                        <!--</td>-->
+                    <!--</tr>-->
+                <!--</table>-->
+                <div class="demoTable">
+                    搜索ID：
+                    <div class="layui-inline">
+                        <input class="layui-input" name="id" id="demoReload" autocomplete="off">
+                    </div>
+                    <button class="layui-btn" data-type="reload">搜索</button>
+                </div>
+                <table class="layui-hide" id="test"></table>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="/assets/js/jquery-3.4.1.min.js"></script>
+<script src="/assets/js/jstree/jstree.min.js"></script>
+<script src="/assets/js/layui.js" charset="utf-8"></script>
+<script>
+    layui.use('table', function(){
+        var table = layui.table;
+
+        table.render({
+            elem: '#test'
+            ,url:'/auth/admin/index'
+            ,cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
+            ,cols: [[
+                {field:'id', width:80, title: 'ID', sort: true}
+                ,{field:'username', width:80, title: '用户名'}
+                ,{field:'sex', width:80, title: '性别', sort: true}
+                // ,{field:'city', width:80, title: '城市'}
+                // ,{field:'sign', title: '签名', width: '30%'} //minWidth：局部定义当前单元格的最小宽度，layui 2.2.1 新增
+                // ,{field:'experience', title: '积分', sort: true}
+                // ,{field:'score', title: '评分', sort: true}
+                // ,{field:'classify', title: '职业'}
+                // ,{field:'wealth', width:137, title: '财富', sort: true}
+            ]]
+            ,id: 'testReload'
+        });
+        var $ = layui.$, active = {
+            reload: function(){
+                var demoReload = $('#demoReload');
+
+                //执行重载
+                table.reload('testReload', {
+                    // page: {
+                    //     curr: 1 //重新从第 1 页开始
+                    // },
+                    where: {
+                        key: {
+                            id: demoReload.val()
+                        }
+                    }
+                }, 'data');
+            }
+        };
+
+        $('.demoTable .layui-btn').on('click', function(){
+            var type = $(this).data('type');
+            active[type] ? active[type].call(this) : '';
+        });
+    });
+</script>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script src="/assets/js/require<?php echo \think\Config::get('app_debug')?'':'.min'; ?>.js" data-main="/assets/js/require-backend<?php echo \think\Config::get('app_debug')?'':'.min'; ?>.js?v=<?php echo htmlentities($site['version']); ?>"></script>
+    </body>
+</html>
