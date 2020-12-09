@@ -67,7 +67,7 @@ class Admin extends Backend
     {
         $groupList = \db('service_station')->select();
         $data = $this->generateTree($groupList);
-//        halt($data);
+       // halt($data);
         return $data;
     }
 

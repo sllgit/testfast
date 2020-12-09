@@ -1,6 +1,10 @@
+.panel-body{
+    display: flex;
+    justify-content: space-between;
+}
 #leftbody{
     border: 0.06vw #666666 solid;
-    width: 10vw;
+    width: 13vw;
     height: 40vw;
     float: left;
     font-size: 0.9vw;
@@ -9,10 +13,13 @@
 .leftbody1{
     width: 15vw;
 }
+.leftbody1 span{
+    white-space: nowrap;
+}
 #myTabContent{
     float: left;
-    width: 78vw;
-    margin-left: 4vw;
+    width: 80vw;
+    margin-left: 1vw;
 }
 .tab-addtabs .tab-pane{
     width: 100%;

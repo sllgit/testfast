@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:78:"D:\phpstudy_pro\WWW\testfast\public/../application/admin\view\index\login.html";i:1602168705;s:68:"D:\phpstudy_pro\WWW\testfast\application\admin\view\common\meta.html";i:1602168705;s:70:"D:\phpstudy_pro\WWW\testfast\application\admin\view\common\script.html";i:1602168705;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:78:"D:\phpstudy_pro\WWW\testfast\public/../application/admin\view\index\login.html";i:1606703091;s:68:"D:\phpstudy_pro\WWW\testfast\application\admin\view\common\meta.html";i:1602168705;s:70:"D:\phpstudy_pro\WWW\testfast\application\admin\view\common\script.html";i:1602168705;}*/ ?>
 <!DOCTYPE html>
 <html lang="<?php echo $config['language']; ?>">
 <head>
@@ -135,15 +135,15 @@
                             <div class="input-group-addon"><span class="glyphicon glyphicon-lock" aria-hidden="true"></span></div>
                             <input type="password" class="form-control" id="pd-form-password" placeholder="<?php echo __('Password'); ?>" name="password" autocomplete="off" value="" data-rule="<?php echo __('Password'); ?>:required;password"/>
                         </div>
-                        <?php if(\think\Config::get('fastadmin.login_captcha')): ?>
-                        <div class="input-group">
-                            <div class="input-group-addon"><span class="glyphicon glyphicon-option-horizontal" aria-hidden="true"></span></div>
-                            <input type="text" name="captcha" class="form-control" placeholder="<?php echo __('Captcha'); ?>" data-rule="<?php echo __('Captcha'); ?>:required;length(4)"/>
-                            <span class="input-group-addon" style="padding:0;border:none;cursor:pointer;">
-                                        <img src="<?php echo rtrim('/', '/'); ?>/index.php?s=/captcha" width="100" height="30" onclick="this.src = '<?php echo rtrim('/', '/'); ?>/index.php?s=/captcha&r=' + Math.random();"/>
-                                    </span>
-                        </div>
-                        <?php endif; ?>
+                        <!--<?php if(\think\Config::get('fastadmin.login_captcha')): ?>-->
+                        <!--<div class="input-group">-->
+                            <!--<div class="input-group-addon"><span class="glyphicon glyphicon-option-horizontal" aria-hidden="true"></span></div>-->
+                            <!--<input type="text" name="captcha" class="form-control" placeholder="<?php echo __('Captcha'); ?>" data-rule="<?php echo __('Captcha'); ?>:required;length(4)"/>-->
+                            <!--<span class="input-group-addon" style="padding:0;border:none;cursor:pointer;">-->
+                                        <!--<img src="<?php echo rtrim('/', '/'); ?>/index.php?s=/captcha" width="100" height="30" onclick="this.src = '<?php echo rtrim('/', '/'); ?>/index.php?s=/captcha&r=' + Math.random();"/>-->
+                                    <!--</span>-->
+                        <!--</div>-->
+                        <!--<?php endif; ?>-->
                         <div class="form-group checkbox">
                             <label class="inline" for="keeplogin">
                                 <input type="checkbox" name="keeplogin" id="keeplogin" value="1"/>

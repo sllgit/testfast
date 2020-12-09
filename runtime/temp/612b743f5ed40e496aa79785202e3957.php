@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:83:"D:\phpstudy_pro\WWW\testfast\public/../application/admin\view\auth\admin\index.html";i:1602168705;s:71:"D:\phpstudy_pro\WWW\testfast\application\admin\view\layout\default.html";i:1602168705;s:68:"D:\phpstudy_pro\WWW\testfast\application\admin\view\common\meta.html";i:1602168705;s:70:"D:\phpstudy_pro\WWW\testfast\application\admin\view\common\script.html";i:1602168705;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:83:"D:\phpstudy_pro\WWW\testfast\public/../application/admin\view\auth\admin\index.html";i:1607508243;s:71:"D:\phpstudy_pro\WWW\testfast\application\admin\view\layout\default.html";i:1602168705;s:68:"D:\phpstudy_pro\WWW\testfast\application\admin\view\common\meta.html";i:1602168705;s:70:"D:\phpstudy_pro\WWW\testfast\application\admin\view\common\script.html";i:1602168705;}*/ ?>
 <!DOCTYPE html>
 <html lang="<?php echo $config['language']; ?>">
     <head>
@@ -58,27 +58,74 @@
                             <!-- END RIBBON -->
                             <?php endif; ?>
                             <div class="content">
-                                <div class="panel panel-default panel-intro">
+                                <link rel="stylesheet" href="/assets/css/jstree/style.min.css">
+<link rel="stylesheet" href="/assets/css/auth-admin/auth_admin.css">
+<div class="panel panel-default panel-intro">
     <?php echo build_heading(); ?>
-
     <div class="panel-body">
-        <div id="myTabContent" class="tab-content">
-            <div class="tab-pane fade active in" id="one">
-                <div class="widget-body no-padding">
-                    <div id="toolbar" class="toolbar">
-                        <?php echo build_toolbar('refresh,add,delete'); ?>
+        <div id="leftbody">
+            <div class="leftbody1">
+                <div class="jia xian"></div><span class="spans" sid="<?php echo $servicedatas['area']['id']; ?>"><?php echo $servicedatas['area']['name']; ?></span>
+                <?php if(is_array($servicedatas['data']) || $servicedatas['data'] instanceof \think\Collection || $servicedatas['data'] instanceof \think\Paginator): $i = 0; $__LIST__ = $servicedatas['data'];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$v): $mod = ($i % 2 );++$i;?>
+                <div class="one hide">
+                    <?php if($v['son'] != []): ?>
+                    <div class="jia xiang"></div><span class="spans" sid="<?php echo $v['id']; ?>"><?php echo $v['name']; ?></span>
+                    <?php if(is_array($v['son']) || $v['son'] instanceof \think\Collection || $v['son'] instanceof \think\Paginator): $i = 0; $__LIST__ = $v['son'];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vv): $mod = ($i % 2 );++$i;?>
+                    <div class="two hide">
+                        <span class="spans" sid="<?php echo $vv['id']; ?>"><?php echo $vv['name']; ?></span>
                     </div>
-                    <table id="table" class="table table-striped table-bordered table-hover" 
-                           data-operate-edit="<?php echo $auth->check('auth/admin/edit'); ?>" 
-                           data-operate-del="<?php echo $auth->check('auth/admin/del'); ?>" 
-                           width="100%">
-                    </table>
+                    <?php endforeach; endif; else: echo "" ;endif; else: ?>
+                    <span class="spans" sid="<?php echo $v['id']; ?>"><?php echo $v['name']; ?></span>
+                    <?php endif; ?>
+                </div>
+                <?php endforeach; endif; else: echo "" ;endif; ?>
+                <div class="other">
+                    <?php if(is_array($servicedatas['other']) || $servicedatas['other'] instanceof \think\Collection || $servicedatas['other'] instanceof \think\Paginator): $i = 0; $__LIST__ = $servicedatas['other'];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$v): $mod = ($i % 2 );++$i;?>
+                    <span class="spans" sid="<?php echo $v['id']; ?>"><?php echo $v['name']; ?></span>
+                    <?php endforeach; endif; else: echo "" ;endif; ?>
                 </div>
             </div>
+        </div>
+        <div id="myTabContent" class="tab-content">
+            <div class="tab-pane fade active in" id="one">
+                <table>
+                    <tr>
+                        <td>序号</td>
+                        <td>账号</td>
+                        <td>姓名</td>
+                        <td>邮箱</td>
+                        <td>所属服务站</td>
+                        <td>角色</td>
+                        <td>状态</td>
+                        <td>最后登录时间</td>
+                        <td>操作</td>
+                    </tr>
+                     <tr>
+                        <td>1</td>
+                        <td>12346855214</td>
+                        <td>快快快</td>
+                        <td>22222222@qq.com</td>
+                        <td>小孙庄服务站</td>
+                        <td>大队支书</td>
+                        <td>正常</td>
+                        <td>2020-10-01 12:00:00</td>
+                        <td>
+                            <a href="#">修改</a>
+                            <a href="#">重置密码</a>
+                            <a href="#">删除</a>
+                        </td>
+                    </tr>
+                </table>
 
+            </div>
         </div>
     </div>
 </div>
+<script src="/assets/js/jquery-3.4.1.min.js"></script>
+<script src="/assets/js/jstree/jstree.min.js"></script>
+<script>
+
+</script>
                             </div>
                         </div>
                     </div>
