@@ -1,3 +1,6 @@
+.tab-pane{
+    padding: 1vw;
+}
 .panel-body{
     display: flex;
     justify-content: space-between;
