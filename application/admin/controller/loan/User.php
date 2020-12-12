@@ -17,6 +17,7 @@ class User extends Backend
      * @var \app\admin\model\loan\User
      */
     protected $model = null;
+    protected $servicetype = null;
 
     protected $searchFields = 'nickname,phone,idcard';
 
@@ -26,6 +27,8 @@ class User extends Backend
         $this->model = new \app\admin\model\loan\User;
         $bankinfo = $this->model->getbankinfo();
         $this->assign("bankinfo",$bankinfo);
+        $this->assign('servicetype',$this->checkservicetype());
+        $this->assignconfig('servicetype',$this->checkservicetype());
     }
 
     public function import()

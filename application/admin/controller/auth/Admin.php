@@ -8,6 +8,7 @@ use app\common\controller\Backend;
 use fast\Random;
 use fast\Tree;
 use think\Config;
+use think\Db;
 use think\Validate;
 
 /**
@@ -23,6 +24,7 @@ class Admin extends Backend
      * @var \app\admin\model\Admin
      */
     protected $model = null;
+    protected $noNeedRight = ['','closeadmin','openadmin'];
     protected $selectpageFields = 'id,username,nickname,avatar';
     protected $searchFields = 'id,username,nickname,phone,email';
     protected $childrenGroupIds = [];
@@ -65,9 +67,21 @@ class Admin extends Backend
 
     public function getservice()
     {
-        $groupList = \db('service_station')->select();
+        //县-全部 乡-乡和村 村-村 银行-银行 担保-担保
+        //判断当前登录的角色
+        $service_id = $this->auth->service_id;
+        $info = \db('service_station')->where(['id'=>$service_id])->field('type,pid')->find();
+        $where = [];
+        switch ($info['type']){
+            case '0':$where = [];break;
+            case '1':$where['id|pid'] = $service_id;break;
+            default:$where['id'] = $service_id;break;
+        }
+//        dump($where);
+        $groupList = \db('service_station')->where($where)->select();
         $data = $this->generateTree($groupList);
-       // halt($data);
+        $data['id'] = $service_id;
+//        halt($data);
         return $data;
     }
 
@@ -81,6 +95,9 @@ class Admin extends Backend
         }
         //第二部 遍历数据 生成树状结构
         $tree = array();
+        $tree['other'] = array();
+        $tree['area'] = array();
+        $tree['data'] = array();
         foreach($items['data'] as $key => $value){
             $items['data'][$key]['son'] = [];
             if(isset($items['data'][$value['pid']])){
@@ -105,21 +122,62 @@ class Admin extends Backend
      */
     public function index()
     {
+
         //设置过滤方法
         $this->request->filter(['strip_tags', 'trim']);
-        $service_id = $this->request->post('service_id') ?? db('service_station')->where(['area'=>Config::get('site.areas'),'country'=>null,'village'=>null])->value('id');
-//        dump($service_id);
+//        $service_id = $this->request->post('service_id') ?? db('service_station')->where(['area'=>Config::get('site.areas'),'country'=>null,'village'=>null])->value('id');
+        $service_id = $this->auth->service_id;
         if ($this->request->isAjax()) {
+            $page = $this->request->get('page') ?? 2;
+            $limit = $this->request->get('limit') ?? 2;
+            $id = $this->request->get('id');
+            $service_ids = $this->request->get('service_id');
             //如果发送的来源是Selectpage，则转发到Selectpage
-            $data = [
-                "code"=>0,
-                "data"=>[
-                    ["id"=>1,"username"=>"sll1","sex"=>"男"],
-                    ["id"=>2,"username"=>"sll2","sex"=>"女"]
-                ]
-            ];
-//            halt();
-            return $data;
+            if ($this->request->request('keyField')) {
+                return $this->selectpage();
+            }
+            $childrenGroupIds = $this->childrenGroupIds;
+            $groupName = AuthGroup::where('id', 'in', $childrenGroupIds)
+                ->column('id,name');
+            $authGroupList = AuthGroupAccess::where('group_id', 'in', $childrenGroupIds)
+                ->field('uid,group_id')
+                ->select();
+
+            $adminGroupName = [];
+            foreach ($authGroupList as $k => $v) {
+                if (isset($groupName[$v['group_id']])) {
+                    $adminGroupName[$v['uid']][$v['group_id']] = $groupName[$v['group_id']];
+                }
+            }
+            $groups = $this->auth->getGroups();
+            foreach ($groups as $m => $n) {
+                $adminGroupName[$this->auth->id][$n['id']] = $n['name'];
+            }
+
+            $where["service_id"] = $service_ids ? $service_ids : $service_id;
+            if (!empty($id)) $where['username|nickname'] = ["like","%$id%"];
+            $total = $this->model
+                ->where($where)
+                ->count();
+
+            $list = $this->model
+                ->where($where)
+                ->page($page,$limit)
+                ->select();
+
+            foreach ($list as $k => &$v) {
+                $groups = isset($adminGroupName[$v['id']]) ? $adminGroupName[$v['id']] : [];
+                $v['groups'] = implode(',', array_keys($groups));
+                $v['groups_text'] = implode(',', array_values($groups));
+                $list[$k]['service_name'] = db('service_station')->where(['id'=>$v['service_id']])->value('name');
+                $v['logintime'] = date("Y-m-d H:i:s",$v['logintime']);
+            }
+            unset($v);
+
+            $data = json_decode(json_encode($list,256),true);
+            $result = array("code"=>0,"msg"=>"请求成功","count" => $total, "data"=>$data);
+
+            return $result;
         }
         return $this->view->fetch();
     }
@@ -136,7 +194,7 @@ class Admin extends Backend
                 //验证手机号
                 $iseet = $this->model->where(['phone'=>$params['phone']])->find();
                 if ($iseet){
-                    $this->error('该登录手机号已存在！');
+                    $this->error('该账号已存在！');
                 }
                 if (!Validate::is($params['password'], '\S{6,16}')) {
                     $this->error(__("Please input correct password"));
@@ -251,7 +309,7 @@ class Admin extends Backend
     public function del($ids = "")
     {
         if (!$this->request->isPost()) {
-            $this->error(__("Invalid parameters"));
+            return ["code"=>203,"data"=>__('Invalid parameters')];
         }
         $ids = $ids ? $ids : $this->request->post("ids");
         if ($ids) {
@@ -270,30 +328,49 @@ class Admin extends Backend
                 if ($deleteIds) {
                     $this->model->destroy($deleteIds);
                     model('AuthGroupAccess')->where('uid', 'in', $deleteIds)->delete();
-                    $this->success();
+                    return ["code"=>200,"data"=>"删除成功"];
                 }
             }
         }
-        $this->error(__('You have no permission'));
+        return ["code"=>203,"data"=>__('You have no permission')];
     }
 
     /**
-     * 批量更新
+     * 关停管理员
      * @internal
      */
-    public function multi($ids = "")
+    public function closeadmin($ids = "")
     {
-        // 管理员禁止批量操作
-        $this->error();
+        if (!$this->request->isPost()) {
+            return ["code"=>203,"data"=>__('Invalid parameters')];
+        }
+        $ids = $ids ? $ids : $this->request->post("ids");
+
+        $res = $this->model->save(["status"=>"disable"],["id"=>$ids]);
+        if ($res === false){
+            return ["code"=>203,"data"=>"关停操作异常"];
+        }else{
+            return ["code"=>200,"data"=>"关停成功"];
+        }
     }
 
     /**
-     * 下拉搜索
+     * 恢复管理员
+     * @internal
      */
-    public function selectpage()
+    public function openadmin($ids = "")
     {
-        $this->dataLimit = 'auth';
-        $this->dataLimitField = 'id';
-        return parent::selectpage();
+        if (!$this->request->isPost()) {
+            return ["code"=>203,"data"=>__('Invalid parameters')];
+        }
+        $ids = $ids ? $ids : $this->request->post("ids");
+
+        $res = $this->model->save(["status"=>"normal"],["id"=>$ids]);halt($res);
+        if ($res === false){
+            return ["code"=>203,"data"=>"恢复操作异常"];
+        }else{
+            return ["code"=>200,"data"=>"恢复成功"];
+        }
     }
+
 }

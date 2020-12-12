@@ -11,7 +11,7 @@
         <label for="username" class="control-label col-xs-12 col-sm-2">{:__('Service_id')}:</label>
         <div class="col-xs-12 col-sm-8">
             <input type="text" class="form-control hide" id="service_id" name="row[service_id]" value="{$row.service_id|htmlentities}"/>
-            <input type="text" class="form-control" name="row[service_name]" readonly id="service_name" value="{$row.service_name|htmlentities}"/>
+            <input type="text" class="form-control" readonly id="service_name" value="{$row.service_name|htmlentities}"/>
             <button type="button" class="btn btn-primary select" data-toggle="modal" data-target="#myModal">选择服务站</button>
         </div>
     </div>
@@ -36,7 +36,7 @@
     <div class="form-group">
         <label for="email" class="control-label col-xs-12 col-sm-2">{:__('Email')}:</label>
         <div class="col-xs-12 col-sm-8">
-            <input type="email" class="form-control" id="email" name="row[email]" value="{$row.email|htmlentities}" data-rule="required;email" />
+            <input type="email" class="form-control" id="email" name="row[email]" value="{$row.email|htmlentities}" />
         </div>
     </div>
     <div class="form-group">
@@ -74,26 +74,32 @@
                 <div class="modal-body">
                     <div id="editbody">
                         <div class="addbody1">
-                            <div class="jia xian"></div><span class="spans" sid="0">郸城县</span>
-                            {volist name="$servicedatas.data" id="v"}
-                            <div class="one hide">
-                                {if $v.son != []}
-                                <div class="jia xiang"></div><span class="spans" sid="{$v.id}">{$v.name}</span>
-                                {volist name="$v.son" id="vv"}
-                                <div class="two hide">
-                                    <span class="spans" sid="{$vv.id}">{$vv.name}</span>
+                            {if $servicedatas.area != []}
+                                <div class="jia xian"></div><span class="spans" sid="0">郸城县</span>
+                            {/if}
+                            {if $servicedatas.data != []}
+                                {volist name="$servicedatas.data" id="v"}
+                                <div class="one {if $servicedatas.area != []}hide{/if}">
+                                    {if $v.son != []}
+                                    <div class="jia xiang"></div><span class="spans" sid="{$v.id}">{$v.name}</span>
+                                    {volist name="$v.son" id="vv"}
+                                    <div class="two hide">
+                                        <span class="spans" sid="{$vv.id}">{$vv.name}</span>
+                                    </div>
+                                    {/volist}
+                                    {else /}
+                                    <span class="spans" sid="{$v.id}">{$v.name}</span>
+                                    {/if}
                                 </div>
                                 {/volist}
-                                {else /}
-                                <span class="spans" sid="{$v.id}">{$v.name}</span>
-                                {/if}
-                            </div>
-                            {/volist}
-                            <div class="other">
-                                {volist name="$servicedatas.other" id="v"}
-                                <span class="spans" sid="{$v.id}">{$v.name}</span>
-                                {/volist}
-                            </div>
+                            {/if}
+                            {if $servicedatas.other != []}
+                                <div class="other">
+                                    {volist name="$servicedatas.other" id="v"}
+                                    <span class="spans" sid="{$v.id}">{$v.name}</span>
+                                    {/volist}
+                                </div>
+                            {/if}
                         </div>
                     </div>
                 </div>
@@ -109,7 +115,7 @@
     <div class="form-group hidden layer-footer">
         <label class="control-label col-xs-12 col-sm-2"></label>
         <div class="col-xs-12 col-sm-8">
-            <button type="submit" class="btn btn-success btn-embossed disabled">{:__('OK')}</button>
+            <button type="submit" class="btn btn-success btn-embossed disabled submits">{:__('OK')}</button>
             <button type="reset" class="btn btn-default btn-embossed">{:__('Reset')}</button>
         </div>
     </div>

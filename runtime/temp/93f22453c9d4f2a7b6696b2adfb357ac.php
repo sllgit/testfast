@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:6:{s:86:"D:\phpStudy\PHPTutorial\WWW\testfast\public/../application/admin\view\index\index.html";i:1607519277;s:76:"D:\phpStudy\PHPTutorial\WWW\testfast\application\admin\view\common\meta.html";i:1607519277;s:78:"D:\phpStudy\PHPTutorial\WWW\testfast\application\admin\view\common\header.html";i:1607519277;s:76:"D:\phpStudy\PHPTutorial\WWW\testfast\application\admin\view\common\menu.html";i:1607519277;s:79:"D:\phpStudy\PHPTutorial\WWW\testfast\application\admin\view\common\control.html";i:1607519277;s:78:"D:\phpStudy\PHPTutorial\WWW\testfast\application\admin\view\common\script.html";i:1607519277;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:6:{s:78:"D:\phpstudy_pro\WWW\testfast\public/../application/admin\view\index\index.html";i:1602168705;s:68:"D:\phpstudy_pro\WWW\testfast\application\admin\view\common\meta.html";i:1602168705;s:70:"D:\phpstudy_pro\WWW\testfast\application\admin\view\common\header.html";i:1607679866;s:68:"D:\phpstudy_pro\WWW\testfast\application\admin\view\common\menu.html";i:1602168705;s:71:"D:\phpstudy_pro\WWW\testfast\application\admin\view\common\control.html";i:1602168705;s:70:"D:\phpstudy_pro\WWW\testfast\application\admin\view\common\script.html";i:1602168705;}*/ ?>
 <!DOCTYPE html>
 <html lang="<?php echo $config['language']; ?>">
     <head>
@@ -86,24 +86,24 @@
                 </li>
 
                 <!-- 多语言列表 -->
-                <?php if(\think\Config::get('lang_switch_on')): ?>
-                <li class="hidden-xs">
-                    <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-language"></i></a>
-                    <ul class="dropdown-menu">
-                        <li class="<?php echo $config['language']=='zh-cn'?'active':''; ?>">
-                            <a href="?ref=addtabs&lang=zh-cn">简体中文</a>
-                        </li>
-                        <li class="<?php echo $config['language']=='en'?'active':''; ?>">
-                            <a href="?ref=addtabs&lang=en">English</a>
-                        </li>
-                    </ul>
-                </li>
-                <?php endif; ?>
+                <!--<?php if(\think\Config::get('lang_switch_on')): ?>-->
+                <!--<li class="hidden-xs">-->
+                    <!--<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-language"></i></a>-->
+                    <!--<ul class="dropdown-menu">-->
+                        <!--<li class="<?php echo $config['language']=='zh-cn'?'active':''; ?>">-->
+                            <!--<a href="?ref=addtabs&lang=zh-cn">简体中文</a>-->
+                        <!--</li>-->
+                        <!--<li class="<?php echo $config['language']=='en'?'active':''; ?>">-->
+                            <!--<a href="?ref=addtabs&lang=en">English</a>-->
+                        <!--</li>-->
+                    <!--</ul>-->
+                <!--</li>-->
+                <!--<?php endif; ?>-->
 
                 <!-- 全屏按钮 -->
-                <li class="hidden-xs">
-                    <a href="#" data-toggle="fullscreen"><i class="fa fa-arrows-alt"></i></a>
-                </li>
+                <!--<li class="hidden-xs">-->
+                    <!--<a href="#" data-toggle="fullscreen"><i class="fa fa-arrows-alt"></i></a>-->
+                <!--</li>-->
 
                 <!-- 账号信息下拉框 -->
                 <li class="dropdown user user-menu">
@@ -135,9 +135,9 @@
                     </ul>
                 </li>
                 <!-- 控制栏切换按钮 -->
-                <li class="hidden-xs">
-                    <a href="javascript:;" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
-                </li>
+                <!--<li class="hidden-xs">-->
+                    <!--<a href="javascript:;" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>-->
+                <!--</li>-->
             </ul>
         </div>
     </div>

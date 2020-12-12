@@ -59,7 +59,7 @@ class Auth extends \fast\Auth
         }
         if ($admin->password != md5(md5($password) . $admin->salt)) {
             $admin->loginfailure++;
-            $admin->where($where)->save();
+            $admin->allowField(true)->save($admin,$where);
             $this->setError('Password is incorrect');
             return false;
         }

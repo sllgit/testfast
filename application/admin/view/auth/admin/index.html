@@ -6,120 +6,80 @@
 <!--D:\phpStudy\PHPTutorial\WWW\testfast\public\assets\css\modules\layer\default\layer.css-->
 <link rel="stylesheet" href="/assets/css/layui.css">
 <link rel="stylesheet" href="/assets/css/modules/layer/default/layer.css">
+<style>
+    .layui-table-tips-c:before {
+        right: -2.1px!important;
+        top: -1px!important;
+    }
+    .layui-table-tips-c{
+        padding: 0px!important;
+        right: -12px!important;
+    }
+    #layui-table-page1{
+        text-align: center!important;
+    }
+    .layui-laypage-btn,.layui-input{
+        color: black!important;
+    }
+</style>
 <div class="panel panel-default panel-intro">
     {:build_heading()}
     <div class="panel-body">
         <div id="leftbody">
             <div class="leftbody1">
-                <div class="jia xian"></div><span class="spans" sid="{$servicedatas.area.id}">{$servicedatas.area['name']}</span>
-                {volist name="$servicedatas.data" id="v"}
-                <div class="one hide">
-                    {if $v.son != []}
-                    <div class="jia xiang"></div><span class="spans" sid="{$v.id}">{$v.name}</span>
-                    {volist name="$v.son" id="vv"}
-                    <div class="two hide">
-                        <span class="spans" sid="{$vv.id}">{$vv.name}</span>
+                {if $servicedatas.area != []}
+                    <div class="jia xian"></div><span class="spans" sid="{$servicedatas.area.id}">{$servicedatas.area['name']}</span>
+                {/if}
+                {if $servicedatas.data != []}
+                    {volist name="$servicedatas.data" id="v"}
+                    <div class="one {if $servicedatas.area != []}hide{/if}">
+                        {if $v.son != []}
+                        <div class="jia xiang"></div><span class="spans" sid="{$v.id}">{$v.name}</span>
+                        {volist name="$v.son" id="vv"}
+                        <div class="two hide">
+                            <span class="spans" sid="{$vv.id}">{$vv.name}</span>
+                        </div>
+                        {/volist}
+                        {else /}
+                        <span class="spans" sid="{$v.id}">{$v.name}</span>
+                        {/if}
                     </div>
                     {/volist}
-                    {else /}
-                    <span class="spans" sid="{$v.id}">{$v.name}</span>
-                    {/if}
-                </div>
-                {/volist}
+                {/if}
+                {if $servicedatas.other != []}
                 <div class="other">
                     {volist name="$servicedatas.other" id="v"}
                     <span class="spans" sid="{$v.id}">{$v.name}</span>
                     {/volist}
                 </div>
+                {/if}
             </div>
         </div>
+        <span id="service_id" class="hide">{$servicedatas.id}</span>
         <div id="myTabContent" class="tab-content">
             <div class="tab-pane fade active in" id="one">
-                <!--<table>-->
-                    <!--<tr class="titles">-->
-                        <!--<td>序号</td>-->
-                        <!--<td>账号</td>-->
-                        <!--<td>姓名</td>-->
-                        <!--<td>邮箱</td>-->
-                        <!--<td>所属服务站</td>-->
-                        <!--<td>角色</td>-->
-                        <!--<td>状态</td>-->
-                        <!--<td>最后登录时间</td>-->
-                        <!--<td>操作</td>-->
-                    <!--</tr>-->
-                     <!--<tr class="contents">-->
-                        <!--<td>1</td>-->
-                        <!--<td>12346855214</td>-->
-                        <!--<td>快快快</td>-->
-                        <!--<td>22222222@qq.com</td>-->
-                        <!--<td>小孙庄服务站</td>-->
-                        <!--<td>大队支书</td>-->
-                        <!--<td>正常</td>-->
-                        <!--<td>2020-10-01 12:00:00</td>-->
-                        <!--<td>-->
-                            <!--<a href="#">修改</a>-->
-                            <!--<a href="#">重置密码</a>-->
-                            <!--<a href="#">删除</a>-->
-                        <!--</td>-->
-                    <!--</tr>-->
-                <!--</table>-->
                 <div class="demoTable">
-                    搜索ID：
                     <div class="layui-inline">
-                        <input class="layui-input" name="id" id="demoReload" autocomplete="off">
+                        <input class="layui-input" name="id" id="demoReload" autocomplete="off" placeholder="可通过账号或姓名进行查找">
                     </div>
                     <button class="layui-btn" data-type="reload">搜索</button>
+                    <a href="/auth/admin/add" data-area='["50%","95%"]' class="btn btn-success btn-dialog {:$auth->check('auth/admin/add')?'':'hide'}" title="{:__('Add')}" style="float: right;margin-right: 3vw" ><i class="fa fa-plus"></i> {:__('Add')}</a>
+                    <a href="javascript:;" data-area='["50%","95%"]' class="edits btn btn-success btn-dialog hide" title="{:__('Edit')}" style="float: right;margin-right: 3vw" ><i class="fa fa-plus"></i> {:__('Edit')}</a>
+
                 </div>
-                <table class="layui-hide" id="test"></table>
+                <table class="layui-hide" id="test" lay-filter="test"></table>
             </div>
         </div>
     </div>
 </div>
+<script type="text/html" id="barDemo">
+    <a class="layui-btn layui-btn-xs {:$auth->check('auth/admin/edit')?'':'hide'}" lay-event="edit">修改</a>
+    {{# if (d.status == 'normal'){}}
+    <a class="layui-btn layui-btn-xs {:$auth->check('auth/admin/status')?'':'hide'}" lay-event="close">关停</a>
+    {{# } else { }}
+    <a class="layui-btn layui-btn-xs {:$auth->check('auth/admin/status')?'':'hide'}" lay-event="open">恢复</a>
+    {{# } }}
+    <a class="layui-btn layui-btn-danger layui-btn-xs {:$auth->check('auth/admin/del')?'':'hide'}" lay-event="del">删除</a>
+</script>
 <script src="/assets/js/jquery-3.4.1.min.js"></script>
 <script src="/assets/js/jstree/jstree.min.js"></script>
-<script src="/assets/js/layui.js" charset="utf-8"></script>
-<script>
-    layui.use('table', function(){
-        var table = layui.table;
-
-        table.render({
-            elem: '#test'
-            ,url:'/auth/admin/index'
-            ,cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
-            ,cols: [[
-                {field:'id', width:80, title: 'ID', sort: true}
-                ,{field:'username', width:80, title: '用户名'}
-                ,{field:'sex', width:80, title: '性别', sort: true}
-                // ,{field:'city', width:80, title: '城市'}
-                // ,{field:'sign', title: '签名', width: '30%'} //minWidth：局部定义当前单元格的最小宽度，layui 2.2.1 新增
-                // ,{field:'experience', title: '积分', sort: true}
-                // ,{field:'score', title: '评分', sort: true}
-                // ,{field:'classify', title: '职业'}
-                // ,{field:'wealth', width:137, title: '财富', sort: true}
-            ]]
-            ,id: 'testReload'
-        });
-        var $ = layui.$, active = {
-            reload: function(){
-                var demoReload = $('#demoReload');
-
-                //执行重载
-                table.reload('testReload', {
-                    // page: {
-                    //     curr: 1 //重新从第 1 页开始
-                    // },
-                    where: {
-                        key: {
-                            id: demoReload.val()
-                        }
-                    }
-                }, 'data');
-            }
-        };
-
-        $('.demoTable .layui-btn').on('click', function(){
-            var type = $(this).data('type');
-            active[type] ? active[type].call(this) : '';
-        });
-    });
-</script>

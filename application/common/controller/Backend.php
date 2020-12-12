@@ -539,4 +539,19 @@ class Backend extends Controller
         //刷新Token
         $this->request->token();
     }
+
+    /**
+     * 判断当前是否为村级服务人员用来
+     * 进行判断是否有录入贷款信息权限
+     */
+    public function checkservicetype()
+    {
+        $service_id = $this->auth->service_id;
+        $service_type = db('service_station')->where(['id'=>$service_id])->value('type');
+        if ($service_type == 2){
+            return true;
+        }else{
+            return false;
+        }
+    }
 }

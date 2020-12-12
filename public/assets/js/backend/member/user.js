@@ -33,7 +33,11 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
                         {field: 'nickname', title: __('Nickname'), operate: 'LIKE'},
                         {field: 'email', title: __('Email'), operate: 'LIKE'},
                         {field: 'logintime', title: __('Logintime'), operate:'RANGE', addclass:'datetimerange', autocomplete:false, formatter: Table.api.formatter.datetime},
-                        {field: 'status', title: __('Status'), operate: 'LIKE', formatter: Table.api.formatter.status},
+                        {field: 'status', title: __('Status'), operate: 'LIKE',
+                            searchList: {"disable":"关停","normal":"正常"},
+                            iconList: false,
+                            formatter: Table.api.formatter.status
+                        },
                         {field: 'operate', title: __('Operate'), table: table,
                             buttons: [
                                 {

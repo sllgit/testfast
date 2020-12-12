@@ -3,6 +3,7 @@
 return [
     'Group'                         => '所属组别',
     'Phone'                         => '登陆手机号',
+    'Username'                      => '账号',
     'Loginfailure'                  => '登录失败次数',
     'Login time'                    => '最后登录',
     'Service_id'                    => '所属服务站',

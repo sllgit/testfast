@@ -1,5 +1,11 @@
 define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefined, Backend, Table, Form) {
-
+    var servicetype = Config.servicetype;
+    var editurl = '';
+    var delurl = '';
+    if (servicetype == true){
+        editurl = 'loan/user/edit';
+        delurl = 'loan/user/del';
+    }
     var Controller = {
         index: function () {
             // 初始化表格参数配置
@@ -7,7 +13,7 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
                 extend: {
                     index_url: 'loan/user/index' + location.search,
                     add_url: 'loan/user/add',
-                    edit_url: 'loan/user/edit',
+                    edit_url: editurl,
                     del_url: 'loan/user/del',
                     multi_url: 'loan/user/multi',
                     import_url: 'loan/user/import',
@@ -51,7 +57,7 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
                 ]
             });
             table.on('post-body.bs.table',function () {
-                $('.btn-editone').data("area",["50%","95%"]);
+                $('.btn-editone').data("area",["100%","100%"]);
             });
             // 为表格绑定事件
             Table.api.bindevent(table);

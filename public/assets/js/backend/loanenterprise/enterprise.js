@@ -52,7 +52,7 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
                 ]
             });
             table.on('post-body.bs.table',function () {
-                $('.btn-editone').data("area",["50%","95%"]);
+                $('.btn-editone').data("area",["100%","100%"]);
             });
             // 为表格绑定事件
             Table.api.bindevent(table);
