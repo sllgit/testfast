@@ -15,5 +15,8 @@ return [
     'Loan_term'       => '贷款期限(月)',
     'Uppoor_num'      => '带贫困户数(户)',
     'Uppoor_type'     => '带贫方式',
-    'Uppoor_roster'   => '带贫名单'
+    'Uppoor_roster'   => '带贫名单',
+    'Bank_status'     => '银行审核状态',
+    'Loan_status'     => '贷款进度',
+    'payback_time'    => '还款日期',
 ];

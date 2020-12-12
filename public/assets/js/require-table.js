@@ -603,6 +603,15 @@ define(['jquery', 'bootstrap', 'moment', 'moment/locale/zh-cn', 'bootstrap-table
                     var width = this.width != undefined ? (this.width.match(/^\d+$/) ? this.width + "px" : this.width) : "250px";
                     return "<div style='white-space: nowrap; text-overflow:ellipsis; overflow: hidden; max-width:" + width + ";'>" + value + "</div>";
                 },
+                // status: function (value, row, index) {
+                //     var custom = {normal: 'success', hidden: 'gray', deleted: 'danger', locked: 'info'};
+                //     if (typeof this.custom !== 'undefined') {
+                //         custom = $.extend(custom, this.custom);
+                //     }
+                //     this.custom = custom;
+                //     this.icon = 'fa fa-circle';
+                //     return Table.api.formatter.normal.call(this, value, row, index);
+                // },
                 status: function (value, row, index) {
                     var custom = {normal: 'success', hidden: 'gray', deleted: 'danger', locked: 'info'};
                     if (typeof this.custom !== 'undefined') {
@@ -610,6 +619,14 @@ define(['jquery', 'bootstrap', 'moment', 'moment/locale/zh-cn', 'bootstrap-table
                     }
                     this.custom = custom;
                     this.icon = 'fa fa-circle';
+                    // 自定义状态图标
+                    if (typeof this.iconList !== 'undefined') {
+                        if (this.iconList == false) {
+                            this.icon = '';
+                        }else{
+                            this.icon = 'fa fa-'+this.iconList[value];
+                        }
+                    }
                     return Table.api.formatter.normal.call(this, value, row, index);
                 },
                 normal: function (value, row, index) {

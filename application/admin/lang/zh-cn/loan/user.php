@@ -33,5 +33,8 @@ return [
     'Other_idcard_down'      => '配偶或家庭成员身份证反面',
     'Other_accountbook'      => '配偶或家庭成员户口簿原件',
     'Other_accountbook_copy' => '配偶或家庭成员户口簿复印件',
-    'Marry_card'             => '结婚证'
+    'Marry_card'             => '结婚证',
+    'Bank_status'            => '银行审核状态',
+    'Loan_status'            => '贷款进度',
+    'payback_time'           => '还款日期',
 ];

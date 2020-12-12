@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:80:"D:\phpstudy_pro\WWW\testfast\public/../application/admin\view\loan\user\add.html";i:1607677104;s:71:"D:\phpstudy_pro\WWW\testfast\application\admin\view\layout\default.html";i:1602168705;s:68:"D:\phpstudy_pro\WWW\testfast\application\admin\view\common\meta.html";i:1602168705;s:70:"D:\phpstudy_pro\WWW\testfast\application\admin\view\common\script.html";i:1602168705;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:80:"D:\phpstudy_pro\WWW\testfast\public/../application/admin\view\loan\user\add.html";i:1607770063;s:71:"D:\phpstudy_pro\WWW\testfast\application\admin\view\layout\default.html";i:1602168705;s:68:"D:\phpstudy_pro\WWW\testfast\application\admin\view\common\meta.html";i:1602168705;s:70:"D:\phpstudy_pro\WWW\testfast\application\admin\view\common\script.html";i:1602168705;}*/ ?>
 <!DOCTYPE html>
 <html lang="<?php echo $config['language']; ?>">
     <head>
@@ -94,7 +94,7 @@
     <div class="form-group">
         <label class="control-label col-xs-12 col-sm-2"><?php echo __('Area'); ?>:</label>
         <div class="col-xs-12 col-sm-8">
-            <input id="c-area" class="form-control" name="row[area]" type="text" value="0">
+            <input id="c-area" class="form-control" name="row[area]" data-toggle="city-picker" type="text" value="0">
         </div>
     </div>
     <div class="form-group">
@@ -364,6 +364,18 @@
                 <span class="msg-box n-right"></span>
             </div>
             <ul class="row list-inline plupload-preview" id="p-marry_card"></ul>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2"><?php echo __('Loan_status'); ?>:</label>
+        <div class="col-xs-12 col-sm-8">
+            <?php echo build_radios('row[loan_status]', $loanstatus,1); ?>
+        </div>
+    </div>
+    <div class="form-group Time hide">
+        <label class="control-label col-xs-12 col-sm-2"><span class="text-danger">* </span><?php echo __('Payback_time'); ?>:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-payback_time" class="form-control datetimepicker" data-date-format="YYYY-MM-DD" data-use-current="true" name="row[payback_time]" type="text" style="width: 27rem" value="">
         </div>
     </div>
     <div class="form-group layer-footer">

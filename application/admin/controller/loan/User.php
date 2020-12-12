@@ -17,7 +17,6 @@ class User extends Backend
      * @var \app\admin\model\loan\User
      */
     protected $model = null;
-    protected $servicetype = null;
 
     protected $searchFields = 'nickname,phone,idcard';
 
@@ -28,6 +27,7 @@ class User extends Backend
         $bankinfo = $this->model->getbankinfo();
         $this->assign("bankinfo",$bankinfo);
         $this->assign('servicetype',$this->checkservicetype());
+        $this->assign('loanstatus',$this->getloanstatus());
         $this->assignconfig('servicetype',$this->checkservicetype());
     }
 
@@ -65,7 +65,7 @@ class User extends Backend
                     ->paginate($limit);
 
             foreach ($list as $row) {
-                $row->visible(['id','nickname','phone','idcard','loan_price']);
+                $row->visible(['id','nickname','phone','idcard','loan_price','bank_status']);
                 
             }
 

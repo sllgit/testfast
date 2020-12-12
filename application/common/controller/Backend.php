@@ -554,4 +554,17 @@ class Backend extends Controller
             return false;
         }
     }
+    
+    /**
+     * 审核状态
+     */
+    public function getloanstatus()
+    {
+        return [
+            "1"=>"待还款",
+            "2"=>"已还款",
+            "3"=>"逾期未还款",
+            "4"=>"逾期已还款",
+        ];
+    }
 }

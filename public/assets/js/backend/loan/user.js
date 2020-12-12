@@ -41,6 +41,11 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
                         {field: 'phone', title: __('Phone'), operate: 'LIKE'},
                         {field: 'idcard', title: __('Idcard'), operate: 'LIKE'},
                         {field: 'loan_price', title: __('Loan_price'), operate:'BETWEEN'},
+                        // {field: 'bank_status', title: __('Bank_status'),
+                        //     searchList:{"0":"审核中","1":"审核通过","2":"审核驳回"},
+                        //     iconList:false,
+                        //     formatter: Table.api.formatter.status
+                        // },
                         {field: 'operate', title: __('Operate'), table: table,
                             buttons: [
                                 {
@@ -68,11 +73,24 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
         edit: function () {
             Controller.api.bindevent();
         },
+        detail: function () {
+            Controller.api.bindevent();
+        },
         api: {
             bindevent: function () {
                 Form.api.bindevent($("form[role=form]"));
             }
         }
     };
+    //选择已还款或逾期还款
+    $("input[name='row[loan_status]']").click(function() {
+        var o=$(this),v=o.val();
+        if (v == 2 || v == 4){
+            $('.Time').removeClass('hide');
+        }else{
+            $('.Time').addClass('hide');
+        }
+    });
+
     return Controller;
 });

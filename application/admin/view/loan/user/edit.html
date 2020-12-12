@@ -306,6 +306,18 @@
             <ul class="row list-inline plupload-preview" id="p-marry_card"></ul>
         </div>
     </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Loan_status')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            {:build_radios('row[loan_status]', $loanstatus,$row.loan_status)}
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2"><span class="text-danger">* </span>{:__('Payback_time')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-payback_time" class="form-control datetimepicker" data-date-format="YYYY-MM-DD" data-use-current="true" name="row[payback_time]" type="text" style="width: 27rem" value="{:$row.payback_time?datetime($row.payback_time):''}">
+        </div>
+    </div>
     <div class="form-group layer-footer">
         <label class="control-label col-xs-12 col-sm-2"></label>
         <div class="col-xs-12 col-sm-8">
