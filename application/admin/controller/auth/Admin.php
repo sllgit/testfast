@@ -49,16 +49,19 @@ class Admin extends Backend
         } else {
             $result = [];
             $groups = $this->auth->getGroups();
+//            halt($groups);
             foreach ($groups as $m => $n) {
                 $childlist = Tree::instance()->getTreeList(Tree::instance()->getTreeArray($n['id']));
                 $temp = [];
                 foreach ($childlist as $k => $v) {
                     $temp[$v['id']] = $v['name'];
                 }
+                $temp[$groups[0]['id']] = $groups[0]['name'];
                 $result[__($n['name'])] = $temp;
             }
             $groupdata = $result;
         }
+//        halt($groupdata);
         $this->view->assign('groupdata', $groupdata);
         $this->view->assign('servicedatas', $this->getservice());
         $this->assignconfig("admin", ['id' => $this->auth->id]);
@@ -262,7 +265,7 @@ class Admin extends Backend
                 $adminValidate = \think\Loader::validate('Admin');
                 $adminValidate->rule([
                     'username' => 'require|regex:\w{3,12}|unique:admin,username,' . $row->id,
-                    'email'    => 'require|email|unique:admin,email,' . $row->id,
+//                    'email'    => 'require|email|unique:admin,email,' . $row->id,
                     'password' => 'regex:\S{32}',
                 ]);
 

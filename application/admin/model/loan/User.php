@@ -13,7 +13,7 @@ class User extends Model
     
 
     // 表名
-    protected $name = 'local_user_info';
+    protected $name = 'loan_user_info';
     
     // 自动写入时间戳字段
     protected $autoWriteTimestamp = false;

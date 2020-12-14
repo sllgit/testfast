@@ -69,5 +69,35 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
             }
         }
     };
+    //默认加载县乡信息
+    $.ajax({
+        type: "post",
+        url: "/loanenterprise/enterprise/getaddress",
+        data: { pid: 1 },
+        dataType: "json",
+        success: function (data) {
+            str = '<option value="">请选择</option>';
+            for (var i = 0; i < data.length; i++) {
+                str += '<option value="' + data[i].id + '">' + data[i].name + '</option>'
+            }
+            $("#townId").html(str);
+        }
+    });
+    //选择村信息
+    $(document).on("change", "#townId", function () {
+        $.ajax({
+            type: "post",
+            url: "/loanenterprise/enterprise/getaddress",
+            data: { pid: $(this).val() },
+            dataType: "json",
+            success: function (data) {
+                str = '<option value="">请选择</option>';
+                for (var i = 0; i < data.length; i++) {
+                    str += '<option value="' + data[i].id + '">' + data[i].name + '</option>'
+                }
+                $("#villageId").html(str);
+            }
+        });
+    });
     return Controller;
 });

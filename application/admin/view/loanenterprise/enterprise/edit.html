@@ -79,7 +79,12 @@
             <input id="c-uppoor_num" class="form-control" name="row[uppoor_num]" type="number" min="0" value="{$row.uppoor_num|htmlentities}">
         </div>
     </div>
-
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Loan_type')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            {:build_radios('row[loan_type]', ['新增'=>'新增', '续贷'=>'续贷'],$row.loan_type)}
+        </div>
+    </div>
     <div class="form-group">
         <label class="control-label col-xs-12 col-sm-2">{:__('Uppoor_type')}:</label>
         <div class="col-xs-12 col-sm-8 field">

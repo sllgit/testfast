@@ -1,11 +1,8 @@
 define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefined, Backend, Table, Form) {
-    var servicetype = Config.servicetype;
-    var editurl = '';
-    var delurl = '';
-    if (servicetype == true){
-        editurl = 'loan/user/edit';
-        delurl = 'loan/user/del';
-    }
+
+    var loanauth = Config.loanauth;
+    var bankauth = Config.bankauth;
+
     var Controller = {
         index: function () {
             // 初始化表格参数配置
@@ -13,7 +10,7 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
                 extend: {
                     index_url: 'loan/user/index' + location.search,
                     add_url: 'loan/user/add',
-                    edit_url: editurl,
+                    edit_url: 'loan/user/edit',
                     del_url: 'loan/user/del',
                     multi_url: 'loan/user/multi',
                     import_url: 'loan/user/import',
@@ -40,12 +37,19 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
                         {field: 'nickname', title: __('Nickname'), operate: 'LIKE'},
                         {field: 'phone', title: __('Phone'), operate: 'LIKE'},
                         {field: 'idcard', title: __('Idcard'), operate: 'LIKE'},
+                        {field: 'is_joincredit', title: __('信用评级'),
+                            searchList:{"0":"无","1":"良好","2":"优秀"},
+                            iconList:false,
+                            formatter: Table.api.formatter.status
+                        },
                         {field: 'loan_price', title: __('Loan_price'), operate:'BETWEEN'},
-                        // {field: 'bank_status', title: __('Bank_status'),
-                        //     searchList:{"0":"审核中","1":"审核通过","2":"审核驳回"},
-                        //     iconList:false,
-                        //     formatter: Table.api.formatter.status
-                        // },
+                        {field: 'loan_starttime', title: __('发起时间'), operate:'RANGE', addclass:'daterange', formatter: Table.api.formatter.date},
+                        {field: 'loan_endtime', title: __('完成时间'), operate:'RANGE', addclass:'daterange', formatter: Table.api.formatter.date},
+                        {field: 'check_status', title: __('Check_status'),
+                            searchList:{"0":"待审核","1":"审核不通过","2":"银行审核中","3":"银行审核通过","4":"银行审核未通过"},
+                            iconList:false,
+                            formatter: Table.api.formatter.status
+                        },
                         {field: 'operate', title: __('Operate'), table: table,
                             buttons: [
                                 {
@@ -55,14 +59,52 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
                                     // icon: 'fa fa-list',
                                     classname: 'btn btn-info btn-xs btn-detail btn-dialog',
                                     url: 'loan/user/detail',
-                                }
+                                },
+                                {
+                                    name: 'ajax',
+                                    text: '审核',
+                                    title: '一键审核',
+                                    classname: 'btn btn-xs btn-primary btn-magic btn-loanshenhe',
+                                    hidden:function (row) {
+                                        if (loanauth == true){
+                                            if (row.check_status == 0){
+                                                return false;
+                                            }else{
+                                                return true;
+                                            }
+                                        } else{
+                                            return true;
+                                        }
+
+                                    }
+                                },
+                                {
+                                    name: 'ajax',
+                                    text: '审核',
+                                    title: '一键审核',
+                                    classname: 'btn btn-xs btn-primary btn-magic btn-bankshenhe',
+                                    hidden:function (row) {
+                                        if (bankauth == true){
+                                            if (row.check_status == 2){
+                                                return false;
+                                            }else{
+                                                return true;
+                                            }
+                                        } else{
+                                            return true;
+                                        }
+                                    }
+                                },
                             ],
-                            events: Table.api.events.operate, formatter: Table.api.formatter.operate}
+                            events: Table.api.events.operate,
+                            formatter: Table.api.formatter.operate
+                        }
                     ]
                 ]
             });
             table.on('post-body.bs.table',function () {
-                $('.btn-editone').data("area",["100%","100%"]);
+                $('.btn-editone').data("area",["50%","100%"]);
+                $('.btn-detail').data("area",["50%","100%"]);
             });
             // 为表格绑定事件
             Table.api.bindevent(table);
@@ -91,6 +133,57 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
             $('.Time').addClass('hide');
         }
     });
-
+    //默认加载县乡信息
+    $.ajax({
+        type: "post",
+        url: "/loan/user/getaddress",
+        data: { pid: 1 },
+        dataType: "json",
+        success: function (data) {
+            str = '<option value="">请选择</option>';
+            for (var i = 0; i < data.length; i++) {
+                str += '<option value="' + data[i].name + '">' + data[i].name + '</option>'
+            }
+            $("#townId").html(str);
+        }
+    });
+    //选择村信息
+    $(document).on("change", "#townId", function () {
+        $.ajax({
+            type: "post",
+            url: "/loan/user/getaddress",
+            data: { pid: $(this).val() },
+            dataType: "json",
+            success: function (data) {
+                str = '<option value="">请选择</option>';
+                for (var i = 0; i < data.length; i++) {
+                    str += '<option value="' + data[i].name + '">' + data[i].name + '</option>'
+                }
+                $("#villageId").html(str);
+            }
+        });
+    });
+    //身份证验证
+    $("#c-idcard").blur(function () {
+        var valInput = $(this).val();
+        var reg = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+        if (reg.test(valInput) === false) {
+            layer.alert("请检查身份证是否输入正确");
+            return false;
+        } else {
+            $.ajax({
+                type: "post",
+                url: "/loan/user/checkidcard",
+                data: { idcard: valInput },
+                dataType: "json",
+                success: function (data) {
+                    if (data.code !== 200) {
+                        layer.alert("该农户已经在审核中，请不要重复录入");
+                        $("#identity").val("");
+                    }
+                }
+            });
+        }
+    });
     return Controller;
 });

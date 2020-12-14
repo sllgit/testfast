@@ -552,7 +552,65 @@ define(['jquery', 'bootstrap', 'moment', 'moment/locale/zh-cn', 'bootstrap-table
                                 Layer.close(index);
                             }
                         );
-                    }
+                    },
+                    //自己定义新增
+                    //贷款审核
+                    'click .btn-loanshenhe': function (e, value, row, index) {
+                        e.stopPropagation();
+                        e.preventDefault();
+                        var that = this;
+                        var top  = (document.body.clientHeight)/2 - 100;
+                        var left = (document.body.clientWidth)/2 - 200;
+                        var table   = $(that).closest('table');
+                        var options = table.bootstrapTable('getOptions');
+                        Layer.confirm('确定提交给银行审核？',
+                            {icon: 3, title: '温馨提示', offset: [top, left], shadeClose: true,btn: ['确定', '取消'] },
+                            function(index, layero){
+                                Fast.api.ajax({url:'loan/user/loancheckstatus',data:{ids:row[options.pk]}}, function (data, ret) {
+                                    table.bootstrapTable('refresh');
+                                }, function (data, ret) {
+
+                                });
+                                Layer.close(index);
+                            }, function(index){
+                                layer.close(index);
+                            }
+                        );
+                    },
+                    //银行审核
+                    'click .btn-bankshenhe': function (e, value, row, index) {
+                        e.stopPropagation();
+                        e.preventDefault();
+                        var that = this;
+                        var top  = (document.body.clientHeight)/2 - 100;
+                        var left = (document.body.clientWidth)/2 - 200;
+                        var table   = $(that).closest('table');
+                        var options = table.bootstrapTable('getOptions');
+                        Layer.confirm('确定确认审核？',
+                            {icon: 3, title: '温馨提示', offset: [top, left], shadeClose: true,btn: ['确定', '驳回'] },
+                            function(index, layero){
+                                Layer.prompt({title:'请输入放款信息',formType: 2},function(value, index, elem){
+                                    Fast.api.ajax({url:'loan/user/bankcheckstatus',data:{ids:row[options.pk],bank_info:value,check_status:3}}, function (data, ret) {
+                                        table.bootstrapTable('refresh');
+                                    }, function (data, ret) {
+
+                                    });
+                                    Layer.close(index);
+                                });
+                                Layer.close(index);
+                            }, function(index){
+                                Layer.prompt({title:'请输入驳回信息',formType: 2},function(value, index, elem){
+                                    Fast.api.ajax({url:'loan/user/bankcheckstatus',data:{ids:row[options.pk],bank_info:value,check_status:4}}, function (data, ret) {
+                                        table.bootstrapTable('refresh');
+                                    }, function (data, ret) {
+
+                                    });
+                                    Layer.close(index);
+                                });
+                                Layer.close(index);
+                            }
+                        );
+                    },
                 },//单元格图片预览
                 image: {
                     'click .img-center': function (e, value, row, index) {
@@ -571,7 +629,7 @@ define(['jquery', 'bootstrap', 'moment', 'moment/locale/zh-cn', 'bootstrap-table
                             anim: 5 //0-6的选择，指定弹出图片动画类型，默认随机（请注意，3.0之前的版本用shift参数）
                         });
                     },
-                }
+                },
             },
             // 单元格数据格式化
             formatter: {

@@ -17,6 +17,7 @@ class Enterprise extends Backend
      * @var \app\admin\model\loanenterprise\Enterprise
      */
     protected $model = null;
+    protected $noNeedRight = ['getaddress','checkidcard'];
     protected $searchFields = 'nickname,credit_code,deputy_username';
 
     public function _initialize()
