@@ -12,5 +12,6 @@ return [
     'Bank_id'    => '银行名称',
     'Break'      => '备注',
     'Status'     => '是否正常',
-    'Createtime' => '添加时间'
+    'Createtime' => '添加时间',
+    'Address'    => '地区',
 ];

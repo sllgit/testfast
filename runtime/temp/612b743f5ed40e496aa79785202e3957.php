@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:83:"D:\phpstudy_pro\WWW\testfast\public/../application/admin\view\auth\admin\index.html";i:1607760223;s:71:"D:\phpstudy_pro\WWW\testfast\application\admin\view\layout\default.html";i:1602168705;s:68:"D:\phpstudy_pro\WWW\testfast\application\admin\view\common\meta.html";i:1602168705;s:70:"D:\phpstudy_pro\WWW\testfast\application\admin\view\common\script.html";i:1602168705;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:83:"D:\phpstudy_pro\WWW\testfast\public/../application/admin\view\auth\admin\index.html";i:1608012235;s:71:"D:\phpstudy_pro\WWW\testfast\application\admin\view\layout\default.html";i:1602168705;s:68:"D:\phpstudy_pro\WWW\testfast\application\admin\view\common\meta.html";i:1602168705;s:70:"D:\phpstudy_pro\WWW\testfast\application\admin\view\common\script.html";i:1602168705;}*/ ?>
 <!DOCTYPE html>
 <html lang="<?php echo $config['language']; ?>">
     <head>
@@ -91,15 +91,12 @@
                     <div class="jia xian"></div><span class="spans" sid="<?php echo $servicedatas['area']['id']; ?>"><?php echo $servicedatas['area']['name']; ?></span>
                 <?php endif; if($servicedatas['data'] != []): if(is_array($servicedatas['data']) || $servicedatas['data'] instanceof \think\Collection || $servicedatas['data'] instanceof \think\Paginator): $i = 0; $__LIST__ = $servicedatas['data'];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$v): $mod = ($i % 2 );++$i;?>
                     <div class="one <?php if($servicedatas['area'] != []): ?>hide<?php endif; ?>">
-                        <?php if($v['son'] != []): ?>
                         <div class="jia xiang"></div><span class="spans" sid="<?php echo $v['id']; ?>"><?php echo $v['name']; ?></span>
                         <?php if(is_array($v['son']) || $v['son'] instanceof \think\Collection || $v['son'] instanceof \think\Paginator): $i = 0; $__LIST__ = $v['son'];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vv): $mod = ($i % 2 );++$i;?>
                         <div class="two hide">
                             <span class="spans" sid="<?php echo $vv['id']; ?>"><?php echo $vv['name']; ?></span>
                         </div>
-                        <?php endforeach; endif; else: echo "" ;endif; else: ?>
-                        <span class="spans" sid="<?php echo $v['id']; ?>"><?php echo $v['name']; ?></span>
-                        <?php endif; ?>
+                        <?php endforeach; endif; else: echo "" ;endif; ?>
                     </div>
                     <?php endforeach; endif; else: echo "" ;endif; endif; if($servicedatas['other'] != []): ?>
                 <div class="other">

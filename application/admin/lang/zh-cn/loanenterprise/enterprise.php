@@ -2,6 +2,7 @@
 
 return [
     'Id'                     => '企业借贷编号',
+    'Areas'                  => '行政区域',
     'Area'                   => '区县名称',
     'Country'                => '乡名称',
     'Village'                => '村名称',
@@ -30,4 +31,5 @@ return [
     'Loan_endtime'           => '到期日',
     'Loan_bank_desc'         => '贷款银行详细名称',
     'Bank_info'              => '银行通过放款信息',
+    'Entrustprove'           => '委托证明',
 ];

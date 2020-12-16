@@ -75,6 +75,9 @@ class Servicestation extends Backend
     {
         if ($this->request->isPost()) {
             $params = $this->request->post("row/a");
+            if ($params['type'] < 3){
+                $params['name'] = str_replace("服务站","",$params['name']) . '服务站';
+            }
             if ($params) {
                 $params = $this->preExcludeFields($params);
 
@@ -117,12 +120,27 @@ class Servicestation extends Backend
                         if ($this_isset){
                             $this->error('该区域已存在服务站！');
                         }
+                        $params['pid'] = $country_isset['id'];
                     }
                     elseif ($params['type'] == 1){
-                        $params['village'] = null;
-                        $this_isset = \db('service_station')->where(['area'=>$params['area'],'country'=>$params['country']])->find();
-                        if ($this_isset){
-                            $this->error('该区域已存在服务站！');
+                        //县id
+                        $area_id = \db('service_station')->where(['type'=>0])->value('id');
+                        if($area_id > 0){
+                            $params['village'] = null;
+                            $params['pid'] = $area_id;
+                            $this_isset = \db('service_station')->where(['area'=>$params['area'],'country'=>$params['country']])->find();
+                            if ($this_isset){
+                                $this->error('该区域已存在服务站！');
+                            }
+                        }else{
+                            $this->error('请先添加县级服务站！');
+                        }
+                    }
+                    else{
+                        $params['pid'] = -1;
+                        $params['area'] = $params['country'] = $params['village'] = null;
+                        if ($params['type'] == 3){
+                            \db('bank')->insert(["bank_name"=>$params['name']]);
                         }
                     }
                     $params['createtime'] = time();
@@ -170,6 +188,9 @@ class Servicestation extends Backend
         }
         if ($this->request->isPost()) {
             $params = $this->request->post("row/a");
+            if ($params['type'] < 3){
+                $params['name'] = str_replace("服务站","",$params['name']) . '服务站';
+            }
             if ($params) {
                 $params = $this->preExcludeFields($params);
                 $result = false;
@@ -213,13 +234,24 @@ class Servicestation extends Backend
                         if ($this_isset){
                             $this->error('该区域已存在服务站！');
                         }
+                        $params['pid'] = $country_isset['id'];
                     }
                     elseif ($params['type'] == 1){
-                        $params['village'] = null;
-                        $this_isset = \db('service_station')->where(['area'=>$params['area'],'country'=>$params['country'],'id'=>['neq'=>$ids]])->find();
-                        if ($this_isset){
-                            $this->error('该区域已存在服务站！');
+                        //县id
+                        $area_id = \db('service_station')->where(['type'=>0])->value('id');
+                        if($area_id > 0){
+                            $params['village'] = null;
+                            $params['pid'] = $area_id;
+                            $this_isset = \db('service_station')->where(['area'=>$params['area'],'country'=>$params['country']])->find();
+                            if ($this_isset){
+                                $this->error('该区域已存在服务站！');
+                            }
+                        }else{
+                            $this->error('请先添加县级服务站！');
                         }
+                    }
+                    else{
+                        $params['pid'] = -1;
                     }
                     $params['service_id'] = 'FW'.intval($ids + 100000);
                     $params['updatetime'] = time();

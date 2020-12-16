@@ -58,6 +58,20 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
         },
         add: function () {
             Controller.api.bindevent();
+            //默认加载县乡信息
+            $.ajax({
+                type: "post",
+                url: "/organization/servicestation/getaddress",
+                data: { name: '嵩县' },
+                dataType: "json",
+                success: function (data) {
+                    str = '<option value="">请选择</option>';
+                    for (var i = 0; i < data.length; i++) {
+                        str += '<option value="' + data[i].name + '">' + data[i].name + '</option>'
+                    }
+                    $("#townId").html(str);
+                }
+            });
         },
         edit: function () {
             $(function () {
@@ -65,6 +79,44 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
                 changeType(val);
             });
             Controller.api.bindevent();
+            //默认加载县乡信息
+            $.ajax({
+                type: "post",
+                url: "/organization/servicestation/getaddress",
+                data: { name: '嵩县' },
+                dataType: "json",
+                success: function (data) {
+
+                    str = '<option value="">请选择</option>';
+                    for (var i = 0; i < data.length; i++) {
+                        var selecteds = '';
+                        if (data[i].name == value){
+                            selecteds = 'selected';
+                        }
+                        str += '<option value="' + data[i].name + '" '+selecteds+'>' + data[i].name + '</option>'
+                    }
+                    $("#townId").html(str);
+                }
+            });
+            if (values != ''){
+                $.ajax({
+                    type: "post",
+                    url: "/organization/servicestation/getaddress",
+                    data: { name: value },
+                    dataType: "json",
+                    success: function (data) {
+                        str = '<option value="">请选择</option>';
+                        for (var i = 0; i < data.length; i++) {
+                            var selecteds = '';
+                            if (data[i].name == values){
+                                selecteds = 'selected';
+                            }
+                            str += '<option value="' + data[i].name + '" '+selecteds+'>' + data[i].name + '</option>'
+                        }
+                        $("#villageId").html(str);
+                    }
+                });
+            }
         },
         detail: function () {
             Controller.api.bindevent();
@@ -75,6 +127,22 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
             }
         }
     };
+    //选择村信息
+    $(document).on("change", "#townId", function () {
+        $.ajax({
+            type: "post",
+            url: "/organization/servicestation/getaddress",
+            data: { name: $(this).val() },
+            dataType: "json",
+            success: function (data) {
+                str = '<option value="">请选择</option>';
+                for (var i = 0; i < data.length; i++) {
+                    str += '<option value="' + data[i].name + '">' + data[i].name + '</option>'
+                }
+                $("#villageId").html(str);
+            }
+        });
+    });
     $("#c-type").change(function () {
         var val = $("#c-type option:selected").val();
         changeType(val);

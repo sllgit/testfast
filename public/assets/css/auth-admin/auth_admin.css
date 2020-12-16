@@ -12,6 +12,7 @@
     float: left;
     font-size: 0.9vw;
     overflow: auto;
+    padding: 1vw 0;
 }
 .leftbody1{
     width: 15vw;

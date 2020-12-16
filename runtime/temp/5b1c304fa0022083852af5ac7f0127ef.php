@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:81:"D:\phpstudy_pro\WWW\testfast\public/../application/admin\view\auth\group\add.html";i:1602168705;s:71:"D:\phpstudy_pro\WWW\testfast\application\admin\view\layout\default.html";i:1602168705;s:68:"D:\phpstudy_pro\WWW\testfast\application\admin\view\common\meta.html";i:1602168705;s:70:"D:\phpstudy_pro\WWW\testfast\application\admin\view\common\script.html";i:1602168705;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:99:"D:\phpstudy_pro\WWW\testfast\public/../application/admin\view\organization\servicestation\edit.html";i:1608022993;s:71:"D:\phpstudy_pro\WWW\testfast\application\admin\view\layout\default.html";i:1602168705;s:68:"D:\phpstudy_pro\WWW\testfast\application\admin\view\common\meta.html";i:1602168705;s:70:"D:\phpstudy_pro\WWW\testfast\application\admin\view\common\script.html";i:1602168705;}*/ ?>
 <!DOCTYPE html>
 <html lang="<?php echo $config['language']; ?>">
     <head>
@@ -58,37 +58,68 @@
                             <!-- END RIBBON -->
                             <?php endif; ?>
                             <div class="content">
-                                <form id="add-form" class="form-horizontal form-ajax" role="form" data-toggle="validator" method="POST" action="">
-    <?php echo token(); ?>
-    <input type="hidden" name="row[rules]" value="" />
+                                <style>
+    .msg-wrap{
+        margin-left: 13vw!important;
+    }
+</style>
+<form id="edit-form" class="form-horizontal" role="form" data-toggle="validator" method="POST" action="">
+
+
     <div class="form-group">
-        <label class="control-label col-xs-12 col-sm-2"><?php echo __('Parent'); ?>:</label>
+        <label class="control-label col-xs-12 col-sm-2"><?php echo __('Type'); ?>:</label>
         <div class="col-xs-12 col-sm-8">
-            <?php echo build_select('row[pid]', $groupdata, null, ['class'=>'form-control selectpicker', 'data-rule'=>'required']); ?>
+            <select  id="c-type" class="form-control selectpicker" name="row[type]">
+                <option value="">请选择服务站</option>
+                <option value="0" <?php if($row['type'] == 0): ?> selected <?php endif; ?>>县服务站</option>
+                <option value="1" <?php if($row['type'] == 1): ?> selected <?php endif; ?>>乡服务站</option>
+                <option value="2" <?php if($row['type'] == 2): ?> selected <?php endif; ?>>村服务站</option>
+                <option value="3" <?php if($row['type'] == 3): ?> selected <?php endif; ?>>银行</option>
+                <option value="4" <?php if($row['type'] == 4): ?> selected <?php endif; ?>>担保</option>
+            </select>
         </div>
     </div>
+    <div class="form-group Area">
+        <label class="col-sm-2 control-label"><?php echo __('Address'); ?>:</label>
+        <div class="col-sm-7">
+            <select style="width:92PX;height:35px;border:1px solid #ccc;" id="countyId" data-rule="required" name="row[area]">
+                <option value="嵩县">嵩县</option>
+            </select>
+            <select style="width:92PX;height:35px;border:1px solid #ccc;" id="townId" name="row[country]" data-value="<?php echo $row['country']; ?>">
+                <option value="">请选择</option>
+            </select>
+            <select style="width:92PX;height:35px;border:1px solid #ccc;" id="villageId" name="row[village]" data-value="<?php echo $row['village']; ?>">
+                <option value="">请选择</option>
+            </select>
+        </div>
+    </div>
+    <!---->
+    <!--<div class="form-group">-->
+    <!--<label class="control-label col-xs-12 col-sm-2"><?php echo __('Pid'); ?>:</label>-->
+    <!--<div class="col-xs-12 col-sm-8">-->
+    <!--<input id="c-pid" class="form-control" name="row[pid]" type="number" value="0">-->
+    <!--</div>-->
+    <!--</div>-->
     <div class="form-group">
         <label class="control-label col-xs-12 col-sm-2"><?php echo __('Name'); ?>:</label>
         <div class="col-xs-12 col-sm-8">
-            <input type="text" class="form-control" id="name" name="row[name]" value="" data-rule="required" />
+            <input id="c-name" class="form-control" name="row[name]" type="text" placeholder="请填写具体服务站名称，不需要后缀‘服务站’" value="<?php echo htmlentities($row['name']); ?>">
+            <span class="text-danger">* 示例：嵩县服务站 只需填写嵩县 ; 银行等填写全名称</span>
+        </div>
+    </div>
+    <div class="form-group Bank hide">
+        <label class="control-label col-xs-12 col-sm-2"><?php echo __('Bank_id'); ?>:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-bank_id" data-source="organization/servicestation/getbank?model=bank" data-field="bank_name" data-primary-key="id" class="form-control selectpage" data-multiple="true" name="row[bank_id]" type="text" value="<?php echo htmlentities($row['bank_id']); ?>">
         </div>
     </div>
     <div class="form-group">
-        <label class="control-label col-xs-12 col-sm-2"><?php echo __('Permission'); ?>:</label>
+        <label class="control-label col-xs-12 col-sm-2"><?php echo __('Break'); ?>:</label>
         <div class="col-xs-12 col-sm-8">
-            <span class="text-muted"><input type="checkbox" name="" id="checkall" /> <label for="checkall"><small><?php echo __('Check all'); ?></small></label></span>
-            <span class="text-muted"><input type="checkbox" name="" id="expandall" /> <label for="expandall"><small><?php echo __('Expand all'); ?></small></label></span>
-
-            <div id="treeview"></div>
+            <textarea id="c-break" class="form-control" rows="5" name="row[break]" cols="50"><?php echo htmlentities($row['break']); ?></textarea>
         </div>
     </div>
-    <div class="form-group">
-        <label class="control-label col-xs-12 col-sm-2"><?php echo __('Status'); ?>:</label>
-        <div class="col-xs-12 col-sm-8">
-            <?php echo build_radios('row[status]', ['normal'=>__('Normal'), 'hidden'=>__('Hidden')]); ?>
-        </div>
-    </div>
-    <div class="form-group hidden layer-footer">
+    <div class="form-group layer-footer">
         <label class="control-label col-xs-12 col-sm-2"></label>
         <div class="col-xs-12 col-sm-8">
             <button type="submit" class="btn btn-success btn-embossed disabled"><?php echo __('OK'); ?></button>

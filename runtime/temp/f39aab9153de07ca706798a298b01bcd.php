@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:83:"D:\phpstudy_pro\WWW\testfast\public/../application/admin\view\loan\user\detail.html";i:1607944654;s:71:"D:\phpstudy_pro\WWW\testfast\application\admin\view\layout\default.html";i:1602168705;s:68:"D:\phpstudy_pro\WWW\testfast\application\admin\view\common\meta.html";i:1602168705;s:70:"D:\phpstudy_pro\WWW\testfast\application\admin\view\common\script.html";i:1602168705;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:83:"D:\phpstudy_pro\WWW\testfast\public/../application/admin\view\loan\user\detail.html";i:1608102131;s:71:"D:\phpstudy_pro\WWW\testfast\application\admin\view\layout\default.html";i:1602168705;s:68:"D:\phpstudy_pro\WWW\testfast\application\admin\view\common\meta.html";i:1602168705;s:70:"D:\phpstudy_pro\WWW\testfast\application\admin\view\common\script.html";i:1602168705;}*/ ?>
 <!DOCTYPE html>
 <html lang="<?php echo $config['language']; ?>">
     <head>
@@ -58,7 +58,12 @@
                             <!-- END RIBBON -->
                             <?php endif; ?>
                             <div class="content">
-                                <form id="detail-form" class="form-horizontal" role="form" data-toggle="validator" method="POST" action="">
+                                <style>
+    .btn-trash{
+        display: none!important;
+    }
+</style>
+<form id="detail-form" class="form-horizontal" role="form" data-toggle="validator" method="POST" action="">
     <div class="form-group">
         <label class="control-label col-xs-12 col-sm-2"><?php echo __('Id'); ?>:</label>
         <div class="col-xs-12 col-sm-8">
@@ -96,10 +101,18 @@
         </div>
     </div>
     <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2"><?php echo __('Is_poor'); ?>:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="is_poor" class="form-control" name="" type="text" disabled
+                   <?php switch($row['is_poor']): case "是": ?>value="是"<?php break; case "否": ?>value="否"<?php break; default: endswitch; ?>
+            >
+        </div>
+    </div>
+    <div class="form-group">
         <label class="control-label col-xs-12 col-sm-2"><?php echo __('Credit_rating'); ?>:</label>
         <div class="col-xs-12 col-sm-8">
             <input id="credit_rating" class="form-control" name="" type="text" disabled
-                   <?php switch($row['credit_rating']): case "0": ?>value="无信用"<?php break; case "1": ?>value="A"<?php break; case "2": ?>value="AA"<?php break; case "3": ?>value="AAA"<?php break; case "4": ?>value="AAA+"<?php break; default: endswitch; ?>
+                   <?php switch($row['credit_rating']): case "无信用": ?>value="无信用"<?php break; case "A": ?>value="A"<?php break; case "AA": ?>value="AA"<?php break; case "AAA": ?>value="AAA"<?php break; case "AAA+": ?>value="AAA+"<?php break; default: endswitch; ?>
             >
         </div>
     </div>
@@ -112,7 +125,13 @@
     <div class="form-group">
         <label class="control-label col-xs-12 col-sm-2"><?php echo __('Loan_endtime'); ?>:</label>
         <div class="col-xs-12 col-sm-8">
-            <input id="c-loan_endtime" data-rule="required" class="form-control datetimepicker" data-date-format="YYYY-MM-DD" data-use-current="true" name="row[loan_endtime]" disabled type="text" value="<?php echo htmlentities($row['loan_endtime']); ?>">
+            <input id="c-loan_endtime" class="form-control datetimepicker" data-date-format="YYYY-MM-DD" data-use-current="true" name="row[loan_endtime]" disabled type="text" value="<?php echo htmlentities($row['loan_endtime']); ?>">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2"><?php echo __('Payback_time'); ?>:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-payback_time" class="form-control datetimepicker" data-date-format="YYYY-MM-DD" data-use-current="true" name="row[payback_time]" disabled type="text" value="<?php echo htmlentities($row['payback_time']); ?>">
         </div>
     </div>
     <div class="form-group">
@@ -134,10 +153,18 @@
         </div>
     </div>
     <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2"><?php echo __('Loan_use'); ?>:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-loan_use" class="form-control" name="" type="text" disabled
+                   <?php switch($row['loan_use']): case "无": ?>value="无"<?php break; case "第一产业": ?>value="第一产业"<?php break; case "第二产业": ?>value="第二产业"<?php break; case "第三产业": ?>value="第三产业"<?php break; default: endswitch; ?>
+            >
+        </div>
+    </div>
+    <div class="form-group">
         <label class="control-label col-xs-12 col-sm-2"><?php echo __('Loan_type'); ?>:</label>
         <div class="col-xs-12 col-sm-8">
             <input id="c-loan_type" class="form-control" name="" type="text" disabled
-                   <?php switch($row['loan_type']): case "0": ?>value="新增"<?php break; case "1": ?>value="续贷"<?php break; default: endswitch; ?>
+                   <?php switch($row['loan_type']): case "新增": ?>value="新增"<?php break; case "续贷": ?>value="续贷"<?php break; default: endswitch; ?>
             >
         </div>
     </div>
@@ -147,7 +174,7 @@
         <div class="col-xs-12 col-sm-8">
             <select  id="c-loan_bank" class="form-control selectpicker" name="$row[loan_bank]" disabled>
                 <?php if(is_array($bankinfo) || $bankinfo instanceof \think\Collection || $bankinfo instanceof \think\Paginator): if( count($bankinfo)==0 ) : echo "" ;else: foreach($bankinfo as $key=>$vo): ?>
-                <option value="<?php echo $key; ?>" <?php if(in_array(($key), is_array($row['loan_bank'])?$row['loan_bank']:explode(',',$row['loan_bank']))): ?>selected<?php endif; ?>><?php echo $vo; ?></option>
+                <option value="<?php echo $vo; ?>" <?php if(in_array(($vo), is_array($row['loan_bank'])?$row['loan_bank']:explode(',',$row['loan_bank']))): ?>selected<?php endif; ?>><?php echo $vo; ?></option>
                 <?php endforeach; endif; else: echo "" ;endif; ?>
             </select>
         </div>
@@ -162,7 +189,15 @@
         <label class="control-label col-xs-12 col-sm-2"><?php echo __('Is_joincredit'); ?>:</label>
         <div class="col-xs-12 col-sm-8">
             <input id="c-is_joincredit" class="form-control" name="" type="text" disabled
-                   <?php switch($row['is_joincredit']): case "0": ?>value="未参加过"<?php break; case "1": ?>value="良好"<?php break; case "2": ?>value="优秀"<?php break; default: endswitch; ?>
+                   <?php switch($row['is_joincredit']): case "未参加过": ?>value="未参加过"<?php break; case "良好": ?>value="良好"<?php break; case "优秀": ?>value="优秀"<?php break; default: endswitch; ?>
+            >
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2"><?php echo __('Is_safe'); ?>:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-is_safe" class="form-control" name="" type="text" disabled
+                   <?php switch($row['is_safe']): case "否": ?>value="否"<?php break; case "是": ?>value="是"<?php break; default: endswitch; ?>
             >
         </div>
     </div>
@@ -174,18 +209,25 @@
             >
         </div>
     </div>
-    <div class="form-group">
-        <label class="control-label col-xs-12 col-sm-2"><?php echo __('Bank_info'); ?>:</label>
-        <div class="col-xs-12 col-sm-8">
-            <textarea id="c-bank_info" class="form-control" rows="5" placeholder="" name="row[bank_info]" disabled cols="50"><?php echo $row['bank_info']; ?></textarea>
+    <?php if(($row['check_status'] == 3) OR ($row['check_status'] == 4)): ?>
+        <div class="form-group">
+            <label class="control-label col-xs-12 col-sm-2"><?php echo __('Bank_info'); ?>:</label>
+            <div class="col-xs-12 col-sm-8">
+                <textarea id="c-bank_info" class="form-control" rows="5" placeholder="" name="row[bank_info]" disabled cols="50"><?php echo $row['bank_info']; ?></textarea>
+            </div>
         </div>
-    </div>
+    <?php endif; ?>
     <div class="form-group">
-        <label class="control-label col-xs-12 col-sm-2"><?php echo __('Loan_use'); ?>:</label>
+        <label class="control-label col-xs-12 col-sm-2"><?php echo __('Entrustprove'); ?>:</label>
         <div class="col-xs-12 col-sm-8">
-            <input id="c-loan_use" class="form-control" name="" type="text" disabled
-                   <?php switch($row['loan_use']): case "0": ?>value="无"<?php break; case "1": ?>value="第一产业"<?php break; case "2": ?>value="第二产业"<?php break; case "3": ?>value="第三产业"<?php break; default: endswitch; ?>
-            >
+            <div class="input-group">
+                <input id="c-entrustprove" class="form-control hide" size="50" name="row[entrustprove]" type="text" value="<?php echo htmlentities($row['entrustprove']); ?>" />
+                <div class="input-group-addon no-border no-padding">
+                    <span><button type="button" id="plupload-entrustprove" class="btn btn-danger plupload hide" data-input-id="c-entrustprove" data-mimetype="image/gif,image/jpeg,image/png,image/jpg,image/webp" data-multiple="true" data-preview-id="p-entrustprove"><i class="fa fa-upload"></i>上传</button></span>
+                </div>
+                <span class="msg-box n-right"></span>
+            </div>
+            <ul class="row list-inline plupload-preview" id="p-entrustprove"></ul>
         </div>
     </div>
 </form>

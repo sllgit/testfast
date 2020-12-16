@@ -11,7 +11,7 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
                     index_url: 'loan/user/index' + location.search,
                     add_url: 'loan/user/add',
                     edit_url: 'loan/user/edit',
-                    del_url: 'loan/user/del',
+                    // del_url: 'loan/user/del',
                     multi_url: 'loan/user/multi',
                     import_url: 'loan/user/import',
                     table: 'local_user_info',
@@ -37,14 +37,15 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
                         {field: 'nickname', title: __('Nickname'), operate: 'LIKE'},
                         {field: 'phone', title: __('Phone'), operate: 'LIKE'},
                         {field: 'idcard', title: __('Idcard'), operate: 'LIKE'},
-                        {field: 'is_joincredit', title: __('信用评级'),
-                            searchList:{"0":"无","1":"良好","2":"优秀"},
+                        {field: 'is_poor', title: __('Is_poor'),
+                            searchList:{"0":"非贫困户","1":"贫困户"},
                             iconList:false,
                             formatter: Table.api.formatter.status
                         },
-                        {field: 'loan_price', title: __('Loan_price'), operate:'BETWEEN'},
+                        {field: 'credit_rating', title: __('信用评级')},
+                        {field: 'loan_price', title: __('Loan_price')},
                         {field: 'loan_starttime', title: __('发起时间'), operate:'RANGE', addclass:'daterange', formatter: Table.api.formatter.date},
-                        {field: 'loan_endtime', title: __('完成时间'), operate:'RANGE', addclass:'daterange', formatter: Table.api.formatter.date},
+                        {field: 'payback_time', title: __('完成时间'), operate:'RANGE', addclass:'daterange', formatter: Table.api.formatter.date},
                         {field: 'check_status', title: __('Check_status'),
                             searchList:{"0":"待审核","1":"审核不通过","2":"银行审核中","3":"银行审核通过","4":"银行审核未通过"},
                             iconList:false,
@@ -111,9 +112,63 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
         },
         add: function () {
             Controller.api.bindevent();
+            //默认加载县乡信息
+            $.ajax({
+                type: "post",
+                url: "/loan/user/getaddress",
+                data: { name: '嵩县' },
+                dataType: "json",
+                success: function (data) {
+                    str = '<option value="">请选择</option>';
+                    for (var i = 0; i < data.length; i++) {
+                        str += '<option value="' + data[i].name + '">' + data[i].name + '</option>'
+                    }
+                    $("#townId").html(str);
+                }
+            });
         },
         edit: function () {
             Controller.api.bindevent();
+            var value = $("#townId").data('value');
+            var values = $("#villageId").data('value');
+            //默认加载县乡信息
+            $.ajax({
+                type: "post",
+                url: "/loan/user/getaddress",
+                data: { name: '嵩县' },
+                dataType: "json",
+                success: function (data) {
+
+                    str = '<option value="">请选择</option>';
+                    for (var i = 0; i < data.length; i++) {
+                        var selecteds = '';
+                        if (data[i].name == value){
+                            selecteds = 'selected';
+                        }
+                        str += '<option value="' + data[i].name + '" '+selecteds+'>' + data[i].name + '</option>'
+                    }
+                    $("#townId").html(str);
+                }
+            });
+            if (values != ''){
+                $.ajax({
+                    type: "post",
+                    url: "/loan/user/getaddress",
+                    data: { name: value },
+                    dataType: "json",
+                    success: function (data) {
+                        str = '<option value="">请选择</option>';
+                        for (var i = 0; i < data.length; i++) {
+                            var selecteds = '';
+                            if (data[i].name == values){
+                                selecteds = 'selected';
+                            }
+                            str += '<option value="' + data[i].name + '" '+selecteds+'>' + data[i].name + '</option>'
+                        }
+                        $("#villageId").html(str);
+                    }
+                });
+            }
         },
         detail: function () {
             Controller.api.bindevent();
@@ -133,26 +188,12 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
             $('.Time').addClass('hide');
         }
     });
-    //默认加载县乡信息
-    $.ajax({
-        type: "post",
-        url: "/loan/user/getaddress",
-        data: { pid: 1 },
-        dataType: "json",
-        success: function (data) {
-            str = '<option value="">请选择</option>';
-            for (var i = 0; i < data.length; i++) {
-                str += '<option value="' + data[i].name + '">' + data[i].name + '</option>'
-            }
-            $("#townId").html(str);
-        }
-    });
     //选择村信息
     $(document).on("change", "#townId", function () {
         $.ajax({
             type: "post",
             url: "/loan/user/getaddress",
-            data: { pid: $(this).val() },
+            data: { name: $(this).val() },
             dataType: "json",
             success: function (data) {
                 str = '<option value="">请选择</option>';

@@ -53,15 +53,14 @@ class Admin extends Backend
             foreach ($groups as $m => $n) {
                 $childlist = Tree::instance()->getTreeList(Tree::instance()->getTreeArray($n['id']));
                 $temp = [];
+                $temp[$groups[0]['id']] = $groups[0]['name'];
                 foreach ($childlist as $k => $v) {
                     $temp[$v['id']] = $v['name'];
                 }
-                $temp[$groups[0]['id']] = $groups[0]['name'];
                 $result[__($n['name'])] = $temp;
             }
             $groupdata = $result;
         }
-//        halt($groupdata);
         $this->view->assign('groupdata', $groupdata);
         $this->view->assign('servicedatas', $this->getservice());
         $this->assignconfig("admin", ['id' => $this->auth->id]);
@@ -72,7 +71,11 @@ class Admin extends Backend
     {
         //县-全部 乡-乡和村 村-村 银行-银行 担保-担保
         //判断当前登录的角色
-        $service_id = $this->auth->service_id;
+        if ($this->auth->username == 'admin'){
+            $service_id = 1;
+        }else{
+            $service_id = $this->auth->service_id;
+        }
         $info = \db('service_station')->where(['id'=>$service_id])->field('type,pid')->find();
         $where = [];
         switch ($info['type']){
@@ -82,15 +85,20 @@ class Admin extends Backend
         }
 //        dump($where);
         $groupList = \db('service_station')->where($where)->select();
-        $data = $this->generateTree($groupList);
+        if (empty($groupList)){
+            $data['other'] = array();
+            $data['area'] = array();
+            $data['data'] = array();
+        }else{
+            $data = $this->generateTree($groupList);
+        }
         $data['id'] = $service_id;
 //        halt($data);
         return $data;
     }
 
     function generateTree($array){
-        $area = Config::get('site.areas');//默认县城id
-//        halt($area);
+        $area = '嵩县';
         //第一步 构造数据
         $items = array();
         foreach($array as $value){
@@ -103,7 +111,7 @@ class Admin extends Backend
         $tree['data'] = array();
         foreach($items['data'] as $key => $value){
             $items['data'][$key]['son'] = [];
-            if(isset($items['data'][$value['pid']])){
+            if(isset($tree['data'][$value['pid']])){
                 $items['data'][$value['pid']]['son'][] = &$items['data'][$key];
             }else{
                 if ($value['pid'] == -1){
@@ -113,7 +121,7 @@ class Admin extends Backend
                     $tree['area'] = $value;
                 }
                 else{
-                    $tree['data'][] = &$items['data'][$key];
+                    $tree['data'][$value['id']] = &$items['data'][$key];
                 }
             }
         }
@@ -128,8 +136,7 @@ class Admin extends Backend
 
         //设置过滤方法
         $this->request->filter(['strip_tags', 'trim']);
-//        $service_id = $this->request->post('service_id') ?? db('service_station')->where(['area'=>Config::get('site.areas'),'country'=>null,'village'=>null])->value('id');
-        $service_id = $this->auth->service_id;
+        $service_id = 1;
         if ($this->request->isAjax()) {
             $page = $this->request->get('page') ?? 2;
             $limit = $this->request->get('limit') ?? 2;
@@ -173,7 +180,7 @@ class Admin extends Backend
                 $v['groups'] = implode(',', array_keys($groups));
                 $v['groups_text'] = implode(',', array_values($groups));
                 $list[$k]['service_name'] = db('service_station')->where(['id'=>$v['service_id']])->value('name');
-                $v['logintime'] = date("Y-m-d H:i:s",$v['logintime']);
+                $v['logintime'] = !empty($v['logintime']) ? date("Y-m-d H:i:s",$v['logintime']) : '-';
             }
             unset($v);
 
@@ -265,7 +272,7 @@ class Admin extends Backend
                 $adminValidate = \think\Loader::validate('Admin');
                 $adminValidate->rule([
                     'username' => 'require|regex:\w{3,12}|unique:admin,username,' . $row->id,
-//                    'email'    => 'require|email|unique:admin,email,' . $row->id,
+                    'email'    => 'email|unique:admin,email,' . $row->id,
                     'password' => 'regex:\S{32}',
                 ]);
 

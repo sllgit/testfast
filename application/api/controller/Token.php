@@ -7,6 +7,7 @@ use fast\Random;
 
 /**
  * Token接口
+ * @ApiInternal
  */
 class Token extends Api
 {

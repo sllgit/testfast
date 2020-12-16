@@ -8,7 +8,7 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
                     index_url: 'loanenterprise/enterprise/index' + location.search,
                     add_url: 'loanenterprise/enterprise/add',
                     edit_url: 'loanenterprise/enterprise/edit',
-                    del_url: 'loanenterprise/enterprise/del',
+                    // del_url: 'loanenterprise/enterprise/del',
                     multi_url: 'loanenterprise/enterprise/multi',
                     import_url: 'loanenterprise/enterprise/import',
                     table: 'loan_enterprise_info',
@@ -59,8 +59,65 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
         },
         add: function () {
             Controller.api.bindevent();
+            //默认加载县乡信息
+            $.ajax({
+                type: "post",
+                url: "/loan/user/getaddress",
+                data: { name: '嵩县' },
+                dataType: "json",
+                success: function (data) {
+                    str = '<option value="">请选择</option>';
+                    for (var i = 0; i < data.length; i++) {
+                        str += '<option value="' + data[i].name + '">' + data[i].name + '</option>'
+                    }
+                    $("#townId").html(str);
+                }
+            });
         },
         edit: function () {
+            Controller.api.bindevent();
+            var value = $("#townId").data('value');
+            var values = $("#villageId").data('value');
+            //默认加载县乡信息
+            $.ajax({
+                type: "post",
+                url: "/loan/user/getaddress",
+                data: { name: '嵩县' },
+                dataType: "json",
+                success: function (data) {
+
+                    str = '<option value="">请选择</option>';
+                    for (var i = 0; i < data.length; i++) {
+                        var selecteds = '';
+                        if (data[i].name == value){
+                            selecteds = 'selected';
+                        }
+                        str += '<option value="' + data[i].name + '" '+selecteds+'>' + data[i].name + '</option>'
+                    }
+                    $("#townId").html(str);
+                }
+            });
+            if (values != ''){
+                $.ajax({
+                    type: "post",
+                    url: "/loan/user/getaddress",
+                    data: { name: value },
+                    dataType: "json",
+                    success: function (data) {
+                        str = '<option value="">请选择</option>';
+                        for (var i = 0; i < data.length; i++) {
+                            var selecteds = '';
+                            if (data[i].name == values){
+                                selecteds = 'selected';
+                            }
+                            str += '<option value="' + data[i].name + '" '+selecteds+'>' + data[i].name + '</option>'
+                        }
+                        $("#villageId").html(str);
+                    }
+                });
+            }
+        },
+        detail:function(){
             Controller.api.bindevent();
         },
         api: {
@@ -69,31 +126,17 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
             }
         }
     };
-    //默认加载县乡信息
-    $.ajax({
-        type: "post",
-        url: "/loanenterprise/enterprise/getaddress",
-        data: { pid: 1 },
-        dataType: "json",
-        success: function (data) {
-            str = '<option value="">请选择</option>';
-            for (var i = 0; i < data.length; i++) {
-                str += '<option value="' + data[i].id + '">' + data[i].name + '</option>'
-            }
-            $("#townId").html(str);
-        }
-    });
     //选择村信息
     $(document).on("change", "#townId", function () {
         $.ajax({
             type: "post",
-            url: "/loanenterprise/enterprise/getaddress",
-            data: { pid: $(this).val() },
+            url: "/loan/user/getaddress",
+            data: { name: $(this).val() },
             dataType: "json",
             success: function (data) {
                 str = '<option value="">请选择</option>';
                 for (var i = 0; i < data.length; i++) {
-                    str += '<option value="' + data[i].id + '">' + data[i].name + '</option>'
+                    str += '<option value="' + data[i].name + '">' + data[i].name + '</option>'
                 }
                 $("#villageId").html(str);
             }

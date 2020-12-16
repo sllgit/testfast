@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:81:"D:\phpstudy_pro\WWW\testfast\public/../application/admin\view\auth\admin\add.html";i:1607934393;s:71:"D:\phpstudy_pro\WWW\testfast\application\admin\view\layout\default.html";i:1602168705;s:68:"D:\phpstudy_pro\WWW\testfast\application\admin\view\common\meta.html";i:1602168705;s:70:"D:\phpstudy_pro\WWW\testfast\application\admin\view\common\script.html";i:1602168705;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:81:"D:\phpstudy_pro\WWW\testfast\public/../application/admin\view\auth\admin\add.html";i:1608026188;s:71:"D:\phpstudy_pro\WWW\testfast\application\admin\view\layout\default.html";i:1602168705;s:68:"D:\phpstudy_pro\WWW\testfast\application\admin\view\common\meta.html";i:1602168705;s:70:"D:\phpstudy_pro\WWW\testfast\application\admin\view\common\script.html";i:1602168705;}*/ ?>
 <!DOCTYPE html>
 <html lang="<?php echo $config['language']; ?>">
     <head>
@@ -130,7 +130,7 @@
                         <div id="addbody">
                             <div class="addbody1">
                                 <?php if($servicedatas['area'] != []): ?>
-                                <div class="jia xian"></div><span class="spans" sid="11">郸城县</span>
+                                <div class="jia xian"></div><span class="spans" sid="<?php echo $servicedatas['area']['id']; ?>"><?php echo $servicedatas['area']['name']; ?></span>
                                 <?php endif; if($servicedatas['data'] != []): if(is_array($servicedatas['data']) || $servicedatas['data'] instanceof \think\Collection || $servicedatas['data'] instanceof \think\Paginator): $i = 0; $__LIST__ = $servicedatas['data'];if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$v): $mod = ($i % 2 );++$i;?>
                                 <div class="one <?php if($servicedatas['area'] != []): ?>hide<?php endif; ?>">
                                     <?php if($v['son'] != []): ?>

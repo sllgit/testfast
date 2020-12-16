@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:82:"D:\phpstudy_pro\WWW\testfast\public/../application/admin\view\loan\user\index.html";i:1607938226;s:71:"D:\phpstudy_pro\WWW\testfast\application\admin\view\layout\default.html";i:1602168705;s:68:"D:\phpstudy_pro\WWW\testfast\application\admin\view\common\meta.html";i:1602168705;s:70:"D:\phpstudy_pro\WWW\testfast\application\admin\view\common\script.html";i:1602168705;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:82:"D:\phpstudy_pro\WWW\testfast\public/../application/admin\view\loan\user\index.html";i:1608000460;s:71:"D:\phpstudy_pro\WWW\testfast\application\admin\view\layout\default.html";i:1602168705;s:68:"D:\phpstudy_pro\WWW\testfast\application\admin\view\common\meta.html";i:1602168705;s:70:"D:\phpstudy_pro\WWW\testfast\application\admin\view\common\script.html";i:1602168705;}*/ ?>
 <!DOCTYPE html>
 <html lang="<?php echo $config['language']; ?>">
     <head>
@@ -60,7 +60,13 @@
                             <div class="content">
                                 <div class="panel panel-default panel-intro">
     <?php echo build_heading(); ?>
-
+    <div class="panel-heading">
+        <ul class="nav nav-tabs" data-field="is_poor">
+            <li class="active"><a href="#t-all" data-value="" data-toggle="tab">全部</a></li>
+            <li><a href="#t-1" data-value="1" data-toggle="tab">贫困户</a></li>
+            <li><a href="#t-0" data-value="0" data-toggle="tab">非贫困户</a></li>
+        </ul>
+    </div>
     <div class="panel-body">
         <div id="myTabContent" class="tab-content">
             <div class="tab-pane fade active in" id="one">
@@ -70,7 +76,7 @@
                         <a href="javascript:;" data-area='["50%","100%"]' class="btn btn-success btn-add <?php echo $auth->check('loan/user/add')?'':'hide'; ?>" title="<?php echo __('Add'); ?>" ><i class="fa fa-plus"></i> <?php echo __('Add'); ?></a>
                         <!--<a href="javascript:;" class="btn btn-success btn-edit btn-disabled disabled <?php echo $auth->check('loan/user/edit')?'':'hide'; ?>" title="<?php echo __('Edit'); ?>" ><i class="fa fa-pencil"></i> <?php echo __('Edit'); ?></a>-->
                         <!--<a href="javascript:;" class="btn btn-danger btn-del btn-disabled disabled <?php echo $auth->check('loan/user/del')?'':'hide'; ?>" title="<?php echo __('Delete'); ?>" ><i class="fa fa-trash"></i> <?php echo __('Delete'); ?></a>-->
-                        <!--<a href="javascript:;" class="btn btn-danger btn-import <?php echo $auth->check('loan/user/import')?'':'hide'; ?>" title="<?php echo __('Import'); ?>" id="btn-import-file" data-url="ajax/upload" data-mimetype="csv,xls,xlsx" data-multiple="false"><i class="fa fa-upload"></i> <?php echo __('Import'); ?></a>-->
+                        <a href="javascript:;" class="btn btn-danger btn-import <?php echo $auth->check('loan/user/import')?'':'hide'; ?>" title="<?php echo __('Import'); ?>" id="btn-import-file" data-url="ajax/upload" data-mimetype="csv,xls,xlsx" data-multiple="false"><i class="fa fa-upload"></i> <?php echo __('Import'); ?></a>
 
                         <!--<div class="dropdown btn-group <?php echo $auth->check('loan/user/multi')?'':'hide'; ?>">-->
                             <!--<a class="btn btn-primary btn-more dropdown-toggle btn-disabled disabled" data-toggle="dropdown"><i class="fa fa-cog"></i> <?php echo __('More'); ?></a>-->

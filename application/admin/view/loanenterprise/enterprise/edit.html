@@ -6,22 +6,17 @@
 <form id="edit-form" class="form-horizontal" role="form" data-toggle="validator" method="POST" action="">
 
     <div class="form-group">
-        <label class="control-label col-xs-12 col-sm-2">{:__('Area')}:</label>
-        <div class="col-xs-12 col-sm-8">
-            <input id="c-area" class="form-control" name="row[area]" type="text" value="{$row.area|htmlentities}">
-        </div>
-    </div>
-
-    <div class="form-group">
-        <label class="control-label col-xs-12 col-sm-2">{:__('Country')}:</label>
-        <div class="col-xs-12 col-sm-8">
-            <input id="c-country" class="form-control" name="row[country]" type="text" value="{$row.country|htmlentities}">
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="control-label col-xs-12 col-sm-2">{:__('Village')}:</label>
-        <div class="col-xs-12 col-sm-8">
-            <input id="c-village" class="form-control" name="row[village]" type="text" value="{$row.village|htmlentities}">
+        <label class="col-sm-2 control-label">{:__('Areas')}:</label>
+        <div class="col-sm-7">
+            <select style="width:92PX;height:35px;border:1px solid #ccc;" id="countyId" data-rule="required" name="row[area]">
+                <option value="嵩县">嵩县</option>
+            </select>
+            <select style="width:92PX;height:35px;border:1px solid #ccc;" id="townId" name="row[country]" data-value="{$row.country}">
+                <option value="">请选择</option>
+            </select>
+            <select style="width:92PX;height:35px;border:1px solid #ccc;" id="villageId" name="row[village]" data-value="{$row.village}">
+                <option value="">请选择</option>
+            </select>
         </div>
     </div>
 
@@ -58,7 +53,7 @@
     <div class="form-group">
         <label class="control-label col-xs-12 col-sm-2">{:__('Staff_num')}:</label>
         <div class="col-xs-12 col-sm-8">
-            <input id="c-staff_num" class="form-control" name="row[staff_num]" placeholder="请输入主要股东数量" type="number" value="{$row.staff_num|htmlentities}">
+            <input id="c-staff_num" class="form-control" name="row[staff_num]" placeholder="请输入主要股东数量" type="text" value="{$row.staff_num|htmlentities}">
         </div>
     </div>
     <div class="form-group">
@@ -68,15 +63,33 @@
         </div>
     </div>
     <div class="form-group">
-        <label class="control-label col-xs-12 col-sm-2">{:__('Loan_term')}:</label>
+        <label class="control-label col-xs-12 col-sm-2">{:__('Loan_starttime')}:</label>
         <div class="col-xs-12 col-sm-8">
-            <input id="c-loan_term" class="form-control" name="row[loan_term]" type="number" min="0" value="{$row.loan_term|htmlentities}">
+            <input id="c-loan_starttime" data-rule="required" class="form-control datetimepicker" data-date-format="YYYY-MM-DD" data-use-current="true" name="row[loan_starttime]" type="text" value="{$row.loan_starttime|htmlentities}">
         </div>
     </div>
     <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Loan_endtime')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-loan_endtime" data-rule="required" class="form-control datetimepicker" data-date-format="YYYY-MM-DD" data-use-current="true" name="row[loan_endtime]" type="text" value="{$row.loan_endtime|htmlentities}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Payback_time')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-payback_time" data-rule="required" class="form-control datetimepicker" data-date-format="YYYY-MM-DD" data-use-current="true" name="row[payback_time]" type="text" value="{$row.payback_time|htmlentities}">
+        </div>
+    </div>
+    <!--<div class="form-group">-->
+        <!--<label class="control-label col-xs-12 col-sm-2">{:__('Loan_term')}:</label>-->
+        <!--<div class="col-xs-12 col-sm-8">-->
+            <!--<input id="c-loan_term" class="form-control" name="row[loan_term]" type="text" value="{$row.loan_term|htmlentities}">-->
+        <!--</div>-->
+    <!--</div>-->
+    <div class="form-group">
         <label class="control-label col-xs-12 col-sm-2">{:__('Uppoor_num')}:</label>
         <div class="col-xs-12 col-sm-8">
-            <input id="c-uppoor_num" class="form-control" name="row[uppoor_num]" type="number" min="0" value="{$row.uppoor_num|htmlentities}">
+            <input id="c-uppoor_num" class="form-control" name="row[uppoor_num]" type="text" value="{$row.uppoor_num|htmlentities}">
         </div>
     </div>
     <div class="form-group">
@@ -88,7 +101,7 @@
     <div class="form-group">
         <label class="control-label col-xs-12 col-sm-2">{:__('Uppoor_type')}:</label>
         <div class="col-xs-12 col-sm-8 field">
-            {:build_checkboxs('row[uppoor_type]', [
+            {:build_checkboxs('row[uppoor_type][]', [
             '1'=>'统一供种(供苗、幼崽等)',
             '2'=>'技术指导方式带贫',
             '3'=>'提供原料或作为企业原料等产品保底价或优惠价回收方式带贫',
@@ -111,6 +124,19 @@
                 <span class="msg-box n-right"></span>
             </div>
             <ul class="row list-inline plupload-preview" id="p-uppoor_roster"></ul>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Entrustprove')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <div class="input-group">
+                <input id="c-entrustprove" class="form-control hide" size="50" name="row[entrustprove]" type="text" value="{$row.entrustprove|htmlentities}" />
+                <div class="input-group-addon no-border no-padding">
+                    <span><button type="button" id="plupload-entrustprove" class="btn btn-danger plupload cropper" data-input-id="c-entrustprove" data-mimetype="image/gif,image/jpeg,image/png,image/jpg,image/webp" data-multiple="true" data-preview-id="p-entrustprove"><i class="fa fa-upload"></i>上传</button></span>
+                </div>
+                <span class="msg-box n-right"></span>
+            </div>
+            <ul class="row list-inline plupload-preview" id="p-entrustprove"></ul>
         </div>
     </div>
     <div class="form-group layer-footer">

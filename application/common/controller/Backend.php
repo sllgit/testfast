@@ -559,8 +559,23 @@ class Backend extends Controller
      */
     public function getaddress()
     {
-        $pid = $this->request->post('pid');
+        $name = $this->request->post('name');
+        $pid = db('areas')->where(['name'=>$name])->value('id');
         $data = db('areas')->where(['pid'=>$pid])->field('id,name')->select();
         return $data;
+    }
+
+    /**
+     * 获取日期差异天数
+     * @param $start
+     * @param $end
+     * @return float
+     */
+    public function getdays($start,$end)
+    {
+        $startdate=strtotime($start);
+        $enddate=strtotime($end);
+        $days=round(($enddate-$startdate)/3600/24) ;
+        return $days;
     }
 }

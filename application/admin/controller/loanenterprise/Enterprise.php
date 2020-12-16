@@ -3,6 +3,7 @@
 namespace app\admin\controller\loanenterprise;
 
 use app\common\controller\Backend;
+use think\Db;
 
 /**
  * 企业借贷信息管理
@@ -62,7 +63,7 @@ class Enterprise extends Backend
                     ->paginate($limit);
 
             foreach ($list as $row) {
-                $row->visible(['id','nickname','credit_code','deputy_username','phone','loan_price','loan_term']);
+                $row->visible(['id','nickname','credit_code','deputy_username','phone','loan_price','loan_term','entrustprove']);
                 
             }
 
@@ -71,6 +72,163 @@ class Enterprise extends Backend
             return json($result);
         }
         return $this->view->fetch();
+    }
+
+    /**
+     * 添加
+     */
+    public function add()
+    {
+        if ($this->request->isPost()) {
+            $params = $this->request->post("row/a");
+            if ($params) {
+                $params = $this->preExcludeFields($params);
+
+                if ($this->dataLimit && $this->dataLimitFieldAutoFill) {
+                    $params[$this->dataLimitField] = $this->auth->id;
+                }
+                $result = false;
+                Db::startTrans();
+                try {
+                    //是否采用模型验证
+                    if ($this->modelValidate) {
+                        $name = str_replace("\\model\\", "\\validate\\", get_class($this->model));
+                        $validate = is_bool($this->modelValidate) ? ($this->modelSceneValidate ? $name . '.add' : $name) : $this->modelValidate;
+                        $this->model->validateFailException(true)->validate($validate);
+                    }
+                    $params['uppoor_type'] = implode($params['uppoor_type'],',');
+                    $params['createtime'] = time();
+                    $result = $this->model->allowField(true)->save($params);
+                    $lastinsid = $this->model->getLastInsID();
+                    //还款记录
+                    $params['day'] = $this->getdays($params['payback_time'],$params['loan_endtime']);
+                    $params['loan_id'] = $lastinsid;
+                    $params['loan_type'] = 2;
+                    model('PaymentLog')->allowField(true)->save($params);
+                    model('Creditlog')->allowField(true)->save($params);
+                    Db::commit();
+                } catch (ValidateException $e) {
+                    Db::rollback();
+                    $this->error($e->getMessage());
+                } catch (PDOException $e) {
+                    Db::rollback();
+                    $this->error($e->getMessage());
+                } catch (Exception $e) {
+                    Db::rollback();
+                    $this->error($e->getMessage());
+                }
+                if ($result !== false) {
+                    $this->success();
+                } else {
+                    $this->error(__('No rows were inserted'));
+                }
+            }
+            $this->error(__('Parameter %s can not be empty', ''));
+        }
+        return $this->view->fetch();
+    }
+
+    /**
+     * 编辑
+     */
+    public function edit($ids = null)
+    {
+        $row = $this->model->get($ids);
+        if (!$row) {
+            $this->error(__('No Results were found'));
+        }
+        $adminIds = $this->getDataLimitAdminIds();
+        if (is_array($adminIds)) {
+            if (!in_array($row[$this->dataLimitField], $adminIds)) {
+                $this->error(__('You have no permission'));
+            }
+        }
+        if ($this->request->isPost()) {
+            $params = $this->request->post("row/a");
+            if ($params) {
+                $params = $this->preExcludeFields($params);
+                $result = false;
+                Db::startTrans();
+                try {
+                    //是否采用模型验证
+                    if ($this->modelValidate) {
+                        $name = str_replace("\\model\\", "\\validate\\", get_class($this->model));
+                        $validate = is_bool($this->modelValidate) ? ($this->modelSceneValidate ? $name . '.edit' : $name) : $this->modelValidate;
+                        $row->validateFailException(true)->validate($validate);
+                    }
+                    $params['uppoor_type'] = implode($params['uppoor_type'],',');
+                    $result = $row->allowField(true)->save($params);
+                    //还款记录
+                    $params['day'] = $this->getdays($params['payback_time'],$params['loan_endtime']);
+                    $where = ["loan_id"=>$ids,"type"=>2];
+                    model('PaymentLog')->allowField(true)->save($params,$where);
+                    $isset = model('Creditlog')->where($where)->find();
+                    if ($isset){
+                        model('Creditlog')->allowField(true)->save($params,$where);
+                    }else{
+                        model('Creditlog')->allowField(true)->save($params);
+                    }
+                    Db::commit();
+                } catch (ValidateException $e) {
+                    Db::rollback();
+                    $this->error($e->getMessage());
+                } catch (PDOException $e) {
+                    Db::rollback();
+                    $this->error($e->getMessage());
+                } catch (Exception $e) {
+                    Db::rollback();
+                    $this->error($e->getMessage());
+                }
+                if ($result !== false) {
+                    $this->success();
+                } else {
+                    $this->error(__('No rows were updated'));
+                }
+            }
+            $this->error(__('Parameter %s can not be empty', ''));
+        }
+        $this->view->assign("row", $row);
+        return $this->view->fetch();
+    }
+
+    /**
+     * 删除
+     */
+    public function del($ids = "")
+    {
+        if (!$this->request->isPost()) {
+            $this->error(__("Invalid parameters"));
+        }
+        $ids = $ids ? $ids : $this->request->post("ids");
+        if ($ids) {
+            $pk = $this->model->getPk();
+            $adminIds = $this->getDataLimitAdminIds();
+            if (is_array($adminIds)) {
+                $this->model->where($this->dataLimitField, 'in', $adminIds);
+            }
+            $list = $this->model->where($pk, 'in', $ids)->select();
+
+            $count = 0;
+            Db::startTrans();
+            try {
+                foreach ($list as $k => $v) {
+                    $count += $v->delete();
+                }
+                Db::commit();
+            } catch (PDOException $e) {
+                Db::rollback();
+                $this->error($e->getMessage());
+            } catch (Exception $e) {
+                Db::rollback();
+                $this->error($e->getMessage());
+            }
+            if ($count) {
+                $this->success();
+            } else {
+                $this->error(__('No rows were deleted'));
+            }
+        }
+        $this->error(__('Parameter %s can not be empty', 'ids'));
     }
 
     /**
@@ -86,7 +244,8 @@ class Enterprise extends Backend
         if (!$row) {
             $this->error(__('No Results were found'));
         }
-        $row->pid = \db('service_station')->where(['area'=>$row->area,'country'=>$row->country])->value('name');
+        //地区
+        $row['a_c_v'] = $row['area'].'-'.$row['country'].'-'.$row['village'];
         $this->view->assign("row",$row);
         return $this->view->fetch();
     }

@@ -1,0 +1,53 @@
+[ 2020-12-15T14:50:59+08:00 ][ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.000112s ]
+[ info ] [ LOG ] INIT File
+[ 2020-12-15T14:50:59+08:00 ][ info ] [ CACHE ] INIT File
+[ 2020-12-15T14:50:59+08:00 ][ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.001668s ]
+[ 2020-12-15T14:50:59+08:00 ][ info ] [ DB ] INIT mysql
+[ 2020-12-15T14:51:14+08:00 ][ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.000111s ]
+[ info ] [ LOG ] INIT File
+[ 2020-12-15T14:51:14+08:00 ][ info ] [ CACHE ] INIT File
+[ 2020-12-15T14:51:14+08:00 ][ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.001592s ]
+[ 2020-12-15T14:51:14+08:00 ][ info ] [ DB ] INIT mysql
+[ 2020-12-15T14:51:14+08:00 ][ info ] [ LANG ] D:\phpstudy_pro\WWW\testfast\application\admin\lang/zh-cn.php
+[ 2020-12-15T19:05:46+08:00 ][ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.000114s ]
+[ info ] [ LOG ] INIT File
+[ 2020-12-15T19:05:46+08:00 ][ info ] [ CACHE ] INIT File
+[ 2020-12-15T19:05:46+08:00 ][ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.001605s ]
+[ 2020-12-15T19:17:08+08:00 ][ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.000110s ]
+[ info ] [ LOG ] INIT File
+[ 2020-12-15T19:17:08+08:00 ][ info ] [ CACHE ] INIT File
+[ 2020-12-15T19:17:08+08:00 ][ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.001587s ]
+[ 2020-12-15T19:21:24+08:00 ][ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.000109s ]
+[ info ] [ LOG ] INIT File
+[ 2020-12-15T19:21:24+08:00 ][ info ] [ CACHE ] INIT File
+[ 2020-12-15T19:21:24+08:00 ][ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.001563s ]
+[ 2020-12-15T19:30:02+08:00 ][ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.000117s ]
+[ info ] [ LOG ] INIT File
+[ 2020-12-15T19:30:02+08:00 ][ info ] [ CACHE ] INIT File
+[ 2020-12-15T19:30:02+08:00 ][ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.002470s ]
+[ 2020-12-15T19:31:23+08:00 ][ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.000118s ]
+[ info ] [ LOG ] INIT File
+[ 2020-12-15T19:31:23+08:00 ][ info ] [ CACHE ] INIT File
+[ 2020-12-15T19:31:23+08:00 ][ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.001645s ]
+[ 2020-12-15T19:33:50+08:00 ][ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.000144s ]
+[ info ] [ LOG ] INIT File
+[ 2020-12-15T19:33:50+08:00 ][ info ] [ CACHE ] INIT File
+[ 2020-12-15T19:33:50+08:00 ][ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.001792s ]
+[ 2020-12-15T19:34:18+08:00 ][ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.000120s ]
+[ info ] [ LOG ] INIT File
+[ 2020-12-15T19:34:18+08:00 ][ info ] [ CACHE ] INIT File
+[ 2020-12-15T19:34:18+08:00 ][ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.001615s ]
+[ 2020-12-15T19:34:18+08:00 ][ info ] [ DB ] INIT mysql
+[ 2020-12-15T19:34:18+08:00 ][ info ] [ LANG ] D:\phpstudy_pro\WWW\testfast\application\admin\lang/zh-cn.php
+[ 2020-12-15T19:35:57+08:00 ][ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.000117s ]
+[ info ] [ LOG ] INIT File
+[ 2020-12-15T19:35:57+08:00 ][ info ] [ CACHE ] INIT File
+[ 2020-12-15T19:35:57+08:00 ][ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.001604s ]
+[ 2020-12-15T19:41:53+08:00 ][ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.000317s ]
+[ info ] [ LOG ] INIT File
+[ 2020-12-15T19:41:53+08:00 ][ info ] [ CACHE ] INIT File
+[ 2020-12-15T19:41:53+08:00 ][ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.001617s ]
+[ 2020-12-15T19:42:04+08:00 ][ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.000116s ]
+[ info ] [ LOG ] INIT File
+[ 2020-12-15T19:42:04+08:00 ][ info ] [ CACHE ] INIT File
+[ 2020-12-15T19:42:04+08:00 ][ info ] [ BEHAVIOR ] Run Closure @app_init [ RunTime:0.001689s ]

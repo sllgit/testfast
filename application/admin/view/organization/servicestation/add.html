@@ -1,3 +1,8 @@
+<style>
+    .msg-wrap{
+        margin-left: 13vw!important;
+    }
+</style>
 <form id="add-form" class="form-horizontal" role="form" data-toggle="validator" method="POST" action="">
 
     <div class="form-group">
@@ -13,35 +18,25 @@
             </select>
         </div>
     </div>
-    <div class="form-group Area">
-        <label class="control-label col-xs-12 col-sm-2">{:__('Area')}:</label>
-        <div class="col-xs-12 col-sm-8">
-            <input id="c-area" class="form-control" name="row[area]" type="text" value="0">
+    <div class="form-group Area ">
+        <label class="col-sm-2 control-label">{:__('Address')}:</label>
+        <div class="col-sm-7">
+            <select style="width:92PX;height:35px;border:1px solid #ccc;" id="countyId" data-rule="required" name="row[area]">
+                <option value="嵩县">嵩县</option>
+            </select>
+            <select style="width:92PX;height:35px;border:1px solid #ccc;" id="townId" name="row[country]" data-value="">
+                <option value="">请选择</option>
+            </select>
+            <select style="width:92PX;height:35px;border:1px solid #ccc;" id="villageId" name="row[village]" data-value="">
+                <option value="">请选择</option>
+            </select>
         </div>
     </div>
-    <div class="form-group Area">
-        <label class="control-label col-xs-12 col-sm-2">{:__('Country')}:</label>
-        <div class="col-xs-12 col-sm-8">
-            <input id="c-country" class="form-control" name="row[country]" type="text">
-        </div>
-    </div>
-    <div class="form-group Area">
-        <label class="control-label col-xs-12 col-sm-2">{:__('Village')}:</label>
-        <div class="col-xs-12 col-sm-8">
-            <input id="c-village" class="form-control" name="row[village]" type="text">
-        </div>
-    </div>
-    <!---->
-    <!--<div class="form-group">-->
-        <!--<label class="control-label col-xs-12 col-sm-2">{:__('Pid')}:</label>-->
-        <!--<div class="col-xs-12 col-sm-8">-->
-            <!--<input id="c-pid" class="form-control" name="row[pid]" type="number" value="0">-->
-        <!--</div>-->
-    <!--</div>-->
     <div class="form-group">
         <label class="control-label col-xs-12 col-sm-2">{:__('Name')}:</label>
         <div class="col-xs-12 col-sm-8">
-            <input id="c-name" class="form-control" name="row[name]" type="text">
+            <input id="c-name" class="form-control" name="row[name]" type="text" placeholder="请填写具体服务站名称，不需要后缀‘服务站’">
+            <span class="text-danger">* 示例：嵩县服务站 只需填写嵩县 ; 银行等填写全名称</span>
         </div>
     </div>
     <div class="form-group Bank hide">

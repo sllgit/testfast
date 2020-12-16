@@ -10,6 +10,7 @@ use think\Validate;
 
 /**
  * 会员接口
+ * @ApiInternal
  */
 class User extends Api
 {

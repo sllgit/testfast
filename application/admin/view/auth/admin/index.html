@@ -33,16 +33,12 @@
                 {if $servicedatas.data != []}
                     {volist name="$servicedatas.data" id="v"}
                     <div class="one {if $servicedatas.area != []}hide{/if}">
-                        {if $v.son != []}
                         <div class="jia xiang"></div><span class="spans" sid="{$v.id}">{$v.name}</span>
                         {volist name="$v.son" id="vv"}
                         <div class="two hide">
                             <span class="spans" sid="{$vv.id}">{$vv.name}</span>
                         </div>
                         {/volist}
-                        {else /}
-                        <span class="spans" sid="{$v.id}">{$v.name}</span>
-                        {/if}
                     </div>
                     {/volist}
                 {/if}

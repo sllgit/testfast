@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:81:"D:\phpstudy_pro\WWW\testfast\public/../application/admin\view\loan\user\edit.html";i:1607940040;s:71:"D:\phpstudy_pro\WWW\testfast\application\admin\view\layout\default.html";i:1602168705;s:68:"D:\phpstudy_pro\WWW\testfast\application\admin\view\common\meta.html";i:1602168705;s:70:"D:\phpstudy_pro\WWW\testfast\application\admin\view\common\script.html";i:1602168705;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:81:"D:\phpstudy_pro\WWW\testfast\public/../application/admin\view\loan\user\edit.html";i:1608102660;s:71:"D:\phpstudy_pro\WWW\testfast\application\admin\view\layout\default.html";i:1602168705;s:68:"D:\phpstudy_pro\WWW\testfast\application\admin\view\common\meta.html";i:1602168705;s:70:"D:\phpstudy_pro\WWW\testfast\application\admin\view\common\script.html";i:1602168705;}*/ ?>
 <!DOCTYPE html>
 <html lang="<?php echo $config['language']; ?>">
     <head>
@@ -61,12 +61,6 @@
                                 <form id="edit-form" class="form-horizontal" role="form" data-toggle="validator" method="POST" action="">
 
     <div class="form-group">
-        <label class="control-label col-xs-12 col-sm-2"><?php echo __('Local_no'); ?>:</label>
-        <div class="col-xs-12 col-sm-8">
-            <input id="c-local_no" data-rule="required" class="form-control" name="row[local_no]" type="text" value="<?php echo htmlentities($row['local_no']); ?>">
-        </div>
-    </div>
-    <div class="form-group">
         <label class="control-label col-xs-12 col-sm-2"><?php echo __('Nickname'); ?>:</label>
         <div class="col-xs-12 col-sm-8">
             <input id="c-nickname" data-rule="required" class="form-control" name="row[nickname]" type="text" value="<?php echo htmlentities($row['nickname']); ?>">
@@ -79,15 +73,15 @@
         </div>
     </div>
     <div class="form-group">
-        <label class="col-sm-2 control-label">家庭住址</label>
+        <label class="col-sm-2 control-label"><?php echo __('Address'); ?>:</label>
         <div class="col-sm-7">
             <select style="width:92PX;height:35px;border:1px solid #ccc;" id="countyId" data-rule="required" name="row[area]">
-                <option value="1">嵩县</option>
+                <option value="嵩县">嵩县</option>
             </select>
-            <select style="width:92PX;height:35px;border:1px solid #ccc;" id="townId" data-rule="required" name="row[country]">
+            <select style="width:92PX;height:35px;border:1px solid #ccc;" id="townId" name="row[country]" data-value="<?php echo $row['country']; ?>">
                 <option value="">请选择</option>
             </select>
-            <select style="width:92PX;height:35px;border:1px solid #ccc;" id="villageId" name="row[village]">
+            <select style="width:92PX;height:35px;border:1px solid #ccc;" id="villageId" name="row[village]" data-value="<?php echo $row['village']; ?>">
                 <option value="">请选择</option>
             </select>
         </div>
@@ -99,14 +93,20 @@
         </div>
     </div>
     <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2"><?php echo __('Is_poor'); ?>:</label>
+        <div class="col-xs-12 col-sm-8">
+            <?php echo build_radios('row[is_poor]', ['是'=>'是', '否'=>'否'],$row['is_poor']); ?>
+        </div>
+    </div>
+    <div class="form-group">
         <label class="control-label col-xs-12 col-sm-2"><?php echo __('Credit_rating'); ?>:</label>
         <div class="col-xs-12 col-sm-8">
             <select  id="c-credit_rating" class="form-control selectpicker" name="row[credit_rating]">
-                <option value="1" <?php if($row['credit_rating'] == 1): ?> selected <?php endif; ?>>A</option>
-                <option value="2" <?php if($row['credit_rating'] == 2): ?> selected <?php endif; ?>>AA</option>
-                <option value="3" <?php if($row['credit_rating'] == 3): ?> selected <?php endif; ?>>AAA</option>
-                <option value="4" <?php if($row['credit_rating'] == 4): ?> selected <?php endif; ?>>AAA+</option>
-                <option value="0" <?php if($row['credit_rating'] == 0): ?> selected <?php endif; ?>>无信用</option>
+                <option value="A" <?php if($row['credit_rating'] == 'A'): ?> selected <?php endif; ?>>A</option>
+                <option value="AA" <?php if($row['credit_rating'] == 'AA'): ?> selected <?php endif; ?>>AA</option>
+                <option value="AAA" <?php if($row['credit_rating'] == 'AAA'): ?> selected <?php endif; ?>>AAA</option>
+                <option value="AAA+" <?php if($row['credit_rating'] == 'AAA+'): ?> selected <?php endif; ?>>AAA+</option>
+                <option value="无信用" <?php if($row['credit_rating'] == '无信用'): ?> selected <?php endif; ?>>无信用</option>
             </select>
         </div>
     </div>
@@ -120,6 +120,12 @@
         <label class="control-label col-xs-12 col-sm-2"><?php echo __('Loan_endtime'); ?>:</label>
         <div class="col-xs-12 col-sm-8">
             <input id="c-loan_endtime" data-rule="required" class="form-control datetimepicker" data-date-format="YYYY-MM-DD" data-use-current="true" name="row[loan_endtime]" type="text" value="<?php echo htmlentities($row['loan_endtime']); ?>">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2"><?php echo __('Payback_time'); ?>:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-payback_time" data-rule="required" class="form-control datetimepicker" data-date-format="YYYY-MM-DD" data-use-current="true" name="row[payback_time]" type="text" value="<?php echo htmlentities($row['payback_time']); ?>">
         </div>
     </div>
     <div class="form-group">
@@ -141,9 +147,15 @@
         </div>
     </div>
     <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2"><?php echo __('Loan_use'); ?>:</label>
+        <div class="col-xs-12 col-sm-8">
+            <?php echo build_radios('row[loan_use]', ['第一产业'=>'第一产业', '第二产业'=>'第二产业', '第三产业'=>'第三产业','无'=>'无'],$row['loan_use']); ?>
+        </div>
+    </div>
+    <div class="form-group">
         <label class="control-label col-xs-12 col-sm-2"><?php echo __('Loan_type'); ?>:</label>
         <div class="col-xs-12 col-sm-8">
-            <?php echo build_radios('row[loan_type]', ['0'=>'新增', '1'=>'续贷'],$row['loan_type']); ?>
+            <?php echo build_radios('row[loan_type]', ['新增'=>'新增', '续贷'=>'续贷'],$row['loan_type']); ?>
         </div>
     </div>
 
@@ -152,7 +164,7 @@
         <div class="col-xs-12 col-sm-8">
             <select  id="c-loan_bank" class="form-control selectpicker" name="$row[loan_bank]">
                 <?php if(is_array($bankinfo) || $bankinfo instanceof \think\Collection || $bankinfo instanceof \think\Paginator): if( count($bankinfo)==0 ) : echo "" ;else: foreach($bankinfo as $key=>$vo): ?>
-                <option value="<?php echo $key; ?>" <?php if(in_array(($key), is_array($row['loan_bank'])?$row['loan_bank']:explode(',',$row['loan_bank']))): ?>selected<?php endif; ?>><?php echo $vo; ?></option>
+                <option value="<?php echo $vo; ?>" <?php if(in_array(($vo), is_array($row['loan_bank'])?$row['loan_bank']:explode(',',$row['loan_bank']))): ?>selected<?php endif; ?>><?php echo $vo; ?></option>
                 <?php endforeach; endif; else: echo "" ;endif; ?>
             </select>
         </div>
@@ -161,6 +173,31 @@
         <label class="control-label col-xs-12 col-sm-2"><?php echo __('Loan_bank_desc'); ?>:</label>
         <div class="col-xs-12 col-sm-8">
             <textarea id="c-loan_bank_desc" class="form-control" rows="5" placeholder="" name="row[loan_bank_desc]" cols="50"><?php echo htmlentities($row['loan_bank_desc']); ?></textarea>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2"><?php echo __('Is_joincredit'); ?>:</label>
+        <div class="col-xs-12 col-sm-8">
+            <?php echo build_radios('row[is_joincredit]', ['未参加过'=>'未参加过', '良好'=>'良好','优秀'=>'优秀'],$row['is_joincredit']); ?>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2"><?php echo __('Is_safe'); ?>:</label>
+        <div class="col-xs-12 col-sm-8">
+            <?php echo build_radios('row[is_safe]', ['否'=>'否', '是'=>'是'],$row['is_safe']); ?>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2"><?php echo __('Entrustprove'); ?>:</label>
+        <div class="col-xs-12 col-sm-8">
+            <div class="input-group">
+                <input id="c-entrustprove" class="form-control hide" size="50" name="row[entrustprove]" type="text" value="<?php echo htmlentities($row['entrustprove']); ?>" />
+                <div class="input-group-addon no-border no-padding">
+                    <span><button type="button" id="plupload-entrustprove" class="btn btn-danger plupload cropper" data-input-id="c-entrustprove" data-mimetype="image/gif,image/jpeg,image/png,image/jpg,image/webp" data-multiple="true" data-preview-id="p-entrustprove"><i class="fa fa-upload"></i>上传</button></span>
+                </div>
+                <span class="msg-box n-right"></span>
+            </div>
+            <ul class="row list-inline plupload-preview" id="p-entrustprove"></ul>
         </div>
     </div>
     <div class="form-group layer-footer">

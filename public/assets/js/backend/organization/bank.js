@@ -35,18 +35,7 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
                             iconList: false,
                             formatter: Table.api.formatter.status
                         },
-                        {field: 'operate', title: __('Operate'), table: table,
-                            buttons: [
-                                {
-                                    name: 'detail',
-                                    extend:'data-area=\'["50%","95%"]\'',
-                                    text: __('详情'),
-                                    // icon: 'fa fa-list',
-                                    classname: 'btn btn-info btn-xs btn-detail btn-dialog',
-                                    url: 'organization/bank/detail',
-                                }
-                            ],
-                            events: Table.api.events.operate, formatter: Table.api.formatter.operate}                     ]
+                        {field: 'operate', title: __('Operate'), table: table,events: Table.api.events.operate, formatter: Table.api.formatter.operate}                     ]
                 ]
             });
             table.on('post-body.bs.table',function () {

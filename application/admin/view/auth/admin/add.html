@@ -70,7 +70,7 @@
                         <div id="addbody">
                             <div class="addbody1">
                                 {if $servicedatas.area != []}
-                                <div class="jia xian"></div><span class="spans" sid="11">郸城县</span>
+                                <div class="jia xian"></div><span class="spans" sid="{$servicedatas.area.id}">{$servicedatas.area.name}</span>
                                 {/if}
                                 {if $servicedatas.data != []}
                                 {volist name="$servicedatas.data" id="v"}
