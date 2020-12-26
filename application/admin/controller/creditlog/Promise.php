@@ -52,7 +52,8 @@ class Promise extends Backend
             $wheres = ['credit_rating'=>['in',['A','AA','AAA','AAA+']]];
             $list = $this->model
                 ->where($where)
-                ->where($wheres)
+//                ->where($wheres)
+                ->whereExp('payback_time','<=loan_endtime')
                 ->order($sort, $order)
                 ->paginate($limit);
             foreach ($list as $k => $v){

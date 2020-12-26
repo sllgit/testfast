@@ -3,6 +3,8 @@
 return [
     'Url'                                         => '链接',
     'Userame'                                     => '用户名',
+    'Group_id'                                    => '所属角色',
+    'Service_id'                                  => '所属服务站',
     'Createtime'                                  => '操作时间',
     'Click to edit'                               => '点击编辑',
     'Admin log'                                   => '操作日志',

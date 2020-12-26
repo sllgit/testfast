@@ -2,7 +2,14 @@
 
 return [
     'autoload' => false,
-    'hooks' => [],
+    'hooks' => [
+        'action_begin' => [
+            'geetest',
+        ],
+        'config_init' => [
+            'geetest',
+        ],
+    ],
     'route' => [],
     'priority' => [],
 ];

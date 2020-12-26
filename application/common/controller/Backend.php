@@ -578,4 +578,24 @@ class Backend extends Controller
         $days=round(($enddate-$startdate)/3600/24) ;
         return $days;
     }
+
+    /**
+     * 更新银行放款金额
+     * @throws \think\Exception
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\ModelNotFoundException
+     * @throws \think\exception\DbException
+     */
+    public function InsertBankPrice($service_id,$price)
+    {
+        $ser_sta = \db('service_station')->where(['id'=>$service_id])->field('name,type')->find();
+        if ($ser_sta['type'] == 3){
+             $isset = \db('bank_price')->where(['bank_name'=>$ser_sta['name']])->find();
+            if ($isset){
+                \db('bank_price')->where(['bank_name'=>$ser_sta['name']])->update(['price'=>$price+$isset['price']]);
+            }else{
+                \db('bank_price')->insert(['bank_name'=>$ser_sta['name'],'price'=>$price]);
+            }
+        }
+    }
 }

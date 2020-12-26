@@ -1170,4 +1170,7 @@ table.table-nowrap thead > tr > th {
   -o-transform: rotate(-90deg);
   transform: rotate(-90deg);
 }
+.field label{
+  width: 100%;
+}
 /*# sourceMappingURL=backend.css.map */

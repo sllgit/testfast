@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:97:"D:\phpstudy_pro\WWW\testfast\public/../application/admin\view\loanenterprise\enterprise\edit.html";i:1608105877;s:71:"D:\phpstudy_pro\WWW\testfast\application\admin\view\layout\default.html";i:1602168705;s:68:"D:\phpstudy_pro\WWW\testfast\application\admin\view\common\meta.html";i:1602168705;s:70:"D:\phpstudy_pro\WWW\testfast\application\admin\view\common\script.html";i:1602168705;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:97:"D:\phpstudy_pro\WWW\testfast\public/../application/admin\view\loanenterprise\enterprise\edit.html";i:1608805043;s:71:"D:\phpstudy_pro\WWW\testfast\application\admin\view\layout\default.html";i:1602168705;s:68:"D:\phpstudy_pro\WWW\testfast\application\admin\view\common\meta.html";i:1602168705;s:70:"D:\phpstudy_pro\WWW\testfast\application\admin\view\common\script.html";i:1602168705;}*/ ?>
 <!DOCTYPE html>
 <html lang="<?php echo $config['language']; ?>">
     <head>
@@ -64,7 +64,13 @@
     }
 </style>
 <form id="edit-form" class="form-horizontal" role="form" data-toggle="validator" method="POST" action="">
-
+    <input type="hidden" name="row[applyedit_id]" value="<?php echo htmlentities($row['applyedit_id']); ?>">
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2"><?php echo __('Is_faucet'); ?>:</label>
+        <div class="col-xs-12 col-sm-8">
+            <?php echo build_radios('row[is_faucet]', ['否'=>'否', '是'=>'是'],$row['is_faucet']); ?>
+        </div>
+    </div>
     <div class="form-group">
         <label class="col-sm-2 control-label"><?php echo __('Areas'); ?>:</label>
         <div class="col-sm-7">
@@ -131,13 +137,19 @@
     <div class="form-group">
         <label class="control-label col-xs-12 col-sm-2"><?php echo __('Loan_endtime'); ?>:</label>
         <div class="col-xs-12 col-sm-8">
-            <input id="c-loan_endtime" data-rule="required" class="form-control datetimepicker" data-date-format="YYYY-MM-DD" data-use-current="true" name="row[loan_endtime]" type="text" value="<?php echo htmlentities($row['loan_endtime']); ?>">
+            <input id="c-loan_endtime" data-rule="required" class="form-control datetimepicker Time" data-date-format="YYYY-MM-DD" data-use-current="true" name="row[loan_endtime]" type="text" value="<?php echo htmlentities($row['loan_endtime']); ?>">
         </div>
     </div>
     <div class="form-group">
         <label class="control-label col-xs-12 col-sm-2"><?php echo __('Payback_time'); ?>:</label>
         <div class="col-xs-12 col-sm-8">
-            <input id="c-payback_time" data-rule="required" class="form-control datetimepicker" data-date-format="YYYY-MM-DD" data-use-current="true" name="row[payback_time]" type="text" value="<?php echo htmlentities($row['payback_time']); ?>">
+            <input id="c-payback_time" data-rule="required" class="form-control datetimepicker Time" data-date-format="YYYY-MM-DD" data-use-current="true" name="row[payback_time]" type="text" value="<?php echo htmlentities($row['payback_time']); ?>">
+        </div>
+    </div>
+    <div class="form-group Res hide">
+        <label class="control-label col-xs-12 col-sm-2"><?php echo __('Overduereason'); ?>:</label>
+        <div class="col-xs-12 col-sm-8 field">
+            <?php echo build_radios('row[overduereason]', $overduereason , $row['overduereason'] ); ?>
         </div>
     </div>
     <!--<div class="form-group">-->
@@ -147,9 +159,67 @@
         <!--</div>-->
     <!--</div>-->
     <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2"><?php echo __('Year_interest_rate'); ?>:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-year_interest_rate" class="form-control" data-rule="required" name="row[year_interest_rate]" type="number" min="0" value="<?php echo htmlentities($row['year_interest_rate']); ?>">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2"><?php echo __('Discount_rate'); ?>:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-discount_rate" class="form-control" data-rule="required" name="row[discount_rate]" type="number" min="0" value="<?php echo htmlentities($row['discount_rate']); ?>">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2"><?php echo __('Supportprice'); ?>:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-supportprice" class="form-control" data-rule="required" name="row[supportprice]" type="number" min="0" value="<?php echo htmlentities($row['supportprice']); ?>">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2"><?php echo __('Discount_price'); ?>:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-discount_price" class="form-control" data-rule="required" name="row[discount_price]" type="number" min="0" value="<?php echo htmlentities($row['discount_price']); ?>">
+        </div>
+    </div>
+    <div class="form-group">
         <label class="control-label col-xs-12 col-sm-2"><?php echo __('Uppoor_num'); ?>:</label>
         <div class="col-xs-12 col-sm-8">
             <input id="c-uppoor_num" class="form-control" name="row[uppoor_num]" type="text" value="<?php echo htmlentities($row['uppoor_num']); ?>">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2"><?php echo __('Loan_bank'); ?>:</label>
+        <div class="col-xs-12 col-sm-8">
+            <select  id="c-loan_bank" class="form-control selectpicker" name="$row[loan_bank]">
+                <?php if(is_array($bankinfo) || $bankinfo instanceof \think\Collection || $bankinfo instanceof \think\Paginator): if( count($bankinfo)==0 ) : echo "" ;else: foreach($bankinfo as $key=>$vo): ?>
+                <option value="<?php echo $vo; ?>" <?php if(in_array(($vo), is_array($row['loan_bank'])?$row['loan_bank']:explode(',',$row['loan_bank']))): ?>selected<?php endif; ?>><?php echo $vo; ?></option>
+                <?php endforeach; endif; else: echo "" ;endif; ?>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2"><?php echo __('Credit_rating'); ?>:</label>
+        <div class="col-xs-12 col-sm-8">
+            <select  id="c-credit_rating" class="form-control selectpicker" name="row[credit_rating]">
+                <option value="A" <?php if($row['credit_rating'] == 'A'): ?> selected <?php endif; ?>>A</option>
+                <option value="AA" <?php if($row['credit_rating'] == 'AA'): ?> selected <?php endif; ?>>AA</option>
+                <option value="AAA" <?php if($row['credit_rating'] == 'AAA'): ?> selected <?php endif; ?>>AAA</option>
+                <option value="AAA+" <?php if($row['credit_rating'] == 'AAA+'): ?> selected <?php endif; ?>>AAA+</option>
+                <option value="无信用" <?php if($row['credit_rating'] == '无信用'): ?> selected <?php endif; ?>>无信用</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2"><?php echo __('Loan_status_type'); ?>:</label>
+        <div class="col-xs-12 col-sm-8">
+            <?php echo build_radios('row[loan_status_type]', $loanstatustype ,$row['loan_status_type']); ?>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2"><?php echo __('Loanmodel'); ?>:</label>
+        <div class="col-xs-12 col-sm-8">
+            <?php echo build_radios('row[loanmodel]', $loanmodel ,$row['loanmodel']); ?>
         </div>
     </div>
     <div class="form-group">
@@ -161,15 +231,7 @@
     <div class="form-group">
         <label class="control-label col-xs-12 col-sm-2"><?php echo __('Uppoor_type'); ?>:</label>
         <div class="col-xs-12 col-sm-8 field">
-            <?php echo build_checkboxs('row[uppoor_type][]', [
-            '1'=>'统一供种(供苗、幼崽等)',
-            '2'=>'技术指导方式带贫',
-            '3'=>'提供原料或作为企业原料等产品保底价或优惠价回收方式带贫',
-            '4'=>'吸纳就业方式带贫',
-            '5'=>'针对农产品产业通过加工、延伸产业链方式带贫',
-            '6'=>'贫困户土地经营权、林权等入股或土地流转企业方式带贫',
-            '7'=>'其他',
-            ],$row['uppoor_type']); ?>
+            <?php echo build_checkboxs('row[uppoor_type][]', $uppoortype ,$row['uppoor_type']); ?>
         </div>
     </div>
 

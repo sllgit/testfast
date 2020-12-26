@@ -40,7 +40,12 @@ class User extends Backend
         $this->assignconfig("bankauth",Auth::instance()->check('loan/user/bankcheckstatus'));
         $this->assign("bankinfo",$bankinfo);
         $this->assign('loanstatus',$this->getloanstatus());
-        $this->assign("root",$_SERVER['REQUEST_SCHEME'].'://'.$_SERVER['SERVER_NAME']);
+        $this->assign('distribution',$this->model->getDistribution());
+        $this->assign('overduereason',$this->model->getOverdueReason());
+        $this->assign('loanuse',$this->model->getLoanUse());
+        $this->assign('isjoincredit',$this->model->getIsJoincredit());
+        $this->assign('loanstatustype',$this->model->getLoanStatusType());
+
     }
 
     /**
@@ -64,10 +69,21 @@ class User extends Backend
                 return $this->selectpage();
             }
             list($where, $sort, $order, $offset, $limit) = $this->buildparams();
-
+            $service_id = $this->auth->service_id;
+            $service_data = \db('service_station')->where(['id'=>$service_id])->field('country,village,type,name')->find();
+            $wheres = [];
+            if ($service_data['type'] >=3){
+                $wheres['loan_bank'] = $service_data['name'];
+                $wheres['check_status'] = ['in',[2,3,4]];
+            }elseif($service_data['type'] == 2){
+                $wheres['village'] = $service_data['village'];
+            }elseif($service_data['type'] == 1){
+                $wheres['country'] = $service_data['country'];
+            }
             $list = $this->model
                     
                     ->where($where)
+                    ->where($wheres)
                     ->order($sort, $order)
                     ->paginate($limit);
 
@@ -90,6 +106,13 @@ class User extends Backend
                 if ($this->dataLimit && $this->dataLimitFieldAutoFill) {
                     $params[$this->dataLimitField] = $this->auth->id;
                 }
+                //判断是否逾期
+                if ($params['payback_time'] <= $params['loan_endtime']){
+                    $params['overduereason'] = null;
+                }
+                if ($params['loan_use'] != '第一产业'){
+                    $params['distribution'] = null;
+                }
                 Db::startTrans();
                 try {
                     //是否采用模型验证
@@ -98,14 +121,17 @@ class User extends Backend
                         $validate = is_bool($this->modelValidate) ? ($this->modelSceneValidate ? $name . '.add' : $name) : $this->modelValidate;
                         $this->model->validateFailException(true)->validate($validate);
                     }
+                    $nowtime = time();
                     //借贷业务号码
                     $params['local_no'] = date("Ymd").rand(9999,9999999);
+                    $params['createtime'] = $nowtime;
+                    $params['admin_id'] = $this->auth->id;
                     $this->model->allowField(true)->save($params);
                     $lastinsid = $this->model->getLastInsID();
                     //还款记录
                     $params['day'] = $this->getdays($params['payback_time'],$params['loan_endtime']);
                     $params['loan_id'] = $lastinsid;
-                    $params['loan_type'] = 1;
+                    $params['type'] = 1;
                     model('PaymentLog')->allowField(true)->save($params);
                     model('Creditlog')->allowField(true)->save($params);
                     Db::commit();
@@ -144,6 +170,13 @@ class User extends Backend
         if ($this->request->isPost()) {
             $params = $this->request->post("row/a");
             if ($params) {
+                //判断是否逾期
+                if ($params['payback_time'] <= $params['loan_endtime']){
+                    $params['overduereason'] = null;
+                }
+                if ($params['loan_use'] != '第一产业'){
+                    $params['distribution'] = null;
+                }
                 $params = $this->preExcludeFields($params);
                 $result = false;
                 Db::startTrans();
@@ -154,6 +187,14 @@ class User extends Backend
                         $validate = is_bool($this->modelValidate) ? ($this->modelSceneValidate ? $name . '.edit' : $name) : $this->modelValidate;
                         $row->validateFailException(true)->validate($validate);
                     }
+                    $nowtime = time();
+                    //消除修改权限
+                    $result = \db('apply_edit')->where(['id'=>$params['applyedit_id']])->update(['updatetime'=>$nowtime]);
+
+                    $params['applyedit_id'] = null;
+                    $params['applyedit_status'] = 0;
+                    $params['updatetime'] = $nowtime;
+                    $params['admin_id'] = $this->auth->id;
                     $result = $row->allowField(true)->save($params);
                     //还款记录
                     $params['day'] = $this->getdays($params['payback_time'],$params['loan_endtime']);
@@ -165,6 +206,7 @@ class User extends Backend
                     }else{
                         model('Creditlog')->allowField(true)->save($params);
                     }
+
                     Db::commit();
                 } catch (ValidateException $e) {
                     Db::rollback();
@@ -177,6 +219,7 @@ class User extends Backend
                     $this->error($e->getMessage());
                 }
                 if ($result !== false) {
+
                     $this->success();
                 } else {
                     $this->error(__('No rows were updated'));
@@ -184,10 +227,30 @@ class User extends Backend
             }
             $this->error(__('Parameter %s can not be empty', ''));
         }
+
         $this->view->assign("row", $row);
         return $this->view->fetch();
     }
-
+    
+    /**
+     * 农户贷款详情
+     * @param $ids
+     * @return string
+     * @throws \think\Exception
+     * @throws \think\exception\DbException
+     */
+    public function detail($ids)
+    {
+        $row = $this->model->get($ids);
+        if (!$row) {
+            $this->error(__('No Results were found'));
+        }
+        //地区
+        $row['a_c_v'] = $row['area'].'-'.$row['country'].'-'.$row['village'];
+        $this->view->assign("row",$row);
+        return $this->view->fetch();
+    }
+    
     /**
      * 导入
      */
@@ -334,40 +397,45 @@ class User extends Backend
     }
 
     /**
-     * 服务站详情
+     * 申请修改权限
      * @param $ids
-     * @return string
-     * @throws \think\Exception
-     * @throws \think\exception\DbException
      */
-    public function detail($ids)
+    public function applyedit($ids)
     {
-        $row = $this->model->get($ids);
-        if (!$row) {
+        $ids =$this->request->post('ids') ?? $ids ;
+        if ($ids){
+            Db::startTrans();
+            try {
+                $where = $data = [
+                    "apply_id" => $this->auth->id ,
+                    "loan_id" => $ids ,
+                    "loan_type" => 1 ,
+                    "updatetime" => null ,
+                ];
+                $isset = \db('apply_edit')->where($where)->find();
+                if ($isset){
+                    $applyedit_id = $isset['id'];
+                }else{
+                    unset($where['updatetime']);
+                    $where["createtime"] = time() ;
+                    $applyedit_id = \db('apply_edit')->insertGetId($where);
+                }
+                $res = $this->model->save(['applyedit_id'=>$applyedit_id],['id'=>$ids]);
+                if ($res === false) throw new Exception('申请失败');
+                Db::commit();
+                $this->success('申请成功');
+            } catch (Exception $e) {
+                $this->error($e->getMessage());
+                Db::rollback();
+            }
+
+            halt($ids);
+        }else{
             $this->error(__('No Results were found'));
         }
-        //地区
-        $row['a_c_v'] = $row['area'].'-'.$row['country'].'-'.$row['village'];
-        $this->view->assign("row",$row);
-        return $this->view->fetch();
-    }
 
-    /**
-     * 检测身份证号是否已录入
-     * @return array
-     * @throws \think\Exception
-     */
-    public function checkidcard()
-    {
-        $idcard = $this->request->post('idcard');
-        $idcard_count = db('loan_user_info')->where(['idcard'=>$idcard])->count();
-        if ($idcard_count > 0){
-            return ['code'=>203];
-        }else{
-            return ["code"=>200];
-        }
     }
-
+    
     /**
      * 提交审核贷款信息
      */
@@ -389,11 +457,30 @@ class User extends Backend
         $pms = $this->request->post();
         $res = $this->model->allowField(true)->save($pms,['id'=>$pms['ids']]);
         if ($res !== false){
+            if ($pms['check_status'] == 3){
+                $service_id = $this->auth->service_id;
+                $this->InsertBankPrice($service_id,(float)$pms['price']);
+            }
             $this->success('审核成功');
         }else{
             $this->success('审核失败');
         }
     }
 
+    /**
+     * 检测身份证号是否已录入
+     * @return array
+     * @throws \think\Exception
+     */
+    public function checkidcard()
+    {
+        $idcard = $this->request->post('idcard');
+        $idcard_count = db('loan_user_info')->where(['idcard'=>$idcard])->count();
+        if ($idcard_count > 0){
+            return ['code'=>203];
+        }else{
+            return ["code"=>200];
+        }
+    }
 
 }

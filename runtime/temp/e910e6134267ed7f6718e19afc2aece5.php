@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:88:"D:\phpstudy_pro\WWW\testfast\public/../application/admin\view\general\profile\index.html";i:1607756901;s:71:"D:\phpstudy_pro\WWW\testfast\application\admin\view\layout\default.html";i:1602168705;s:68:"D:\phpstudy_pro\WWW\testfast\application\admin\view\common\meta.html";i:1602168705;s:70:"D:\phpstudy_pro\WWW\testfast\application\admin\view\common\script.html";i:1602168705;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:88:"D:\phpstudy_pro\WWW\testfast\public/../application/admin\view\general\profile\index.html";i:1608276703;s:71:"D:\phpstudy_pro\WWW\testfast\application\admin\view\layout\default.html";i:1602168705;s:68:"D:\phpstudy_pro\WWW\testfast\application\admin\view\common\meta.html";i:1602168705;s:70:"D:\phpstudy_pro\WWW\testfast\application\admin\view\common\script.html";i:1602168705;}*/ ?>
 <!DOCTYPE html>
 <html lang="<?php echo $config['language']; ?>">
     <head>
@@ -123,6 +123,15 @@
                             <label for="username" class="control-label"><?php echo __('Username'); ?>:</label>
                             <input type="text" class="form-control" id="username" name="row[username]" value="<?php echo htmlentities($admin['username']); ?>" disabled/>
                         </div>
+                        <div class="form-group">
+                            <label for="username" class="control-label"><?php echo __('Group_id'); ?>:</label>
+                            <input type="text" class="form-control" id="group_id" name="row[group_id]" value="<?php echo htmlentities($data['group_name']); ?>" disabled/>
+                        </div>
+                        <div class="form-group">
+                            <label for="username" class="control-label"><?php echo __('Service_id'); ?>:</label>
+                            <input type="text" class="form-control" id="service_id" name="row[service_id]" value="<?php echo htmlentities($data['service_name']); ?>" disabled/>
+                        </div>
+
                         <div class="form-group">
                             <label for="email" class="control-label"><?php echo __('Email'); ?>:</label>
                             <input type="text" class="form-control" id="email" name="row[email]" value="<?php echo htmlentities($admin['email']); ?>" data-rule="required;email"/>

@@ -15,12 +15,22 @@ use think\Validate;
  */
 class Profile extends Backend
 {
-
     /**
      * 查看
      */
     public function index()
     {
+        $group_id = $this->auth->group_id;
+        $service_id = $this->auth->group_id;
+        switch ($group_id){
+            case 0 :$group_name = '超级管理员';break;
+            default :$group_name = model('AuthGroup')->where(['id'=>$group_id])->value('name');break;
+        }
+        switch ($service_id){
+            case 0 :$service_name = '无';break;
+            default :$service_name = model('ServiceStation')->where(['id'=>$group_id])->value('name');break;
+        }
+        $this->view->assign('data',["group_name"=>$group_name,"service_name"=>$service_name]);
         return $this->view->fetch();
     }
 

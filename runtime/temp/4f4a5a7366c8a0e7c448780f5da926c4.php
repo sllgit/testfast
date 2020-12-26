@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:98:"D:\phpstudy_pro\WWW\testfast\public/../application/admin\view\organization\servicestation\add.html";i:1608022756;s:71:"D:\phpstudy_pro\WWW\testfast\application\admin\view\layout\default.html";i:1602168705;s:68:"D:\phpstudy_pro\WWW\testfast\application\admin\view\common\meta.html";i:1602168705;s:70:"D:\phpstudy_pro\WWW\testfast\application\admin\view\common\script.html";i:1602168705;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:98:"D:\phpstudy_pro\WWW\testfast\public/../application/admin\view\organization\servicestation\add.html";i:1608022993;s:71:"D:\phpstudy_pro\WWW\testfast\application\admin\view\layout\default.html";i:1602168705;s:68:"D:\phpstudy_pro\WWW\testfast\application\admin\view\common\meta.html";i:1602168705;s:70:"D:\phpstudy_pro\WWW\testfast\application\admin\view\common\script.html";i:1602168705;}*/ ?>
 <!DOCTYPE html>
 <html lang="<?php echo $config['language']; ?>">
     <head>
@@ -96,7 +96,7 @@
         <label class="control-label col-xs-12 col-sm-2"><?php echo __('Name'); ?>:</label>
         <div class="col-xs-12 col-sm-8">
             <input id="c-name" class="form-control" name="row[name]" type="text" placeholder="请填写具体服务站名称，不需要后缀‘服务站’">
-            <span class="text-danger">* 示例：嵩县服务站 只需填写嵩县</span>
+            <span class="text-danger">* 示例：嵩县服务站 只需填写嵩县 ; 银行等填写全名称</span>
         </div>
     </div>
     <div class="form-group Bank hide">

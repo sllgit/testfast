@@ -45,8 +45,8 @@
         <div class="col-xs-12 col-sm-8">
             <input id="is_poor" class="form-control" name="" type="text" disabled
                    {switch $row.is_poor}
-                   {case 是}value="是"{/case}
-            {case 否}value="否"{/case}
+                   {case 1}value="是"{/case}
+            {case 0}value="否"{/case}
             {default /}
             {/switch}
             >
@@ -104,17 +104,39 @@
         </div>
     </div>
     <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Supportprice')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-supportprice" class="form-control" data-rule="required" name="row[supportprice]" disabled type="number" value="{$row.supportprice|htmlentities}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Loan_status_type')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <select  id="c-loan_status_type" class="form-control selectpicker" name="row[loan_status_type]" disabled>
+                {foreach name="$loanstatustype" item="vo"}
+                <option value="{$key}" {in name="key" value="$row.loan_status_type"}selected{/in}>{$vo}</option>
+                {/foreach}
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
         <label class="control-label col-xs-12 col-sm-2">{:__('Loan_use')}:</label>
         <div class="col-xs-12 col-sm-8">
-            <input id="c-loan_use" class="form-control" name="" type="text" disabled
-                   {switch $row.loan_use}
-                   {case 无}value="无"{/case}
-            {case 第一产业}value="第一产业"{/case}
-            {case 第二产业}value="第二产业"{/case}
-            {case 第三产业}value="第三产业"{/case}
-            {default /}
-            {/switch}
-            >
+            <select  id="c-loan_use" class="form-control selectpicker" name="row[loan_use]" disabled>
+                {foreach name="$loanuse" item="vo"}
+                <option value="{$key}" {in name="key" value="$row.loan_use"}selected{/in}>{$vo}</option>
+                {/foreach}
+            </select>
+        </div>
+    </div>
+    <div class="form-group Dis">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Distribution')}:</label>
+        <div class="col-xs-12 col-sm-8 field">
+            <select  id="c-distribution" class="form-control selectpicker" name="row[distribution]" disabled>
+                {foreach name="$distribution" item="vo"}
+                <option value="{$key}" {in name="key" value="$row.distribution"}selected{/in}>{$vo}</option>
+                {/foreach}
+            </select>
         </div>
     </div>
     <div class="form-group">
@@ -133,9 +155,9 @@
     <div class="form-group">
         <label class="control-label col-xs-12 col-sm-2">{:__('Loan_bank')}:</label>
         <div class="col-xs-12 col-sm-8">
-            <select  id="c-loan_bank" class="form-control selectpicker" name="$row[loan_bank]" disabled>
+            <select  id="c-loan_bank" class="form-control selectpicker" name="row[loan_bank]" disabled>
                 {foreach name="$bankinfo" item="vo"}
-                <option value="{$vo}" {in name="vo" value="$row.loan_bank"}selected{/in}>{$vo}</option>
+                <option value="{$key}" {in name="key" value="$row.loan_bank"}selected{/in}>{$vo}</option>
                 {/foreach}
             </select>
         </div>
@@ -149,14 +171,11 @@
     <div class="form-group">
         <label class="control-label col-xs-12 col-sm-2">{:__('Is_joincredit')}:</label>
         <div class="col-xs-12 col-sm-8">
-            <input id="c-is_joincredit" class="form-control" name="" type="text" disabled
-                   {switch $row.is_joincredit}
-                   {case 未参加过}value="未参加过"{/case}
-            {case 良好}value="良好"{/case}
-            {case 优秀}value="优秀"{/case}
-            {default /}
-            {/switch}
-            >
+            <select  id="c-is_joincredit" class="form-control selectpicker" name="row[is_joincredit]" disabled>
+                {foreach name="$isjoincredit" item="vo"}
+                <option value="{$key}" {in name="key" value="$row.is_joincredit"}selected{/in}>{$vo}</option>
+                {/foreach}
+            </select>
         </div>
     </div>
     <div class="form-group">

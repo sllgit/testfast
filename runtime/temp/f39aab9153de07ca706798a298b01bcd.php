@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:83:"D:\phpstudy_pro\WWW\testfast\public/../application/admin\view\loan\user\detail.html";i:1608102131;s:71:"D:\phpstudy_pro\WWW\testfast\application\admin\view\layout\default.html";i:1602168705;s:68:"D:\phpstudy_pro\WWW\testfast\application\admin\view\common\meta.html";i:1602168705;s:70:"D:\phpstudy_pro\WWW\testfast\application\admin\view\common\script.html";i:1602168705;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:83:"D:\phpstudy_pro\WWW\testfast\public/../application/admin\view\loan\user\detail.html";i:1608806773;s:71:"D:\phpstudy_pro\WWW\testfast\application\admin\view\layout\default.html";i:1602168705;s:68:"D:\phpstudy_pro\WWW\testfast\application\admin\view\common\meta.html";i:1602168705;s:70:"D:\phpstudy_pro\WWW\testfast\application\admin\view\common\script.html";i:1602168705;}*/ ?>
 <!DOCTYPE html>
 <html lang="<?php echo $config['language']; ?>">
     <head>
@@ -153,11 +153,39 @@
         </div>
     </div>
     <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2"><?php echo __('Supportprice'); ?>:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-supportprice" class="form-control" data-rule="required" name="row[supportprice]" disabled type="number" value="<?php echo htmlentities($row['supportprice']); ?>">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2"><?php echo __('Loan_status_type'); ?>:</label>
+        <div class="col-xs-12 col-sm-8">
+            <select  id="c-loan_status_type" class="form-control selectpicker" name="row[loan_status_type]" disabled>
+                <?php if(is_array($loanstatustype) || $loanstatustype instanceof \think\Collection || $loanstatustype instanceof \think\Paginator): if( count($loanstatustype)==0 ) : echo "" ;else: foreach($loanstatustype as $key=>$vo): ?>
+                <option value="<?php echo $key; ?>" <?php if(in_array(($key), is_array($row['loan_status_type'])?$row['loan_status_type']:explode(',',$row['loan_status_type']))): ?>selected<?php endif; ?>><?php echo $vo; ?></option>
+                <?php endforeach; endif; else: echo "" ;endif; ?>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
         <label class="control-label col-xs-12 col-sm-2"><?php echo __('Loan_use'); ?>:</label>
         <div class="col-xs-12 col-sm-8">
-            <input id="c-loan_use" class="form-control" name="" type="text" disabled
-                   <?php switch($row['loan_use']): case "无": ?>value="无"<?php break; case "第一产业": ?>value="第一产业"<?php break; case "第二产业": ?>value="第二产业"<?php break; case "第三产业": ?>value="第三产业"<?php break; default: endswitch; ?>
-            >
+            <select  id="c-loan_use" class="form-control selectpicker" name="row[loan_use]" disabled>
+                <?php if(is_array($loanuse) || $loanuse instanceof \think\Collection || $loanuse instanceof \think\Paginator): if( count($loanuse)==0 ) : echo "" ;else: foreach($loanuse as $key=>$vo): ?>
+                <option value="<?php echo $key; ?>" <?php if(in_array(($key), is_array($row['loan_use'])?$row['loan_use']:explode(',',$row['loan_use']))): ?>selected<?php endif; ?>><?php echo $vo; ?></option>
+                <?php endforeach; endif; else: echo "" ;endif; ?>
+            </select>
+        </div>
+    </div>
+    <div class="form-group Dis">
+        <label class="control-label col-xs-12 col-sm-2"><?php echo __('Distribution'); ?>:</label>
+        <div class="col-xs-12 col-sm-8 field">
+            <select  id="c-distribution" class="form-control selectpicker" name="row[distribution]" disabled>
+                <?php if(is_array($distribution) || $distribution instanceof \think\Collection || $distribution instanceof \think\Paginator): if( count($distribution)==0 ) : echo "" ;else: foreach($distribution as $key=>$vo): ?>
+                <option value="<?php echo $key; ?>" <?php if(in_array(($key), is_array($row['distribution'])?$row['distribution']:explode(',',$row['distribution']))): ?>selected<?php endif; ?>><?php echo $vo; ?></option>
+                <?php endforeach; endif; else: echo "" ;endif; ?>
+            </select>
         </div>
     </div>
     <div class="form-group">
@@ -172,9 +200,9 @@
     <div class="form-group">
         <label class="control-label col-xs-12 col-sm-2"><?php echo __('Loan_bank'); ?>:</label>
         <div class="col-xs-12 col-sm-8">
-            <select  id="c-loan_bank" class="form-control selectpicker" name="$row[loan_bank]" disabled>
+            <select  id="c-loan_bank" class="form-control selectpicker" name="row[loan_bank]" disabled>
                 <?php if(is_array($bankinfo) || $bankinfo instanceof \think\Collection || $bankinfo instanceof \think\Paginator): if( count($bankinfo)==0 ) : echo "" ;else: foreach($bankinfo as $key=>$vo): ?>
-                <option value="<?php echo $vo; ?>" <?php if(in_array(($vo), is_array($row['loan_bank'])?$row['loan_bank']:explode(',',$row['loan_bank']))): ?>selected<?php endif; ?>><?php echo $vo; ?></option>
+                <option value="<?php echo $key; ?>" <?php if(in_array(($key), is_array($row['loan_bank'])?$row['loan_bank']:explode(',',$row['loan_bank']))): ?>selected<?php endif; ?>><?php echo $vo; ?></option>
                 <?php endforeach; endif; else: echo "" ;endif; ?>
             </select>
         </div>
@@ -188,9 +216,11 @@
     <div class="form-group">
         <label class="control-label col-xs-12 col-sm-2"><?php echo __('Is_joincredit'); ?>:</label>
         <div class="col-xs-12 col-sm-8">
-            <input id="c-is_joincredit" class="form-control" name="" type="text" disabled
-                   <?php switch($row['is_joincredit']): case "未参加过": ?>value="未参加过"<?php break; case "良好": ?>value="良好"<?php break; case "优秀": ?>value="优秀"<?php break; default: endswitch; ?>
-            >
+            <select  id="c-is_joincredit" class="form-control selectpicker" name="row[is_joincredit]" disabled>
+                <?php if(is_array($isjoincredit) || $isjoincredit instanceof \think\Collection || $isjoincredit instanceof \think\Paginator): if( count($isjoincredit)==0 ) : echo "" ;else: foreach($isjoincredit as $key=>$vo): ?>
+                <option value="<?php echo $key; ?>" <?php if(in_array(($key), is_array($row['is_joincredit'])?$row['is_joincredit']:explode(',',$row['is_joincredit']))): ?>selected<?php endif; ?>><?php echo $vo; ?></option>
+                <?php endforeach; endif; else: echo "" ;endif; ?>
+            </select>
         </div>
     </div>
     <div class="form-group">

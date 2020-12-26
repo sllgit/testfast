@@ -2,7 +2,7 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
 
     var loanauth = Config.loanauth;
     var bankauth = Config.bankauth;
-
+    // console.log(bankauth);
     var Controller = {
         index: function () {
             // 初始化表格参数配置
@@ -11,7 +11,7 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
                     index_url: 'loan/user/index' + location.search,
                     add_url: 'loan/user/add',
                     edit_url: 'loan/user/edit',
-                    // del_url: 'loan/user/del',
+                    del_url: 'loan/user/del',
                     multi_url: 'loan/user/multi',
                     import_url: 'loan/user/import',
                     table: 'local_user_info',
@@ -23,6 +23,7 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
             $.fn.bootstrapTable.locales[Table.defaults.locale]['formatSearch'] = function(){return "名称,手机号,身份证号";};
 
             // 初始化表格
+
             table.bootstrapTable({
                 url: $.fn.bootstrapTable.defaults.extend.index_url,
                 pk: 'id',
@@ -30,6 +31,10 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
                 showToggle: false,
                 showColumns: false,
                 showExport: false,
+                //启用固定列
+                fixedColumns: true,
+                //固定右侧列数
+                fixedRightNumber: 1,
                 columns: [
                     [
                         {checkbox: true},
@@ -60,6 +65,19 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
                                     // icon: 'fa fa-list',
                                     classname: 'btn btn-info btn-xs btn-detail btn-dialog',
                                     url: 'loan/user/detail',
+                                },
+                                {
+                                    name: 'ajax',
+                                    text: '申请修改',
+                                    title: '申请修改权限',
+                                    classname: 'btn btn-xs btn-primary btn-magic btn-applyedit',
+                                    hidden:function (row) {
+                                        if (row.applyedit_id > 0){
+                                            return true;
+                                        } else{
+                                            return false;
+                                        }
+                                    }
                                 },
                                 {
                                     name: 'ajax',
@@ -98,7 +116,15 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
                                 },
                             ],
                             events: Table.api.events.operate,
-                            formatter: Table.api.formatter.operate
+                            formatter: function(value,row,index){
+                                var that = $.extend({},this);
+                                var table = $(that.table).clone(true);
+                                if(row.applyedit_status != 1){
+                                    $(table).data("operate-edit",null);
+                                    that.table = table;
+                                }
+                                return Table.api.formatter.operate.call(that,value,row,index);
+                            },
                         }
                     ]
                 ]
@@ -131,6 +157,7 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
             Controller.api.bindevent();
             var value = $("#townId").data('value');
             var values = $("#villageId").data('value');
+            var v = $("input[name='row[loan_use]']:checked").val();
             //默认加载县乡信息
             $.ajax({
                 type: "post",
@@ -168,10 +195,14 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
                         $("#villageId").html(str);
                     }
                 });
-            }
+            };
+            checkTime();
+            Dis(v);
         },
         detail: function () {
             Controller.api.bindevent();
+            var v = $("#c-loan_use").val();
+            Dis(v);
         },
         api: {
             bindevent: function () {
@@ -187,6 +218,11 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
         }else{
             $('.Time').addClass('hide');
         }
+    });
+    //选择产业
+    $("input[name='row[loan_use]']").click(function() {
+        var o=$(this),v=o.val();
+        Dis(v);
     });
     //选择村信息
     $(document).on("change", "#townId", function () {
@@ -226,5 +262,30 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
             });
         }
     });
+    //根据输入的还款日期或到期日期判断是否显示逾期内容
+    $(".Time").blur(function () {
+        checkTime();
+    });
+    function checkTime() {
+        var loan_endtime = $("#c-loan_endtime").val();
+        var payback_time = $("#c-payback_time").val();
+        if (loan_endtime != '' && payback_time != ''){
+            var loan_endtime = Number(new Date(loan_endtime+' 00:00:00') / 1000);
+            var payback_time = Number(new Date(payback_time+' 00:00:00') / 1000);
+            if (payback_time > loan_endtime){
+                $(".Res").removeClass('hide');
+            }else{
+                $(".Res").addClass('hide');
+
+            }
+        }
+    }
+    function Dis(v) {
+        if (v == '第一产业'){
+            $(".Dis").removeClass('hide');
+        } else {
+            $(".Dis").addClass('hide');
+        }
+    }
     return Controller;
 });

@@ -563,10 +563,14 @@ define(['jquery', 'bootstrap', 'moment', 'moment/locale/zh-cn', 'bootstrap-table
                         var left = (document.body.clientWidth)/2 - 200;
                         var table   = $(that).closest('table');
                         var options = table.bootstrapTable('getOptions');
+                        var loanurl = 'loan/user/loancheckstatus';
+                        if (row.type == 2){
+                            loanurl = 'loanenterprise/enterprise/loancheckstatus';
+                        }
                         Layer.confirm('确定提交给银行审核？',
                             {icon: 3, title: '温馨提示', offset: [top, left], shadeClose: true,btn: ['确定', '取消'] },
                             function(index, layero){
-                                Fast.api.ajax({url:'loan/user/loancheckstatus',data:{ids:row[options.pk]}}, function (data, ret) {
+                                Fast.api.ajax({url:loanurl,data:{ids:row[options.pk]}}, function (data, ret) {
                                     table.bootstrapTable('refresh');
                                 }, function (data, ret) {
 
@@ -586,11 +590,15 @@ define(['jquery', 'bootstrap', 'moment', 'moment/locale/zh-cn', 'bootstrap-table
                         var left = (document.body.clientWidth)/2 - 200;
                         var table   = $(that).closest('table');
                         var options = table.bootstrapTable('getOptions');
+                        var bankurl = 'loan/user/bankcheckstatus';
+                        if (row.type == 2){
+                            bankurl = 'loanenterprise/enterprise/bankcheckstatus';
+                        }
                         Layer.confirm('确定确认审核？',
                             {icon: 3, title: '温馨提示', offset: [top, left], shadeClose: true,btn: ['确定', '驳回'] },
                             function(index, layero){
                                 Layer.prompt({title:'请输入放款信息',formType: 2},function(value, index, elem){
-                                    Fast.api.ajax({url:'loan/user/bankcheckstatus',data:{ids:row[options.pk],bank_info:value,check_status:3}}, function (data, ret) {
+                                    Fast.api.ajax({url:bankurl,data:{ids:row[options.pk],bank_info:value,check_status:3,price:row.loan_price}}, function (data, ret) {
                                         table.bootstrapTable('refresh');
                                     }, function (data, ret) {
 
@@ -600,7 +608,7 @@ define(['jquery', 'bootstrap', 'moment', 'moment/locale/zh-cn', 'bootstrap-table
                                 Layer.close(index);
                             }, function(index){
                                 Layer.prompt({title:'请输入驳回信息',formType: 2},function(value, index, elem){
-                                    Fast.api.ajax({url:'loan/user/bankcheckstatus',data:{ids:row[options.pk],bank_info:value,check_status:4}}, function (data, ret) {
+                                    Fast.api.ajax({url:'loan/user/bankcheckstatus',data:{ids:row[options.pk],bank_info:value,check_status:4,price:row.loan_price}}, function (data, ret) {
                                         table.bootstrapTable('refresh');
                                     }, function (data, ret) {
 
@@ -608,6 +616,62 @@ define(['jquery', 'bootstrap', 'moment', 'moment/locale/zh-cn', 'bootstrap-table
                                     Layer.close(index);
                                 });
                                 Layer.close(index);
+                            }
+                        );
+                    },
+                    //申请修改权限
+                    'click .btn-applyedit': function (e, value, row, index) {
+                        e.stopPropagation();
+                        e.preventDefault();
+                        var that = this;
+                        var top  = (document.body.clientHeight)/2 - 100;
+                        var left = (document.body.clientWidth)/2 - 200;
+                        var table   = $(that).closest('table');
+                        var options = table.bootstrapTable('getOptions');
+                        var loanurl = 'loan/user/applyedit';
+                        if (row.type == 2){
+                            loanurl = 'loanenterprise/enterprise/applyedit';
+                        }
+                        Layer.confirm('是否确定申请修改权限？',
+                            {icon: 3, title: '温馨提示', offset: [top, left], shadeClose: true,btn: ['确定', '取消'] },
+                            function(index, layero){
+                                Fast.api.ajax({url:loanurl,data:{ids:row[options.pk],}}, function (data, ret) {
+                                    table.bootstrapTable('refresh');
+                                    Layer.close(index);
+                                }, function (data, ret) {
+
+                                });
+                            }, function(index){
+
+                                Layer.close(index);
+                            }
+                        );
+                    },
+                    //审核申请修改权限
+                    'click .btn-applyeditshenhe': function (e, value, row, index) {
+                        e.stopPropagation();
+                        e.preventDefault();
+                        var that = this;
+                        var top  = (document.body.clientHeight)/2 - 100;
+                        var left = (document.body.clientWidth)/2 - 200;
+                        var table   = $(that).closest('table');
+                        var options = table.bootstrapTable('getOptions');
+                        Layer.confirm('是否通过该条申请？',
+                            {icon: 3, title: '温馨提示', offset: [top, left], shadeClose: true,btn: ['通过', '驳回'] },
+                            function(index, layero){
+                                Fast.api.ajax({url:'applyedit/applyeditshenhe',data:{ids:row[options.pk],'type':1}}, function (data, ret) {
+                                    table.bootstrapTable('refresh');
+                                    Layer.close(index);
+                                }, function (data, ret) {
+
+                                });
+                            }, function(index){
+                                Fast.api.ajax({url:'applyedit/applyeditshenhe',data:{ids:row[options.pk],'type':2}}, function (data, ret) {
+                                    table.bootstrapTable('refresh');
+                                    Layer.close(index);
+                                }, function (data, ret) {
+
+                                });
                             }
                         );
                     },

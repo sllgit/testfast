@@ -35,7 +35,7 @@
     <div class="form-group">
         <label class="control-label col-xs-12 col-sm-2">{:__('Is_poor')}:</label>
         <div class="col-xs-12 col-sm-8">
-            {:build_radios('row[is_poor]', ['是'=>'是', '否'=>'否'],'是')}
+            {:build_radios('row[is_poor]', ['1'=>'是', '0'=>'否'],'是')}
         </div>
     </div>
     <div class="form-group">
@@ -59,13 +59,19 @@
     <div class="form-group">
         <label class="control-label col-xs-12 col-sm-2">{:__('Loan_endtime')}:</label>
         <div class="col-xs-12 col-sm-8">
-            <input id="c-loan_endtime" data-rule="required" class="form-control datetimepicker" data-date-format="YYYY-MM-DD" data-use-current="true" name="row[loan_endtime]" type="text" value="">
+            <input id="c-loan_endtime" data-rule="required" class="form-control datetimepicker Time" data-date-format="YYYY-MM-DD" data-use-current="true" name="row[loan_endtime]" type="text" value="">
         </div>
     </div>
     <div class="form-group">
         <label class="control-label col-xs-12 col-sm-2">{:__('Payback_time')}:</label>
         <div class="col-xs-12 col-sm-8">
-            <input id="c-payback_time" data-rule="required" class="form-control datetimepicker" data-date-format="YYYY-MM-DD" data-use-current="true" name="row[payback_time]" type="text" value="">
+            <input id="c-payback_time" data-rule="required" class="form-control datetimepicker Time" data-date-format="YYYY-MM-DD" data-use-current="true" name="row[payback_time]" type="text" value="">
+        </div>
+    </div>
+    <div class="form-group Res hide">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Overduereason')}:</label>
+        <div class="col-xs-12 col-sm-8 field">
+            {:build_radios('row[overduereason]', $overduereason )}
         </div>
     </div>
     <div class="form-group">
@@ -93,9 +99,29 @@
         </div>
     </div>
     <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Supportprice')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-supportprice" class="form-control" data-rule="required" name="row[supportprice]" type="number" min="0">
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Loan_status_type')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            {:build_radios('row[loan_status_type]', $loanstatustype ,'0')}
+        </div>
+    </div>
+    <div class="form-group">
         <label class="control-label col-xs-12 col-sm-2">{:__('Loan_use')}:</label>
         <div class="col-xs-12 col-sm-8">
-            {:build_radios('row[loan_use]', ['第一产业'=>'第一产业', '第二产业'=>'第二产业', '第三产业'=>'第三产业','无'=>'无'],'第一产业')}
+            {:build_radios('row[loan_use]', $loanuse ,'第一产业')}
+        </div>
+    </div>
+
+    <div class="form-group Dis">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Distribution')}:</label>
+        <div class="col-xs-12 col-sm-8 field">
+            {:build_radios('row[distribution]', $distribution)}
         </div>
     </div>
     <div class="form-group">
@@ -123,7 +149,7 @@
     <div class="form-group">
         <label class="control-label col-xs-12 col-sm-2">{:__('Is_joincredit')}:</label>
         <div class="col-xs-12 col-sm-8">
-            {:build_radios('row[is_joincredit]', ['未参加过'=>'未参加过', '良好'=>'良好','优秀'=>'优秀'],'未参加过')}
+            {:build_radios('row[is_joincredit]', $isjoincredit ,'未参加过')}
         </div>
     </div>
     <div class="form-group">

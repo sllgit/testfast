@@ -49,12 +49,14 @@ class Breach extends Backend
                 return $this->selectpage();
             }
             list($where, $sort, $order, $offset, $limit) = $this->buildparams();
-            $wheres = ['credit_rating'=>['not in',['A','AA','AAA','AAA+']]];
+//            $wheres = ['credit_rating'=>['not in',['A','AA','AAA','AAA+']]];
             $list = $this->model
                 ->where($where)
-                ->where($wheres)
+//                ->where($wheres)
+                ->whereExp('payback_time','>loan_endtime')
                 ->order($sort, $order)
                 ->paginate($limit);
+//                ->select();
             foreach ($list as $k => $v){
                 $list[$k]['address'] = $v['area'] . ' - ' . $v['country'] . ' - ' .$v['village'];
             }

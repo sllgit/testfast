@@ -26,4 +26,9 @@ return [
     'Bank_info'              => '银行通过放款信息',
     'Address'                => '地区',
     'Entrustprove'           => '委托证明',
+    'Distribution'           => '产业分布类型',
+    'Overduereason'          => '逾期原因',
+    'Loan_status_type'       => '贷款状态类型',
+    'Supportprice'           => '产业扶持金额',
+
 ];

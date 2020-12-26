@@ -53,7 +53,10 @@ define(['jquery', 'bootstrap', 'backend', 'table', 'form'], function ($, undefin
                 options.queryParams = function (params) {
                     var filter = {};
                     var op = {};
-                    if (value !== '') {
+                    if (value !== '' && value >= 0) {
+                        filter[field] = value;
+                        op[field] = '>=';
+                    }else if (value !== '' && value < 0) {
                         filter[field] = value;
                         op[field] = '<=';
                     }

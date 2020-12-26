@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:81:"D:\phpstudy_pro\WWW\testfast\public/../application/admin\view\loan\user\edit.html";i:1608102660;s:71:"D:\phpstudy_pro\WWW\testfast\application\admin\view\layout\default.html";i:1602168705;s:68:"D:\phpstudy_pro\WWW\testfast\application\admin\view\common\meta.html";i:1602168705;s:70:"D:\phpstudy_pro\WWW\testfast\application\admin\view\common\script.html";i:1602168705;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:4:{s:81:"D:\phpstudy_pro\WWW\testfast\public/../application/admin\view\loan\user\edit.html";i:1608806306;s:71:"D:\phpstudy_pro\WWW\testfast\application\admin\view\layout\default.html";i:1602168705;s:68:"D:\phpstudy_pro\WWW\testfast\application\admin\view\common\meta.html";i:1602168705;s:70:"D:\phpstudy_pro\WWW\testfast\application\admin\view\common\script.html";i:1602168705;}*/ ?>
 <!DOCTYPE html>
 <html lang="<?php echo $config['language']; ?>">
     <head>
@@ -59,7 +59,7 @@
                             <?php endif; ?>
                             <div class="content">
                                 <form id="edit-form" class="form-horizontal" role="form" data-toggle="validator" method="POST" action="">
-
+    <input type="hidden" name="row[applyedit_id]" value="<?php echo htmlentities($row['applyedit_id']); ?>">
     <div class="form-group">
         <label class="control-label col-xs-12 col-sm-2"><?php echo __('Nickname'); ?>:</label>
         <div class="col-xs-12 col-sm-8">
@@ -119,13 +119,19 @@
     <div class="form-group">
         <label class="control-label col-xs-12 col-sm-2"><?php echo __('Loan_endtime'); ?>:</label>
         <div class="col-xs-12 col-sm-8">
-            <input id="c-loan_endtime" data-rule="required" class="form-control datetimepicker" data-date-format="YYYY-MM-DD" data-use-current="true" name="row[loan_endtime]" type="text" value="<?php echo htmlentities($row['loan_endtime']); ?>">
+            <input id="c-loan_endtime" data-rule="required" class="form-control datetimepicker Time" data-date-format="YYYY-MM-DD" data-use-current="true" name="row[loan_endtime]" type="text" value="<?php echo htmlentities($row['loan_endtime']); ?>">
         </div>
     </div>
     <div class="form-group">
         <label class="control-label col-xs-12 col-sm-2"><?php echo __('Payback_time'); ?>:</label>
         <div class="col-xs-12 col-sm-8">
-            <input id="c-payback_time" data-rule="required" class="form-control datetimepicker" data-date-format="YYYY-MM-DD" data-use-current="true" name="row[payback_time]" type="text" value="<?php echo htmlentities($row['payback_time']); ?>">
+            <input id="c-payback_time" data-rule="required" class="form-control datetimepicker Time" data-date-format="YYYY-MM-DD" data-use-current="true" name="row[payback_time]" type="text" value="<?php echo htmlentities($row['payback_time']); ?>">
+        </div>
+    </div>
+    <div class="form-group Res hide">
+        <label class="control-label col-xs-12 col-sm-2"><?php echo __('Overduereason'); ?>:</label>
+        <div class="col-xs-12 col-sm-8 field">
+            <?php echo build_radios('row[overduereason]', $overduereason ); ?>
         </div>
     </div>
     <div class="form-group">
@@ -147,9 +153,27 @@
         </div>
     </div>
     <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2"><?php echo __('Supportprice'); ?>:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-supportprice" class="form-control" data-rule="required" name="row[supportprice]" type="number" min="0" value="<?php echo htmlentities($row['supportprice']); ?>">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2"><?php echo __('Loan_status_type'); ?>:</label>
+        <div class="col-xs-12 col-sm-8">
+            <?php echo build_radios('row[loan_status_type]', $loanstatustype ,$row['loan_status_type']); ?>
+        </div>
+    </div>
+    <div class="form-group">
         <label class="control-label col-xs-12 col-sm-2"><?php echo __('Loan_use'); ?>:</label>
         <div class="col-xs-12 col-sm-8">
-            <?php echo build_radios('row[loan_use]', ['第一产业'=>'第一产业', '第二产业'=>'第二产业', '第三产业'=>'第三产业','无'=>'无'],$row['loan_use']); ?>
+            <?php echo build_radios('row[loan_use]', $loanuse ,$row['loan_use']); ?>
+        </div>
+    </div>
+    <div class="form-group Dis">
+        <label class="control-label col-xs-12 col-sm-2"><?php echo __('Distribution'); ?>:</label>
+        <div class="col-xs-12 col-sm-8 field">
+            <?php echo build_radios('row[distribution]', $distribution,$row['distribution']); ?>
         </div>
     </div>
     <div class="form-group">
@@ -178,7 +202,7 @@
     <div class="form-group">
         <label class="control-label col-xs-12 col-sm-2"><?php echo __('Is_joincredit'); ?>:</label>
         <div class="col-xs-12 col-sm-8">
-            <?php echo build_radios('row[is_joincredit]', ['未参加过'=>'未参加过', '良好'=>'良好','优秀'=>'优秀'],$row['is_joincredit']); ?>
+            <?php echo build_radios('row[is_joincredit]', $isjoincredit ,$row['is_joincredit']); ?>
         </div>
     </div>
     <div class="form-group">

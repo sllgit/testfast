@@ -2,6 +2,8 @@
 
 namespace app\common\controller;
 
+use app\api\model\LoanEnterpriseInfo;
+use app\api\model\LoanUserInfo;
 use app\common\library\Auth;
 use think\Config;
 use think\exception\HttpResponseException;
@@ -321,5 +323,36 @@ class Api
 
         //刷新Token
         $this->request->token();
+    }
+
+    /**
+     * 获取地区贷款额度、产业扶持、征信记录
+     * @return array
+     * @throws \think\Exception
+     */
+    protected function getMapData()
+    {
+        $areas = \model('Areas')->field('name,pinyinfirst')->where(['pid'=>1,'status'=>1])->select();
+        $data = [];
+        foreach ($areas as $k => $v){
+            $userprice = LoanUserInfo::where(['country'=>$v['name']])->sum('loan_price');
+            $enterprice = LoanEnterpriseInfo::where(['country'=>$v['name']])->sum('loan_price');
+
+            $usersupportprice = LoanUserInfo::where(['country'=>$v['name']])->sum('supportprice');
+            $entersupportprice = LoanEnterpriseInfo::where(['country'=>$v['name']])->sum('supportprice');
+
+            $usercredit = LoanUserInfo::where(['country'=>$v['name'],'credit_rating'=>['in',['A','AA','AAA','AAA+']]])->count();
+            $entercredit = LoanEnterpriseInfo::where(['country'=>$v['name'],'credit_rating'=>['in',['A','AA','AAA','AAA+']]])->count();
+
+
+            $data[] = [
+                "id"=>$v['pinyinfirst'],
+                "lavel"=>$v['name'],
+                "price"=>$userprice + $enterprice,
+                "creditcount"=>$usercredit + $entercredit,
+                "support"=>$usersupportprice + $entersupportprice,
+            ];
+        }
+        return $data ?? [];
     }
 }

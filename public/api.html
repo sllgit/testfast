@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="">
-        <title>测试专用</title>
+        <title>嵩县金融服务系统</title>
 
         <!-- Bootstrap Core CSS -->
         <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
@@ -108,7 +108,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="./" target="_blank">测试专用</a>
+                    <a class="navbar-brand" href="./" target="_blank">嵩县金融服务系统</a>
                 </div>
                 <div class="navbar-collapse collapse">
                     <form class="navbar-form navbar-right">
@@ -138,20 +138,39 @@
             <!-- menu -->
             <div id="sidebar">
                 <div class="list-group panel">
+                                        <a href="#信用评价系统数据概览接口" class="list-group-item" data-toggle="collapse" data-parent="#sidebar">信用评价系统数据概览接口  <i class="fa fa-caret-down"></i></a>
+                    <div class="child collapse" id="信用评价系统数据概览接口">
+                                                <a href="javascript:;" data-id="0" class="list-group-item">信用评价系统数据概览</a>
+                                            </div>
                                         <a href="#金融扶贫系统数据概览接口" class="list-group-item" data-toggle="collapse" data-parent="#sidebar">金融扶贫系统数据概览接口  <i class="fa fa-caret-down"></i></a>
                     <div class="child collapse" id="金融扶贫系统数据概览接口">
-                                                <a href="javascript:;" data-id="0" class="list-group-item">金融扶贫系统数据概览</a>
+                                                <a href="javascript:;" data-id="1" class="list-group-item">金融扶贫系统数据概览</a>
+                                            </div>
+                                        <a href="#产业支撑系统数据概览接口" class="list-group-item" data-toggle="collapse" data-parent="#sidebar">产业支撑系统数据概览接口  <i class="fa fa-caret-down"></i></a>
+                    <div class="child collapse" id="产业支撑系统数据概览接口">
+                                                <a href="javascript:;" data-id="2" class="list-group-item">产业支撑系统数据</a>
+                                            </div>
+                                        <a href="#录入数据接口" class="list-group-item" data-toggle="collapse" data-parent="#sidebar">录入数据接口  <i class="fa fa-caret-down"></i></a>
+                    <div class="child collapse" id="录入数据接口">
+                                                <a href="javascript:;" data-id="3" class="list-group-item">页面初始化数据</a>
+                                                <a href="javascript:;" data-id="4" class="list-group-item">农户录入数据</a>
+                                                <a href="javascript:;" data-id="5" class="list-group-item">企业录入数据</a>
+                                                <a href="javascript:;" data-id="6" class="list-group-item">图片上传</a>
+                                            </div>
+                                        <a href="#风险防控系统数据概览接口" class="list-group-item" data-toggle="collapse" data-parent="#sidebar">风险防控系统数据概览接口  <i class="fa fa-caret-down"></i></a>
+                    <div class="child collapse" id="风险防控系统数据概览接口">
+                                                <a href="javascript:;" data-id="7" class="list-group-item">风险防控系统数据</a>
                                             </div>
                                     </div>
             </div>
             <div class="panel-group" id="accordion">
-                                <h2>金融扶贫系统数据概览接口</h2>
+                                <h2>信用评价系统数据概览接口</h2>
                 <hr>
                                 <div class="panel panel-default">
                     <div class="panel-heading" id="heading-0">
                         <h4 class="panel-title">
                             <span class="label label-primary">POST</span>
-                            <a data-toggle="collapse" data-parent="#accordion0" href="#collapseOne0"> 金融扶贫系统数据概览 <span class="text-muted">/Financial/index</span></a>
+                            <a data-toggle="collapse" data-parent="#accordion0" href="#collapseOne0"> 信用评价系统数据概览 <span class="text-muted">/Credit/index</span></a>
                         </h4>
                     </div>
                     <div id="collapseOne0" class="panel-collapse collapse">
@@ -169,7 +188,7 @@
 
                                 <div class="tab-pane active" id="info0">
                                     <div class="well">
-                                        金融扶贫系统数据概览                                    </div>
+                                        信用评价系统数据概览                                    </div>
                                     <div class="panel panel-default">
                                         <div class="panel-heading"><strong>Headers</strong></div>
                                         <div class="panel-body">
@@ -240,7 +259,7 @@
                                                                                         <div class="panel panel-default">
                                                 <div class="panel-heading"><strong>参数</strong></div>
                                                 <div class="panel-body">
-                                                    <form enctype="application/x-www-form-urlencoded" role="form" action="/Financial/index" method="POST" name="form0" id="form0">
+                                                    <form enctype="application/x-www-form-urlencoded" role="form" action="/Credit/index" method="POST" name="form0" id="form0">
                                                                                                                 <div class="form-group">
                                                             <label class="control-label" for="id">id</label>
                                                             <input type="integer" class="form-control input-sm" id="id" required placeholder="会员ID" name="id">
@@ -277,10 +296,1421 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             <pre id="sample_response0">{
-         'code':'200',
-         'msg':'返回成功',
-         'time':'返回成功',
-         'data':{"service": {"county": "县服务中心","town": "乡服务站","village": "村服务部","admincount": "三级服务体系人员"},"newloaninfo": [{"nickname": "姓名","phone": "手机号","idcard": "身份证号","loan_price": "金额","loan_starttime": "贷款日"}],"comment": {"AAA+": "AAA+类型百分比","AAA": "AAA类型百分比","AA": "AA类型百分比","A": "A类型百分比","无信用": "无信用类型百分比"},"rankinglist": {"地区名称": "地区金额"},"loantype": {"user_农户": {"usercount": "农户数量","userprice": "农户贷款总金额"}}}
+        "code": 200,
+        "msg": "成功",
+        "time": "1608254759",
+        "data": {"comment": [{"credit_rating": "信用分类名称","counts": "分类户数"}],
+                 "country": {"counts": "乡总数","credit": "乡信用数量","nocredit": "乡非信用数量","creditratio": "乡信用比例","nocreditratio": "乡非信用比例"},
+                 "village": {"counts": "村总数","credit": "村信用数量","nocredit": "村非信用数量","creditratio": "村信用比例","nocreditratio": "村非信用比例"},
+                 "comments": [{"label": "信用等级名称","nums": "信用等级比例"}],
+                 "newloaninfo": [{"id": "用户id","nickname": "姓名","credit_rating": "级别","credit_code": "评分","address": "地址"}],
+                 "trend": [{"month": "月份","nums": "人数"}],
+                 "rank": {"nopoor": [{"label": "非贫困等级","nums": "非贫困等级比例"}],
+                          "poor": [{"label": "贫困等级","nums": "贫困等级比例"}]
+                         },
+                 "ranking": {"countrydata": [{"name": "乡名称","ratio": "乡百分比"}],
+                             "villagedata": [{"name": "村名称","ratio": "村百分比"}]
+                            }
+                }
+        }</pre>
+                                        </div>
+                                    </div>
+                                </div><!-- #sample -->
+
+                            </div><!-- .tab-content -->
+                        </div>
+                    </div>
+                </div>
+                                <h2>金融扶贫系统数据概览接口</h2>
+                <hr>
+                                <div class="panel panel-default">
+                    <div class="panel-heading" id="heading-1">
+                        <h4 class="panel-title">
+                            <span class="label label-primary">POST</span>
+                            <a data-toggle="collapse" data-parent="#accordion1" href="#collapseOne1"> 金融扶贫系统数据概览 <span class="text-muted">/Financial/index</span></a>
+                        </h4>
+                    </div>
+                    <div id="collapseOne1" class="panel-collapse collapse">
+                        <div class="panel-body">
+
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-tabs" id="doctab1">
+                                <li class="active"><a href="#info1" data-toggle="tab">基础信息</a></li>
+                                <li><a href="#sandbox1" data-toggle="tab">在线测试</a></li>
+                                <li><a href="#sample1" data-toggle="tab">返回示例</a></li>
+                            </ul>
+
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+
+                                <div class="tab-pane active" id="info1">
+                                    <div class="well">
+                                        金融扶贫系统数据概览                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading"><strong>Headers</strong></div>
+                                        <div class="panel-body">
+                                                                                        <table class="table table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th>名称</th>
+                                                        <th>类型</th>
+                                                        <th>必选</th>
+                                                        <th>描述</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                                                                        <tr>
+                                                        <td>token</td>
+                                                        <td>string</td>
+                                                        <td>是</td>
+                                                        <td>请求的Token</td>
+                                                    </tr>
+                                                                                                    </tbody>
+                                            </table>
+                                                                                    </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading"><strong>参数</strong></div>
+                                        <div class="panel-body">
+                                                                                        <table class="table table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th>名称</th>
+                                                        <th>类型</th>
+                                                        <th>必选</th>
+                                                        <th>描述</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                                                                        <tr>
+                                                        <td>id</td>
+                                                        <td>integer</td>
+                                                        <td>是</td>
+                                                        <td>会员ID</td>
+                                                    </tr>
+                                                                                                    </tbody>
+                                            </table>
+                                                                                    </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading"><strong>正文</strong></div>
+                                        <div class="panel-body">
+                                            无                                        </div>
+                                    </div>
+                                </div><!-- #info -->
+
+                                <div class="tab-pane" id="sandbox1">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                                                                        <div class="panel panel-default">
+                                                <div class="panel-heading"><strong>Headers</strong></div>
+                                                <div class="panel-body">
+                                                    <div class="headers">
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="token">token</label>
+                                                            <input type="string" class="form-control input-sm" id="token" required placeholder="请求的Token - Ex: " name="token">
+                                                        </div>
+                                                                                                            </div>
+                                                </div>
+                                            </div>
+                                                                                        <div class="panel panel-default">
+                                                <div class="panel-heading"><strong>参数</strong></div>
+                                                <div class="panel-body">
+                                                    <form enctype="application/x-www-form-urlencoded" role="form" action="/Financial/index" method="POST" name="form1" id="form1">
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="id">id</label>
+                                                            <input type="integer" class="form-control input-sm" id="id" required placeholder="会员ID" name="id">
+                                                        </div>
+                                                                                                                <div class="form-group">
+                                                            <button type="submit" class="btn btn-success send" rel="1">提交</button>
+                                                            <button type="reset" class="btn btn-info" rel="1">重置</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading"><strong>响应输出</strong></div>
+                                                <div class="panel-body">
+                                                    <div class="row">
+                                                        <div class="col-md-12" style="overflow-x:auto">
+                                                            <pre id="response_headers1"></pre>
+                                                            <pre id="response1"></pre>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading"><strong>返回参数</strong></div>
+                                                <div class="panel-body">
+                                                                                                        无
+                                                                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div><!-- #sandbox -->
+
+                                <div class="tab-pane" id="sample1">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <pre id="sample_response1">{
+            "code":200,
+            "msg":"返回成功",
+            "time":"返回成功",
+            "data":{
+            "service": {"county": "县服务中心","town": "乡服务站","village": "村服务部","admincount": "三级服务体系人员"},
+            "newloaninfo": [{"nickname": "姓名","phone": "手机号","idcard": "身份证号","loan_price": "金额","loan_starttime": "贷款日"}],
+            "monitor": [{"collectionrate": "采集率","credit": "有信率","houseloanrate": "户贷率","overdue": "逾期率","bad": "不良率","average": "户均获贷额度"}],
+            "comment": [{"label": "信用类型名称","nums": "信用类型百分比"}],
+            "rankinglist": [{"country": "地区名称","prices":"地区金额"}],
+            "loantype": {"user": {"usercount": "农户数量","userprice": "农户贷款总金额"},
+            "nofaucet": {"entercount": "企业数量","enterprice": "企业贷款总金额"},
+            "faucet": {"entercount": "龙头企业数量","enterprice": "龙头企业贷款总金额"}},
+            "distribution": [{"label": "产业名称","nums": "产业数量","ratio":"产业百分比"}],
+            "bankprice": [{"bank_name": "放款银行名称","price": "放款银行金额","ratio":"放款银行百分比"}]
+            }
+        }</pre>
+                                        </div>
+                                    </div>
+                                </div><!-- #sample -->
+
+                            </div><!-- .tab-content -->
+                        </div>
+                    </div>
+                </div>
+                                <h2>产业支撑系统数据概览接口</h2>
+                <hr>
+                                <div class="panel panel-default">
+                    <div class="panel-heading" id="heading-2">
+                        <h4 class="panel-title">
+                            <span class="label label-primary">POST</span>
+                            <a data-toggle="collapse" data-parent="#accordion2" href="#collapseOne2"> 产业支撑系统数据 <span class="text-muted">/Industry/index</span></a>
+                        </h4>
+                    </div>
+                    <div id="collapseOne2" class="panel-collapse collapse">
+                        <div class="panel-body">
+
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-tabs" id="doctab2">
+                                <li class="active"><a href="#info2" data-toggle="tab">基础信息</a></li>
+                                <li><a href="#sandbox2" data-toggle="tab">在线测试</a></li>
+                                <li><a href="#sample2" data-toggle="tab">返回示例</a></li>
+                            </ul>
+
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+
+                                <div class="tab-pane active" id="info2">
+                                    <div class="well">
+                                        产业支撑系统数据                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading"><strong>Headers</strong></div>
+                                        <div class="panel-body">
+                                                                                        <table class="table table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th>名称</th>
+                                                        <th>类型</th>
+                                                        <th>必选</th>
+                                                        <th>描述</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                                                                        <tr>
+                                                        <td>token</td>
+                                                        <td>string</td>
+                                                        <td>是</td>
+                                                        <td>请求的Token</td>
+                                                    </tr>
+                                                                                                    </tbody>
+                                            </table>
+                                                                                    </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading"><strong>参数</strong></div>
+                                        <div class="panel-body">
+                                                                                        <table class="table table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th>名称</th>
+                                                        <th>类型</th>
+                                                        <th>必选</th>
+                                                        <th>描述</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                                                                        <tr>
+                                                        <td>id</td>
+                                                        <td>integer</td>
+                                                        <td>是</td>
+                                                        <td>会员ID</td>
+                                                    </tr>
+                                                                                                    </tbody>
+                                            </table>
+                                                                                    </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading"><strong>正文</strong></div>
+                                        <div class="panel-body">
+                                            无                                        </div>
+                                    </div>
+                                </div><!-- #info -->
+
+                                <div class="tab-pane" id="sandbox2">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                                                                        <div class="panel panel-default">
+                                                <div class="panel-heading"><strong>Headers</strong></div>
+                                                <div class="panel-body">
+                                                    <div class="headers">
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="token">token</label>
+                                                            <input type="string" class="form-control input-sm" id="token" required placeholder="请求的Token - Ex: " name="token">
+                                                        </div>
+                                                                                                            </div>
+                                                </div>
+                                            </div>
+                                                                                        <div class="panel panel-default">
+                                                <div class="panel-heading"><strong>参数</strong></div>
+                                                <div class="panel-body">
+                                                    <form enctype="application/x-www-form-urlencoded" role="form" action="/Industry/index" method="POST" name="form2" id="form2">
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="id">id</label>
+                                                            <input type="integer" class="form-control input-sm" id="id" required placeholder="会员ID" name="id">
+                                                        </div>
+                                                                                                                <div class="form-group">
+                                                            <button type="submit" class="btn btn-success send" rel="2">提交</button>
+                                                            <button type="reset" class="btn btn-info" rel="2">重置</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading"><strong>响应输出</strong></div>
+                                                <div class="panel-body">
+                                                    <div class="row">
+                                                        <div class="col-md-12" style="overflow-x:auto">
+                                                            <pre id="response_headers2"></pre>
+                                                            <pre id="response2"></pre>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading"><strong>返回参数</strong></div>
+                                                <div class="panel-body">
+                                                                                                        无
+                                                                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div><!-- #sandbox -->
+
+                                <div class="tab-pane" id="sample2">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <pre id="sample_response2">{
+        "code": 200,
+        "msg": "成功",
+        "time": "1608254759",
+        "data": {}
+        }</pre>
+                                        </div>
+                                    </div>
+                                </div><!-- #sample -->
+
+                            </div><!-- .tab-content -->
+                        </div>
+                    </div>
+                </div>
+                                <h2>录入数据接口</h2>
+                <hr>
+                                <div class="panel panel-default">
+                    <div class="panel-heading" id="heading-3">
+                        <h4 class="panel-title">
+                            <span class="label label-primary">POST</span>
+                            <a data-toggle="collapse" data-parent="#accordion3" href="#collapseOne3"> 页面初始化数据 <span class="text-muted">/Loan/init</span></a>
+                        </h4>
+                    </div>
+                    <div id="collapseOne3" class="panel-collapse collapse">
+                        <div class="panel-body">
+
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-tabs" id="doctab3">
+                                <li class="active"><a href="#info3" data-toggle="tab">基础信息</a></li>
+                                <li><a href="#sandbox3" data-toggle="tab">在线测试</a></li>
+                                <li><a href="#sample3" data-toggle="tab">返回示例</a></li>
+                            </ul>
+
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+
+                                <div class="tab-pane active" id="info3">
+                                    <div class="well">
+                                        页面初始化数据                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading"><strong>Headers</strong></div>
+                                        <div class="panel-body">
+                                                                                        无
+                                                                                    </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading"><strong>参数</strong></div>
+                                        <div class="panel-body">
+                                                                                        无
+                                                                                    </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading"><strong>正文</strong></div>
+                                        <div class="panel-body">
+                                            无                                        </div>
+                                    </div>
+                                </div><!-- #info -->
+
+                                <div class="tab-pane" id="sandbox3">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                                                                        <div class="panel panel-default">
+                                                <div class="panel-heading"><strong>参数</strong></div>
+                                                <div class="panel-body">
+                                                    <form enctype="application/x-www-form-urlencoded" role="form" action="/Loan/init" method="POST" name="form3" id="form3">
+                                                                                                                <div class="form-group">
+                                                            无
+                                                        </div>
+                                                                                                                <div class="form-group">
+                                                            <button type="submit" class="btn btn-success send" rel="3">提交</button>
+                                                            <button type="reset" class="btn btn-info" rel="3">重置</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading"><strong>响应输出</strong></div>
+                                                <div class="panel-body">
+                                                    <div class="row">
+                                                        <div class="col-md-12" style="overflow-x:auto">
+                                                            <pre id="response_headers3"></pre>
+                                                            <pre id="response3"></pre>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading"><strong>返回参数</strong></div>
+                                                <div class="panel-body">
+                                                                                                        无
+                                                                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div><!-- #sandbox -->
+
+                                <div class="tab-pane" id="sample3">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <pre id="sample_response3">{
+    'code':'200',
+    'msg':'成功',
+    'time':'1608540255',
+    'data':{
+        "banklist":[{"key":"银行键","value":"银行值"}],
+        "overduereason":[{"key":"逾期原因键","value":"逾期原因值"}],
+        "purposeloan":[{"key":"贷款用途键","value":"贷款用途值"}],
+        "distribution":[{"key":"产业分布类型键","value":"产业分布类型值"}],
+        "isjoincredit":[{"key":"信用等级评定键","value":"信用等级评定值"}],
+        "loanmodel":[{"key":"贷款模式键","value":"贷款模式值"}],
+        "uppoortype":[{"key":"带贫方式键","value":"带贫方式值"}]
+    }
+    }</pre>
+                                        </div>
+                                    </div>
+                                </div><!-- #sample -->
+
+                            </div><!-- .tab-content -->
+                        </div>
+                    </div>
+                </div>
+                                <div class="panel panel-default">
+                    <div class="panel-heading" id="heading-4">
+                        <h4 class="panel-title">
+                            <span class="label label-primary">POST</span>
+                            <a data-toggle="collapse" data-parent="#accordion4" href="#collapseOne4"> 农户录入数据 <span class="text-muted">/Loan/userInsertData</span></a>
+                        </h4>
+                    </div>
+                    <div id="collapseOne4" class="panel-collapse collapse">
+                        <div class="panel-body">
+
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-tabs" id="doctab4">
+                                <li class="active"><a href="#info4" data-toggle="tab">基础信息</a></li>
+                                <li><a href="#sandbox4" data-toggle="tab">在线测试</a></li>
+                                <li><a href="#sample4" data-toggle="tab">返回示例</a></li>
+                            </ul>
+
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+
+                                <div class="tab-pane active" id="info4">
+                                    <div class="well">
+                                        农户录入数据                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading"><strong>Headers</strong></div>
+                                        <div class="panel-body">
+                                                                                        无
+                                                                                    </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading"><strong>参数</strong></div>
+                                        <div class="panel-body">
+                                                                                        <table class="table table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th>名称</th>
+                                                        <th>类型</th>
+                                                        <th>必选</th>
+                                                        <th>描述</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                                                                        <tr>
+                                                        <td>nickname</td>
+                                                        <td>string</td>
+                                                        <td>是</td>
+                                                        <td>贷款人姓名</td>
+                                                    </tr>
+                                                                                                        <tr>
+                                                        <td>phone</td>
+                                                        <td>integer</td>
+                                                        <td>是</td>
+                                                        <td>贷款人手机号</td>
+                                                    </tr>
+                                                                                                        <tr>
+                                                        <td>area</td>
+                                                        <td>string</td>
+                                                        <td>是</td>
+                                                        <td>区县名称</td>
+                                                    </tr>
+                                                                                                        <tr>
+                                                        <td>country</td>
+                                                        <td>string</td>
+                                                        <td>是</td>
+                                                        <td>乡镇名称</td>
+                                                    </tr>
+                                                                                                        <tr>
+                                                        <td>village</td>
+                                                        <td>string</td>
+                                                        <td>是</td>
+                                                        <td>村名称</td>
+                                                    </tr>
+                                                                                                        <tr>
+                                                        <td>idcard</td>
+                                                        <td>string</td>
+                                                        <td>是</td>
+                                                        <td>身份证号</td>
+                                                    </tr>
+                                                                                                        <tr>
+                                                        <td>credit_rating</td>
+                                                        <td>string</td>
+                                                        <td>是</td>
+                                                        <td>信用评级</td>
+                                                    </tr>
+                                                                                                        <tr>
+                                                        <td>loan_price</td>
+                                                        <td>float</td>
+                                                        <td>是</td>
+                                                        <td>贷款金额</td>
+                                                    </tr>
+                                                                                                        <tr>
+                                                        <td>loan_use</td>
+                                                        <td>string</td>
+                                                        <td>是</td>
+                                                        <td>贷款用途</td>
+                                                    </tr>
+                                                                                                        <tr>
+                                                        <td>distribution</td>
+                                                        <td>string</td>
+                                                        <td>是</td>
+                                                        <td>产业分布类型</td>
+                                                    </tr>
+                                                                                                        <tr>
+                                                        <td>loan_bank</td>
+                                                        <td>string</td>
+                                                        <td>是</td>
+                                                        <td>贷款银行类别</td>
+                                                    </tr>
+                                                                                                        <tr>
+                                                        <td>loan_bank_desc</td>
+                                                        <td>string</td>
+                                                        <td>是</td>
+                                                        <td>贷款银行详细信息</td>
+                                                    </tr>
+                                                                                                        <tr>
+                                                        <td>is_joincredit</td>
+                                                        <td>string</td>
+                                                        <td>是</td>
+                                                        <td>是否参加过信用等级评定</td>
+                                                    </tr>
+                                                                                                        <tr>
+                                                        <td>loan_starttime</td>
+                                                        <td>integer</td>
+                                                        <td>是</td>
+                                                        <td>借款日</td>
+                                                    </tr>
+                                                                                                        <tr>
+                                                        <td>loan_endtime</td>
+                                                        <td>integer</td>
+                                                        <td>是</td>
+                                                        <td>到期日</td>
+                                                    </tr>
+                                                                                                        <tr>
+                                                        <td>payback_time</td>
+                                                        <td>integer</td>
+                                                        <td>是</td>
+                                                        <td>还款日期</td>
+                                                    </tr>
+                                                                                                        <tr>
+                                                        <td>overduereason</td>
+                                                        <td>string</td>
+                                                        <td>否</td>
+                                                        <td>逾期原因</td>
+                                                    </tr>
+                                                                                                        <tr>
+                                                        <td>year_interest_rate</td>
+                                                        <td>float</td>
+                                                        <td>是</td>
+                                                        <td>年利率</td>
+                                                    </tr>
+                                                                                                        <tr>
+                                                        <td>discount_rate</td>
+                                                        <td>float</td>
+                                                        <td>是</td>
+                                                        <td>贴息利率</td>
+                                                    </tr>
+                                                                                                        <tr>
+                                                        <td>discount_price</td>
+                                                        <td>float</td>
+                                                        <td>是</td>
+                                                        <td>应贴息金额</td>
+                                                    </tr>
+                                                                                                        <tr>
+                                                        <td>is_poor</td>
+                                                        <td>string</td>
+                                                        <td>是</td>
+                                                        <td>是否为贫困户</td>
+                                                    </tr>
+                                                                                                        <tr>
+                                                        <td>loan_type</td>
+                                                        <td>string</td>
+                                                        <td>是</td>
+                                                        <td>贷款类型</td>
+                                                    </tr>
+                                                                                                        <tr>
+                                                        <td>is_safe</td>
+                                                        <td>string</td>
+                                                        <td>是</td>
+                                                        <td>是否购买贷款保证保险</td>
+                                                    </tr>
+                                                                                                        <tr>
+                                                        <td>entrustprove</td>
+                                                        <td>string</td>
+                                                        <td>是</td>
+                                                        <td>委托证明</td>
+                                                    </tr>
+                                                                                                    </tbody>
+                                            </table>
+                                                                                    </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading"><strong>正文</strong></div>
+                                        <div class="panel-body">
+                                            无                                        </div>
+                                    </div>
+                                </div><!-- #info -->
+
+                                <div class="tab-pane" id="sandbox4">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                                                                        <div class="panel panel-default">
+                                                <div class="panel-heading"><strong>参数</strong></div>
+                                                <div class="panel-body">
+                                                    <form enctype="application/x-www-form-urlencoded" role="form" action="/Loan/userInsertData" method="POST" name="form4" id="form4">
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="nickname">nickname</label>
+                                                            <input type="string" class="form-control input-sm" id="nickname" required placeholder="贷款人姓名" name="nickname">
+                                                        </div>
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="phone">phone</label>
+                                                            <input type="integer" class="form-control input-sm" id="phone" required placeholder="贷款人手机号" name="phone">
+                                                        </div>
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="area">area</label>
+                                                            <input type="string" class="form-control input-sm" id="area" required placeholder="区县名称" name="area">
+                                                        </div>
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="country">country</label>
+                                                            <input type="string" class="form-control input-sm" id="country" required placeholder="乡镇名称" name="country">
+                                                        </div>
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="village">village</label>
+                                                            <input type="string" class="form-control input-sm" id="village" required placeholder="村名称" name="village">
+                                                        </div>
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="idcard">idcard</label>
+                                                            <input type="string" class="form-control input-sm" id="idcard" required placeholder="身份证号" name="idcard">
+                                                        </div>
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="credit_rating">credit_rating</label>
+                                                            <input type="string" class="form-control input-sm" id="credit_rating" required placeholder="信用评级" name="credit_rating">
+                                                        </div>
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="loan_price">loan_price</label>
+                                                            <input type="float" class="form-control input-sm" id="loan_price" required placeholder="贷款金额" name="loan_price">
+                                                        </div>
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="loan_use">loan_use</label>
+                                                            <input type="string" class="form-control input-sm" id="loan_use" required placeholder="贷款用途" name="loan_use">
+                                                        </div>
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="distribution">distribution</label>
+                                                            <input type="string" class="form-control input-sm" id="distribution" required placeholder="产业分布类型" name="distribution">
+                                                        </div>
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="loan_bank">loan_bank</label>
+                                                            <input type="string" class="form-control input-sm" id="loan_bank" required placeholder="贷款银行类别" name="loan_bank">
+                                                        </div>
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="loan_bank_desc">loan_bank_desc</label>
+                                                            <input type="string" class="form-control input-sm" id="loan_bank_desc" required placeholder="贷款银行详细信息" name="loan_bank_desc">
+                                                        </div>
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="is_joincredit">is_joincredit</label>
+                                                            <input type="string" class="form-control input-sm" id="is_joincredit" required placeholder="是否参加过信用等级评定" name="is_joincredit">
+                                                        </div>
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="loan_starttime">loan_starttime</label>
+                                                            <input type="integer" class="form-control input-sm" id="loan_starttime" required placeholder="借款日" name="loan_starttime">
+                                                        </div>
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="loan_endtime">loan_endtime</label>
+                                                            <input type="integer" class="form-control input-sm" id="loan_endtime" required placeholder="到期日" name="loan_endtime">
+                                                        </div>
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="payback_time">payback_time</label>
+                                                            <input type="integer" class="form-control input-sm" id="payback_time" required placeholder="还款日期" name="payback_time">
+                                                        </div>
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="overduereason">overduereason</label>
+                                                            <input type="string" class="form-control input-sm" id="overduereason"  placeholder="逾期原因" name="overduereason">
+                                                        </div>
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="year_interest_rate">year_interest_rate</label>
+                                                            <input type="float" class="form-control input-sm" id="year_interest_rate" required placeholder="年利率" name="year_interest_rate">
+                                                        </div>
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="discount_rate">discount_rate</label>
+                                                            <input type="float" class="form-control input-sm" id="discount_rate" required placeholder="贴息利率" name="discount_rate">
+                                                        </div>
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="discount_price">discount_price</label>
+                                                            <input type="float" class="form-control input-sm" id="discount_price" required placeholder="应贴息金额" name="discount_price">
+                                                        </div>
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="is_poor">is_poor</label>
+                                                            <input type="string" class="form-control input-sm" id="is_poor" required placeholder="是否为贫困户" name="is_poor">
+                                                        </div>
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="loan_type">loan_type</label>
+                                                            <input type="string" class="form-control input-sm" id="loan_type" required placeholder="贷款类型" name="loan_type">
+                                                        </div>
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="is_safe">is_safe</label>
+                                                            <input type="string" class="form-control input-sm" id="is_safe" required placeholder="是否购买贷款保证保险" name="is_safe">
+                                                        </div>
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="entrustprove">entrustprove</label>
+                                                            <input type="string" class="form-control input-sm" id="entrustprove" required placeholder="委托证明" name="entrustprove">
+                                                        </div>
+                                                                                                                <div class="form-group">
+                                                            <button type="submit" class="btn btn-success send" rel="4">提交</button>
+                                                            <button type="reset" class="btn btn-info" rel="4">重置</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading"><strong>响应输出</strong></div>
+                                                <div class="panel-body">
+                                                    <div class="row">
+                                                        <div class="col-md-12" style="overflow-x:auto">
+                                                            <pre id="response_headers4"></pre>
+                                                            <pre id="response4"></pre>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading"><strong>返回参数</strong></div>
+                                                <div class="panel-body">
+                                                                                                        无
+                                                                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div><!-- #sandbox -->
+
+                                <div class="tab-pane" id="sample4">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <pre id="sample_response4">{
+    'code':'200',
+    'msg':'录入成功',
+    'time':'1608540255',
+    'data':{}
+    }</pre>
+                                        </div>
+                                    </div>
+                                </div><!-- #sample -->
+
+                            </div><!-- .tab-content -->
+                        </div>
+                    </div>
+                </div>
+                                <div class="panel panel-default">
+                    <div class="panel-heading" id="heading-5">
+                        <h4 class="panel-title">
+                            <span class="label label-primary">POST</span>
+                            <a data-toggle="collapse" data-parent="#accordion5" href="#collapseOne5"> 企业录入数据 <span class="text-muted">/Loan/enterInsertData</span></a>
+                        </h4>
+                    </div>
+                    <div id="collapseOne5" class="panel-collapse collapse">
+                        <div class="panel-body">
+
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-tabs" id="doctab5">
+                                <li class="active"><a href="#info5" data-toggle="tab">基础信息</a></li>
+                                <li><a href="#sandbox5" data-toggle="tab">在线测试</a></li>
+                                <li><a href="#sample5" data-toggle="tab">返回示例</a></li>
+                            </ul>
+
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+
+                                <div class="tab-pane active" id="info5">
+                                    <div class="well">
+                                        企业录入数据                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading"><strong>Headers</strong></div>
+                                        <div class="panel-body">
+                                                                                        无
+                                                                                    </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading"><strong>参数</strong></div>
+                                        <div class="panel-body">
+                                                                                        <table class="table table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th>名称</th>
+                                                        <th>类型</th>
+                                                        <th>必选</th>
+                                                        <th>描述</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                                                                        <tr>
+                                                        <td>is_faucet</td>
+                                                        <td>string</td>
+                                                        <td>是</td>
+                                                        <td>是否为龙头企业</td>
+                                                    </tr>
+                                                                                                        <tr>
+                                                        <td>area</td>
+                                                        <td>string</td>
+                                                        <td>是</td>
+                                                        <td>区县名称</td>
+                                                    </tr>
+                                                                                                        <tr>
+                                                        <td>country</td>
+                                                        <td>string</td>
+                                                        <td>是</td>
+                                                        <td>乡镇名称</td>
+                                                    </tr>
+                                                                                                        <tr>
+                                                        <td>village</td>
+                                                        <td>string</td>
+                                                        <td>是</td>
+                                                        <td>村名称</td>
+                                                    </tr>
+                                                                                                        <tr>
+                                                        <td>nickname</td>
+                                                        <td>string</td>
+                                                        <td>是</td>
+                                                        <td>企业名称</td>
+                                                    </tr>
+                                                                                                        <tr>
+                                                        <td>credit_code</td>
+                                                        <td>string</td>
+                                                        <td>是</td>
+                                                        <td>社会信用代码</td>
+                                                    </tr>
+                                                                                                        <tr>
+                                                        <td>deputy_username</td>
+                                                        <td>string</td>
+                                                        <td>是</td>
+                                                        <td>法定代表人</td>
+                                                    </tr>
+                                                                                                        <tr>
+                                                        <td>phone</td>
+                                                        <td>string</td>
+                                                        <td>是</td>
+                                                        <td>联系电话</td>
+                                                    </tr>
+                                                                                                        <tr>
+                                                        <td>address</td>
+                                                        <td>string</td>
+                                                        <td>是</td>
+                                                        <td>注册地址</td>
+                                                    </tr>
+                                                                                                        <tr>
+                                                        <td>staff_num</td>
+                                                        <td>string</td>
+                                                        <td>是</td>
+                                                        <td>员工人数</td>
+                                                    </tr>
+                                                                                                        <tr>
+                                                        <td>loan_price</td>
+                                                        <td>float</td>
+                                                        <td>是</td>
+                                                        <td>贷款金额</td>
+                                                    </tr>
+                                                                                                        <tr>
+                                                        <td>loan_starttime</td>
+                                                        <td>integer</td>
+                                                        <td>是</td>
+                                                        <td>借款日</td>
+                                                    </tr>
+                                                                                                        <tr>
+                                                        <td>loan_endtime</td>
+                                                        <td>integer</td>
+                                                        <td>是</td>
+                                                        <td>到期日</td>
+                                                    </tr>
+                                                                                                        <tr>
+                                                        <td>payback_time</td>
+                                                        <td>integer</td>
+                                                        <td>是</td>
+                                                        <td>还款日期</td>
+                                                    </tr>
+                                                                                                        <tr>
+                                                        <td>overduereason</td>
+                                                        <td>string</td>
+                                                        <td>否</td>
+                                                        <td>逾期原因</td>
+                                                    </tr>
+                                                                                                        <tr>
+                                                        <td>year_interest_rate</td>
+                                                        <td>float</td>
+                                                        <td>是</td>
+                                                        <td>年利率</td>
+                                                    </tr>
+                                                                                                        <tr>
+                                                        <td>discount_rate</td>
+                                                        <td>float</td>
+                                                        <td>是</td>
+                                                        <td>贴息利率</td>
+                                                    </tr>
+                                                                                                        <tr>
+                                                        <td>discount_price</td>
+                                                        <td>float</td>
+                                                        <td>是</td>
+                                                        <td>应贴息金额</td>
+                                                    </tr>
+                                                                                                        <tr>
+                                                        <td>uppoor_num</td>
+                                                        <td>string</td>
+                                                        <td>是</td>
+                                                        <td>带贫困户数</td>
+                                                    </tr>
+                                                                                                        <tr>
+                                                        <td>loan_bank</td>
+                                                        <td>string</td>
+                                                        <td>是</td>
+                                                        <td>贷款银行类别</td>
+                                                    </tr>
+                                                                                                        <tr>
+                                                        <td>loan_bank_desc</td>
+                                                        <td>string</td>
+                                                        <td>是</td>
+                                                        <td>贷款银行详细信息</td>
+                                                    </tr>
+                                                                                                        <tr>
+                                                        <td>loanmodel</td>
+                                                        <td>string</td>
+                                                        <td>是</td>
+                                                        <td>贷款模式</td>
+                                                    </tr>
+                                                                                                        <tr>
+                                                        <td>loan_type</td>
+                                                        <td>string</td>
+                                                        <td>是</td>
+                                                        <td>借贷类型</td>
+                                                    </tr>
+                                                                                                        <tr>
+                                                        <td>uppoor_type</td>
+                                                        <td>string</td>
+                                                        <td>是</td>
+                                                        <td>带贫方式</td>
+                                                    </tr>
+                                                                                                        <tr>
+                                                        <td>uppoor_roster</td>
+                                                        <td>string</td>
+                                                        <td>是</td>
+                                                        <td>带贫名单</td>
+                                                    </tr>
+                                                                                                        <tr>
+                                                        <td>loan_type</td>
+                                                        <td>string</td>
+                                                        <td>是</td>
+                                                        <td>贷款类型</td>
+                                                    </tr>
+                                                                                                        <tr>
+                                                        <td>entrustprove</td>
+                                                        <td>string</td>
+                                                        <td>是</td>
+                                                        <td>委托证明</td>
+                                                    </tr>
+                                                                                                    </tbody>
+                                            </table>
+                                                                                    </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading"><strong>正文</strong></div>
+                                        <div class="panel-body">
+                                            无                                        </div>
+                                    </div>
+                                </div><!-- #info -->
+
+                                <div class="tab-pane" id="sandbox5">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                                                                        <div class="panel panel-default">
+                                                <div class="panel-heading"><strong>参数</strong></div>
+                                                <div class="panel-body">
+                                                    <form enctype="application/x-www-form-urlencoded" role="form" action="/Loan/enterInsertData" method="POST" name="form5" id="form5">
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="is_faucet">is_faucet</label>
+                                                            <input type="string" class="form-control input-sm" id="is_faucet" required placeholder="是否为龙头企业" name="is_faucet">
+                                                        </div>
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="area">area</label>
+                                                            <input type="string" class="form-control input-sm" id="area" required placeholder="区县名称" name="area">
+                                                        </div>
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="country">country</label>
+                                                            <input type="string" class="form-control input-sm" id="country" required placeholder="乡镇名称" name="country">
+                                                        </div>
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="village">village</label>
+                                                            <input type="string" class="form-control input-sm" id="village" required placeholder="村名称" name="village">
+                                                        </div>
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="nickname">nickname</label>
+                                                            <input type="string" class="form-control input-sm" id="nickname" required placeholder="企业名称" name="nickname">
+                                                        </div>
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="credit_code">credit_code</label>
+                                                            <input type="string" class="form-control input-sm" id="credit_code" required placeholder="社会信用代码" name="credit_code">
+                                                        </div>
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="deputy_username">deputy_username</label>
+                                                            <input type="string" class="form-control input-sm" id="deputy_username" required placeholder="法定代表人" name="deputy_username">
+                                                        </div>
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="phone">phone</label>
+                                                            <input type="string" class="form-control input-sm" id="phone" required placeholder="联系电话" name="phone">
+                                                        </div>
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="address">address</label>
+                                                            <input type="string" class="form-control input-sm" id="address" required placeholder="注册地址" name="address">
+                                                        </div>
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="staff_num">staff_num</label>
+                                                            <input type="string" class="form-control input-sm" id="staff_num" required placeholder="员工人数" name="staff_num">
+                                                        </div>
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="loan_price">loan_price</label>
+                                                            <input type="float" class="form-control input-sm" id="loan_price" required placeholder="贷款金额" name="loan_price">
+                                                        </div>
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="loan_starttime">loan_starttime</label>
+                                                            <input type="integer" class="form-control input-sm" id="loan_starttime" required placeholder="借款日" name="loan_starttime">
+                                                        </div>
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="loan_endtime">loan_endtime</label>
+                                                            <input type="integer" class="form-control input-sm" id="loan_endtime" required placeholder="到期日" name="loan_endtime">
+                                                        </div>
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="payback_time">payback_time</label>
+                                                            <input type="integer" class="form-control input-sm" id="payback_time" required placeholder="还款日期" name="payback_time">
+                                                        </div>
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="overduereason">overduereason</label>
+                                                            <input type="string" class="form-control input-sm" id="overduereason"  placeholder="逾期原因" name="overduereason">
+                                                        </div>
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="year_interest_rate">year_interest_rate</label>
+                                                            <input type="float" class="form-control input-sm" id="year_interest_rate" required placeholder="年利率" name="year_interest_rate">
+                                                        </div>
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="discount_rate">discount_rate</label>
+                                                            <input type="float" class="form-control input-sm" id="discount_rate" required placeholder="贴息利率" name="discount_rate">
+                                                        </div>
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="discount_price">discount_price</label>
+                                                            <input type="float" class="form-control input-sm" id="discount_price" required placeholder="应贴息金额" name="discount_price">
+                                                        </div>
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="uppoor_num">uppoor_num</label>
+                                                            <input type="string" class="form-control input-sm" id="uppoor_num" required placeholder="带贫困户数" name="uppoor_num">
+                                                        </div>
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="loan_bank">loan_bank</label>
+                                                            <input type="string" class="form-control input-sm" id="loan_bank" required placeholder="贷款银行类别" name="loan_bank">
+                                                        </div>
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="loan_bank_desc">loan_bank_desc</label>
+                                                            <input type="string" class="form-control input-sm" id="loan_bank_desc" required placeholder="贷款银行详细信息" name="loan_bank_desc">
+                                                        </div>
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="loanmodel">loanmodel</label>
+                                                            <input type="string" class="form-control input-sm" id="loanmodel" required placeholder="贷款模式" name="loanmodel">
+                                                        </div>
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="loan_type">loan_type</label>
+                                                            <input type="string" class="form-control input-sm" id="loan_type" required placeholder="借贷类型" name="loan_type">
+                                                        </div>
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="uppoor_type">uppoor_type</label>
+                                                            <input type="string" class="form-control input-sm" id="uppoor_type" required placeholder="带贫方式" name="uppoor_type">
+                                                        </div>
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="uppoor_roster">uppoor_roster</label>
+                                                            <input type="string" class="form-control input-sm" id="uppoor_roster" required placeholder="带贫名单" name="uppoor_roster">
+                                                        </div>
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="loan_type">loan_type</label>
+                                                            <input type="string" class="form-control input-sm" id="loan_type" required placeholder="贷款类型" name="loan_type">
+                                                        </div>
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="entrustprove">entrustprove</label>
+                                                            <input type="string" class="form-control input-sm" id="entrustprove" required placeholder="委托证明" name="entrustprove">
+                                                        </div>
+                                                                                                                <div class="form-group">
+                                                            <button type="submit" class="btn btn-success send" rel="5">提交</button>
+                                                            <button type="reset" class="btn btn-info" rel="5">重置</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading"><strong>响应输出</strong></div>
+                                                <div class="panel-body">
+                                                    <div class="row">
+                                                        <div class="col-md-12" style="overflow-x:auto">
+                                                            <pre id="response_headers5"></pre>
+                                                            <pre id="response5"></pre>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading"><strong>返回参数</strong></div>
+                                                <div class="panel-body">
+                                                                                                        无
+                                                                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div><!-- #sandbox -->
+
+                                <div class="tab-pane" id="sample5">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <pre id="sample_response5">{
+    'code':'200',
+    'msg':'录入成功',
+    'time':'1608540255',
+    'data':{}
+    }</pre>
+                                        </div>
+                                    </div>
+                                </div><!-- #sample -->
+
+                            </div><!-- .tab-content -->
+                        </div>
+                    </div>
+                </div>
+                                <div class="panel panel-default">
+                    <div class="panel-heading" id="heading-6">
+                        <h4 class="panel-title">
+                            <span class="label label-primary">POST</span>
+                            <a data-toggle="collapse" data-parent="#accordion6" href="#collapseOne6"> 图片上传 <span class="text-muted">/Loan/uploads</span></a>
+                        </h4>
+                    </div>
+                    <div id="collapseOne6" class="panel-collapse collapse">
+                        <div class="panel-body">
+
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-tabs" id="doctab6">
+                                <li class="active"><a href="#info6" data-toggle="tab">基础信息</a></li>
+                                <li><a href="#sandbox6" data-toggle="tab">在线测试</a></li>
+                                <li><a href="#sample6" data-toggle="tab">返回示例</a></li>
+                            </ul>
+
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+
+                                <div class="tab-pane active" id="info6">
+                                    <div class="well">
+                                        图片上传                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading"><strong>Headers</strong></div>
+                                        <div class="panel-body">
+                                                                                        无
+                                                                                    </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading"><strong>参数</strong></div>
+                                        <div class="panel-body">
+                                                                                        <table class="table table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th>名称</th>
+                                                        <th>类型</th>
+                                                        <th>必选</th>
+                                                        <th>描述</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                                                                        <tr>
+                                                        <td>img</td>
+                                                        <td>integer</td>
+                                                        <td>是</td>
+                                                        <td>图片</td>
+                                                    </tr>
+                                                                                                    </tbody>
+                                            </table>
+                                                                                    </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading"><strong>正文</strong></div>
+                                        <div class="panel-body">
+                                            无                                        </div>
+                                    </div>
+                                </div><!-- #info -->
+
+                                <div class="tab-pane" id="sandbox6">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                                                                        <div class="panel panel-default">
+                                                <div class="panel-heading"><strong>参数</strong></div>
+                                                <div class="panel-body">
+                                                    <form enctype="application/x-www-form-urlencoded" role="form" action="/Loan/uploads" method="POST" name="form6" id="form6">
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="img">img</label>
+                                                            <input type="integer" class="form-control input-sm" id="img" required placeholder="图片" name="img">
+                                                        </div>
+                                                                                                                <div class="form-group">
+                                                            <button type="submit" class="btn btn-success send" rel="6">提交</button>
+                                                            <button type="reset" class="btn btn-info" rel="6">重置</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading"><strong>响应输出</strong></div>
+                                                <div class="panel-body">
+                                                    <div class="row">
+                                                        <div class="col-md-12" style="overflow-x:auto">
+                                                            <pre id="response_headers6"></pre>
+                                                            <pre id="response6"></pre>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading"><strong>返回参数</strong></div>
+                                                <div class="panel-body">
+                                                                                                        无
+                                                                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div><!-- #sandbox -->
+
+                                <div class="tab-pane" id="sample6">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <pre id="sample_response6">{"msg":"返回成功","data":"图片路径","code":200
+    }</pre>
+                                        </div>
+                                    </div>
+                                </div><!-- #sample -->
+
+                            </div><!-- .tab-content -->
+                        </div>
+                    </div>
+                </div>
+                                <h2>风险防控系统数据概览接口</h2>
+                <hr>
+                                <div class="panel panel-default">
+                    <div class="panel-heading" id="heading-7">
+                        <h4 class="panel-title">
+                            <span class="label label-primary">POST</span>
+                            <a data-toggle="collapse" data-parent="#accordion7" href="#collapseOne7"> 风险防控系统数据 <span class="text-muted">/Risk/index</span></a>
+                        </h4>
+                    </div>
+                    <div id="collapseOne7" class="panel-collapse collapse">
+                        <div class="panel-body">
+
+                            <!-- Nav tabs -->
+                            <ul class="nav nav-tabs" id="doctab7">
+                                <li class="active"><a href="#info7" data-toggle="tab">基础信息</a></li>
+                                <li><a href="#sandbox7" data-toggle="tab">在线测试</a></li>
+                                <li><a href="#sample7" data-toggle="tab">返回示例</a></li>
+                            </ul>
+
+                            <!-- Tab panes -->
+                            <div class="tab-content">
+
+                                <div class="tab-pane active" id="info7">
+                                    <div class="well">
+                                        风险防控系统数据                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading"><strong>Headers</strong></div>
+                                        <div class="panel-body">
+                                                                                        <table class="table table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th>名称</th>
+                                                        <th>类型</th>
+                                                        <th>必选</th>
+                                                        <th>描述</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                                                                        <tr>
+                                                        <td>token</td>
+                                                        <td>string</td>
+                                                        <td>是</td>
+                                                        <td>请求的Token</td>
+                                                    </tr>
+                                                                                                    </tbody>
+                                            </table>
+                                                                                    </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading"><strong>参数</strong></div>
+                                        <div class="panel-body">
+                                                                                        <table class="table table-hover">
+                                                <thead>
+                                                    <tr>
+                                                        <th>名称</th>
+                                                        <th>类型</th>
+                                                        <th>必选</th>
+                                                        <th>描述</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                                                                        <tr>
+                                                        <td>id</td>
+                                                        <td>integer</td>
+                                                        <td>是</td>
+                                                        <td>会员ID</td>
+                                                    </tr>
+                                                                                                    </tbody>
+                                            </table>
+                                                                                    </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading"><strong>正文</strong></div>
+                                        <div class="panel-body">
+                                            无                                        </div>
+                                    </div>
+                                </div><!-- #info -->
+
+                                <div class="tab-pane" id="sandbox7">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                                                                        <div class="panel panel-default">
+                                                <div class="panel-heading"><strong>Headers</strong></div>
+                                                <div class="panel-body">
+                                                    <div class="headers">
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="token">token</label>
+                                                            <input type="string" class="form-control input-sm" id="token" required placeholder="请求的Token - Ex: " name="token">
+                                                        </div>
+                                                                                                            </div>
+                                                </div>
+                                            </div>
+                                                                                        <div class="panel panel-default">
+                                                <div class="panel-heading"><strong>参数</strong></div>
+                                                <div class="panel-body">
+                                                    <form enctype="application/x-www-form-urlencoded" role="form" action="/Risk/index" method="POST" name="form7" id="form7">
+                                                                                                                <div class="form-group">
+                                                            <label class="control-label" for="id">id</label>
+                                                            <input type="integer" class="form-control input-sm" id="id" required placeholder="会员ID" name="id">
+                                                        </div>
+                                                                                                                <div class="form-group">
+                                                            <button type="submit" class="btn btn-success send" rel="7">提交</button>
+                                                            <button type="reset" class="btn btn-info" rel="7">重置</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading"><strong>响应输出</strong></div>
+                                                <div class="panel-body">
+                                                    <div class="row">
+                                                        <div class="col-md-12" style="overflow-x:auto">
+                                                            <pre id="response_headers7"></pre>
+                                                            <pre id="response7"></pre>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="panel panel-default">
+                                                <div class="panel-heading"><strong>返回参数</strong></div>
+                                                <div class="panel-body">
+                                                                                                        无
+                                                                                                    </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div><!-- #sandbox -->
+
+                                <div class="tab-pane" id="sample7">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <pre id="sample_response7">{
+        "code": 200,
+        "msg": "成功",
+        "time": "1608254759",
+        "data": {
+            "annualtrend":[{"years":"年份","counts":"贷款户数","sums":"贷款金额","average":"户均平均金额","yearradio":"年度户贷率"}],
+            "overduereason":[{"overduereason":"逾期原因","counts":"逾期笔数","price":"逾期金额","radio":"逾期百分比"}],
+            "compensation":{"allprice":"总风险补偿金","snd":{"radio":"省农信担保占比","price":"省农信担保金额"},"xzz":"县政府","dbqy":"省中小企业反担保集团","zryh":"责任银行"},
+            "pricetype":{"normal":"正常还款金额","overdue":"逾期金额","bad":"不良金额","normalradio":"正常率","overdueradio":"逾期率","badradio":"不良率"},
+            "overduedayradio":{"one":"逾期1-3天","two":"逾期4-10天","three":"逾期10-30天","fore":"逾期30-69天","five":"逾期70天以上"},
+            "price":{"collectionprice":"正在催收金额","violationprice":"历史违约金额"},
+            "creditpriceranking":[{"country":"乡镇（村）占比名称","price":"乡镇（村）占比金额","radio":"乡镇（村）占比百分比"}],
+            "sharingmode":[{
+                    "1":[{"normal":{"counts":"共担正常个数","price":"共担正常金额","radio":"共担正常百分比"}},{"normal":{"counts":"共担逾期个数","price":"共担逾期金额","radio":"共担逾期百分比"}},{"normal":{"counts":"共担不良个数","price":"共担不良金额","radio":"共担不良百分比"}}],
+                    "2":[{"normal":{"counts":"互助正常个数","price":"互助正常金额","radio":"互助正常百分比"}},{"normal":{"counts":"互助逾期个数","price":"互助逾期金额","radio":"互助逾期百分比"}},{"normal":{"counts":"互助不良个数","price":"互助不良金额","radio":"互助不良百分比"}}],
+                    "3":[{"normal":{"counts":"互惠正常个数","price":"互惠正常金额","radio":"互惠正常百分比"}},{"normal":{"counts":"互惠逾期个数","price":"互惠逾期金额","radio":"互惠逾期百分比"}},{"normal":{"counts":"互惠不良个数","price":"互惠不良金额","radio":"互惠不良百分比"}}],
+                    "4":[{"normal":{"counts":"合作正常个数","price":"合作正常金额","radio":"合作正常百分比"}},{"normal":{"counts":"合作逾期个数","price":"合作逾期金额","radio":"合作逾期百分比"}},{"normal":{"counts":"合作不良个数","price":"合作不良金额","radio":"合作不良百分比"}}]
+            }],
+            "overdueranking":[{"country":"逾期地区名称","price":"逾期金额"}]
+        }
         }</pre>
                                         </div>
                                     </div>
@@ -296,9 +1726,9 @@
 
             <div class="row mt0 footer">
                 <div class="col-md-6" align="left">
-                    Generated on 2020-12-16 11:55:59                </div>
+                    Generated on 2020-12-24 14:23:07                </div>
                 <div class="col-md-6" align="right">
-                    <a href="./" target="_blank">测试专用</a>
+                    <a href="./" target="_blank">嵩县金融服务系统</a>
                 </div>
             </div>
 

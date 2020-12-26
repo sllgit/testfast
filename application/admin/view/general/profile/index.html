@@ -64,6 +64,15 @@
                             <input type="text" class="form-control" id="username" name="row[username]" value="{$admin.username|htmlentities}" disabled/>
                         </div>
                         <div class="form-group">
+                            <label for="username" class="control-label">{:__('Group_id')}:</label>
+                            <input type="text" class="form-control" id="group_id" name="row[group_id]" value="{$data.group_name|htmlentities}" disabled/>
+                        </div>
+                        <div class="form-group">
+                            <label for="username" class="control-label">{:__('Service_id')}:</label>
+                            <input type="text" class="form-control" id="service_id" name="row[service_id]" value="{$data.service_name|htmlentities}" disabled/>
+                        </div>
+
+                        <div class="form-group">
                             <label for="email" class="control-label">{:__('Email')}:</label>
                             <input type="text" class="form-control" id="email" name="row[email]" value="{$admin.email|htmlentities}" data-rule="required;email"/>
                         </div>

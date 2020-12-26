@@ -1,5 +1,5 @@
 <form id="edit-form" class="form-horizontal" role="form" data-toggle="validator" method="POST" action="">
-
+    <input type="hidden" name="row[applyedit_id]" value="{$row.applyedit_id|htmlentities}">
     <div class="form-group">
         <label class="control-label col-xs-12 col-sm-2">{:__('Nickname')}:</label>
         <div class="col-xs-12 col-sm-8">
@@ -35,7 +35,7 @@
     <div class="form-group">
         <label class="control-label col-xs-12 col-sm-2">{:__('Is_poor')}:</label>
         <div class="col-xs-12 col-sm-8">
-            {:build_radios('row[is_poor]', ['是'=>'是', '否'=>'否'],$row.is_poor)}
+            {:build_radios('row[is_poor]', ['1'=>'是', '0'=>'否'],$row.is_poor)}
         </div>
     </div>
     <div class="form-group">
@@ -59,13 +59,19 @@
     <div class="form-group">
         <label class="control-label col-xs-12 col-sm-2">{:__('Loan_endtime')}:</label>
         <div class="col-xs-12 col-sm-8">
-            <input id="c-loan_endtime" data-rule="required" class="form-control datetimepicker" data-date-format="YYYY-MM-DD" data-use-current="true" name="row[loan_endtime]" type="text" value="{$row.loan_endtime|htmlentities}">
+            <input id="c-loan_endtime" data-rule="required" class="form-control datetimepicker Time" data-date-format="YYYY-MM-DD" data-use-current="true" name="row[loan_endtime]" type="text" value="{$row.loan_endtime|htmlentities}">
         </div>
     </div>
     <div class="form-group">
         <label class="control-label col-xs-12 col-sm-2">{:__('Payback_time')}:</label>
         <div class="col-xs-12 col-sm-8">
-            <input id="c-payback_time" data-rule="required" class="form-control datetimepicker" data-date-format="YYYY-MM-DD" data-use-current="true" name="row[payback_time]" type="text" value="{$row.payback_time|htmlentities}">
+            <input id="c-payback_time" data-rule="required" class="form-control datetimepicker Time" data-date-format="YYYY-MM-DD" data-use-current="true" name="row[payback_time]" type="text" value="{$row.payback_time|htmlentities}">
+        </div>
+    </div>
+    <div class="form-group Res hide">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Overduereason')}:</label>
+        <div class="col-xs-12 col-sm-8 field">
+            {:build_radios('row[overduereason]', $overduereason )}
         </div>
     </div>
     <div class="form-group">
@@ -87,9 +93,27 @@
         </div>
     </div>
     <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Supportprice')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            <input id="c-supportprice" class="form-control" data-rule="required" name="row[supportprice]" type="number" min="0" value="{$row.supportprice|htmlentities}">
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Loan_status_type')}:</label>
+        <div class="col-xs-12 col-sm-8">
+            {:build_radios('row[loan_status_type]', $loanstatustype ,$row.loan_status_type)}
+        </div>
+    </div>
+    <div class="form-group">
         <label class="control-label col-xs-12 col-sm-2">{:__('Loan_use')}:</label>
         <div class="col-xs-12 col-sm-8">
-            {:build_radios('row[loan_use]', ['第一产业'=>'第一产业', '第二产业'=>'第二产业', '第三产业'=>'第三产业','无'=>'无'],$row.loan_use)}
+            {:build_radios('row[loan_use]', $loanuse ,$row.loan_use)}
+        </div>
+    </div>
+    <div class="form-group Dis">
+        <label class="control-label col-xs-12 col-sm-2">{:__('Distribution')}:</label>
+        <div class="col-xs-12 col-sm-8 field">
+            {:build_radios('row[distribution]', $distribution,$row.distribution)}
         </div>
     </div>
     <div class="form-group">
@@ -118,7 +142,7 @@
     <div class="form-group">
         <label class="control-label col-xs-12 col-sm-2">{:__('Is_joincredit')}:</label>
         <div class="col-xs-12 col-sm-8">
-            {:build_radios('row[is_joincredit]', ['未参加过'=>'未参加过', '良好'=>'良好','优秀'=>'优秀'],$row.is_joincredit)}
+            {:build_radios('row[is_joincredit]', $isjoincredit ,$row.is_joincredit)}
         </div>
     </div>
     <div class="form-group">
